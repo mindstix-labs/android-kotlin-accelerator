@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace 'com.mindstix.core'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.mindstix.core"
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = BuildConfig.jvmTarget
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion BuildConfig.kotlinCompilerExtensionVersion
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    implementation Deps.kore_ktx
+    implementation Deps.lifecycle_runtime
+    implementation Deps.activity_compose
+    implementation platform(Deps.compose_bom)
+    implementation Deps.compose_ui
+    implementation Deps.compose_ui_graphics
+    implementation Deps.ui_tooling_preview
+    implementation Deps.material3
+    // junit
+    testImplementation Deps.junit
+    androidTestImplementation Deps.test_ext_junit
+    // espresso
+    androidTestImplementation Deps.espresso
+    androidTestImplementation platform(Deps.test_compose_bom)
+    androidTestImplementation Deps.ui_test_junit4
+    debugImplementation Deps.ui_tooling
+    debugImplementation Deps.ui_test_manifest
+    // dagger hilt
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
+    // mockk unit test
+    testImplementation Deps.mockk
+}

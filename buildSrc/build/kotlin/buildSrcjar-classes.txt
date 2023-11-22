@@ -1,0 +1,1 @@
+/Users/Anmol/Downloads/baseline/buildSrc/build/classes/kotlin/main/BuildConfig.class:/Users/Anmol/Downloads/baseline/buildSrc/build/classes/kotlin/main/Deps.class:/Users/Anmol/Downloads/baseline/buildSrc/build/classes/kotlin/main/Versions.class

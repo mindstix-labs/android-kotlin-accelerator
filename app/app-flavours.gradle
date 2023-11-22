@@ -1,0 +1,20 @@
+android {
+    flavorDimensions 'market', 'app'
+    productFlavors {
+        // Markets
+        india {
+            dimension "market"
+            applicationIdSuffix ".india"
+        }
+        // Environments
+        uat {
+            dimension "app"
+        }
+        qa {
+            dimension "app"
+        }
+        production {
+            dimension "app"
+        }
+    }
+}

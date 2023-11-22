@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace 'com.mindstix.network'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.mindstix.network"
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        versionCode BuildConfig.versionCode
+        versionName BuildConfig.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = BuildConfig.jvmTarget
+    }
+}
+
+dependencies {
+
+    implementation Deps.kore_ktx
+    implementation Deps.appcompat
+    implementation Deps.material
+    // junit
+    testImplementation Deps.junit
+    androidTestImplementation Deps.test_ext_junit
+    // espresso
+    androidTestImplementation Deps.espresso
+    // dagger hilt
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
+    // mockk
+    testImplementation Deps.mockk
+    // retrofit
+    implementation Deps.retrofit
+    implementation Deps.retrofit_gson
+    implementation Deps.okhttp
+
+
+
+
+}
