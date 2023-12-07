@@ -31,8 +31,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
         jvmTarget = BuildConfig.jvmTarget
@@ -52,6 +52,10 @@ android {
 
 
 dependencies {
+    // Core Module Integration in capabilities
+    implementation project(':core')
+    implementation project(':capabilities')
+    implementation project(':features-login')
 
     implementation Deps.kore_ktx
     implementation Deps.lifecycle_runtime
@@ -80,4 +84,12 @@ dependencies {
     implementation Deps.retrofit_gson
     implementation Deps.okhttp
 
+    // Hilt
+    implementation Deps.hilt_android
+    implementation (Deps.hilt_navigation_compose){
+        exclude group: 'androidx.navigation'
+    }
+    kapt Deps.hilt_android_compiler
+    kapt Deps.hilt_compiler
+    kapt Deps.hilt_compiler_android
 }

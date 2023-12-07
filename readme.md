@@ -8,7 +8,7 @@
     • Target API: 33 (Android 13 Tiramisu)
 **Requirement**: Install JetBrains Toolbox, then install Android Studio via Toolbox.  Updates are done through Toolbox.
 #### Language & Tools
-	• Kotlin 1.8.10 (soon Kotlin 1.8.20)
+	• Kotlin 1.9.21 (soon Kotlin 1.9.21)
 	• Gradle: v8.0
     • Android Gradle plugin: v8.0
 [More information you can find here](https://example.com)

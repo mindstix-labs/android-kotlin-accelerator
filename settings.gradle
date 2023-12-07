@@ -14,8 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "baseline"
 include ':app'
-include ':presentation'
-include ':network'
-include ':common'
-include ':test'
+include ':features-login'
+include ':capabilities'
 include ':core'
