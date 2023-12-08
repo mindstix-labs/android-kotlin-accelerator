@@ -43,6 +43,7 @@ android {
 dependencies {
     implementation Deps.kore_ktx
     implementation Deps.lifecycle_runtime
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
     // junit
     testImplementation Deps.junit
     androidTestImplementation Deps.test_ext_junit

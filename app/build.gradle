@@ -52,7 +52,7 @@ android {
 
 
 dependencies {
-    // Core Module Integration in capabilities
+    // Core, Capabilities, Features Module Integration in the main app
     implementation project(':core')
     implementation project(':capabilities')
     implementation project(':features-login')
@@ -65,6 +65,7 @@ dependencies {
     implementation Deps.compose_ui_graphics
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.7.5'
     //junit
     testImplementation Deps.junit
     androidTestImplementation Deps.test_ext_junit
@@ -86,9 +87,7 @@ dependencies {
 
     // Hilt
     implementation Deps.hilt_android
-    implementation (Deps.hilt_navigation_compose){
-        exclude group: 'androidx.navigation'
-    }
+    implementation Deps.hilt_navigation_compose
     kapt Deps.hilt_android_compiler
     kapt Deps.hilt_compiler
     kapt Deps.hilt_compiler_android
