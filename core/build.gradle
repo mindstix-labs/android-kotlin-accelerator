@@ -1,38 +1,46 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
+// Apply necessary plugins for Android library development, Kotlin
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
 }
 
+// Android library configuration
 android {
-    namespace 'com.mindstix.core'
+    namespace 'com.mindstix.core' // Package namespace for the library
     compileSdk BuildConfig.compileSdk
 
+    // Default configuration for the Android library
     defaultConfig {
         minSdk BuildConfig.minSdk
         targetSdk BuildConfig.targetSdk
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary true
-        }
     }
 
+    // Configuration for different build types (e.g., release)
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Compilation options for the Android library
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
+    // Kotlin compiler options
     kotlinOptions {
         jvmTarget = BuildConfig.jvmTarget
     }
+
+    // Packaging options to exclude specific resources
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
@@ -40,9 +48,11 @@ android {
     }
 }
 
+// Dependencies configuration
 dependencies {
     implementation Deps.kore_ktx
     implementation Deps.lifecycle_runtime
+    implementation Deps.viewmodel_lifecycle
     // junit
     testImplementation Deps.junit
     androidTestImplementation Deps.test_ext_junit

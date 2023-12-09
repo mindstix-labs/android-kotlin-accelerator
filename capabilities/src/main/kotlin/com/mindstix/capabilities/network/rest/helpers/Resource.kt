@@ -1,10 +1,16 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.capabilities.network.rest.helpers
 
 import com.mindstix.capabilities.network.rest.data.GenericErrorModel
 
-
 /**
  * A generic class that contains data and status about loading this data Success,Loading and Error.
+ *
+ * @author Abhijeet Kokane
  */
 data class Resource<out T>(val status: Status, val data: T?, val error: GenericErrorModel?) {
 
@@ -30,16 +36,15 @@ data class Resource<out T>(val status: Status, val data: T?, val error: GenericE
             error = error,
         )
 
+        // Handles Idle/No Action
         fun <T> idle(data: T? = null) = Resource(status = Status.NONE, data = data, error = null)
     }
 
-    /**
-     * This probably has a purpose.
-     */
+    // Enum to represent different states of the resource
     enum class Status {
-        NONE,
-        SUCCESS,
-        ERROR,
-        LOADING,
+        NONE, // No action/Idle state
+        SUCCESS, // Success state
+        ERROR, // Error state
+        LOADING, // Loading state
     }
 }

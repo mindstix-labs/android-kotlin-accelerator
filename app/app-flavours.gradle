@@ -1,18 +1,28 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
 android {
+    // Define flavor dimensions for market and app
     flavorDimensions 'market', 'app'
+
     productFlavors {
-        // Markets
+        // Country-specific flavor for India
         india {
             dimension "market"
+            // Customize application ID suffix for India flavor
             applicationIdSuffix ".india"
         }
-        // Environments
+
+        // Environment-specific flavors
         uat {
             dimension "app"
         }
+
         qa {
             dimension "app"
         }
+
         production {
             dimension "app"
         }

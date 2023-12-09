@@ -1,19 +1,31 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
+// Plugin management configuration for Gradle build scripts
 pluginManagement {
     repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
+        google() // Google Maven repository
+        mavenCentral() // Maven Central repository
+        gradlePluginPortal() // Gradle Plugin Portal repository
     }
 }
+
+// Dependency resolution management for Gradle build scripts
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
-        mavenCentral()
+        google() // Google Maven repository
+        mavenCentral() // Maven Central repository
     }
 }
+
+// Root project configuration
 rootProject.name = "baseline"
-include ':app'
-include ':features-login'
-include ':capabilities'
-include ':core'
+
+// Project inclusion configuration
+include ':app' // Main application module
+include ':features-login' // Feature module for login
+include ':capabilities' // Capabilities module
+include ':core' // Core module

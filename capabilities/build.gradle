@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
+// Apply necessary plugins for Android library development, Kotlin, Dagger Hilt
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
@@ -5,22 +11,22 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
+// Android library configuration
 android {
-    namespace 'com.mindstix.capabilities'
+    namespace 'com.mindstix.capabilities' // Package namespace for the library
     compileSdk BuildConfig.compileSdk
 
     defaultConfig {
         minSdk BuildConfig.minSdk
         targetSdk BuildConfig.targetSdk
-        versionCode BuildConfig.versionCode
-        versionName BuildConfig.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
-        compose true
+        compose true // Enable Jetpack Compose
     }
+
     composeOptions {
         kotlinCompilerExtensionVersion BuildConfig.kotlinCompilerExtensionVersion
     }
@@ -31,45 +37,54 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = BuildConfig.jvmTarget
     }
 }
 
+// Dependencies configuration
 dependencies {
     // Core Module Integration in capabilities
     implementation project(':core')
 
+    // Third-party dependencies
     implementation Deps.kore_ktx
     implementation Deps.appcompat
-    // UI
+
+    // UI dependencies
     implementation Deps.compose_ui
     implementation Deps.compose_ui_graphics
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
-    // junit
+    implementation Deps.navigation_runtime_ktx
+    implementation Deps.navigation_common_ktx
+
+    // Testing dependencies
     testImplementation Deps.junit
     androidTestImplementation Deps.test_ext_junit
-    // espresso
+
+    // Espresso for UI testing
     androidTestImplementation Deps.espresso
-    // dagger hilt
+
+    // Dagger Hilt for dependency injection
     implementation Deps.hilt_android
-    implementation (Deps.hilt_navigation_compose){
-        exclude group: 'androidx.navigation'
-    }
+    implementation Deps.hilt_navigation_compose
     kapt Deps.hilt_android_compiler
     kapt Deps.hilt_compiler
     kapt Deps.hilt_compiler_android
-    // mockk
+
+    // Mocking library for testing
     testImplementation Deps.mockk
-    // retrofit
+
+    // Retrofit for networking
     implementation Deps.retrofit
     implementation Deps.retrofit_gson
     implementation Deps.okhttp
     implementation Deps.okhttpLogging
-
 }

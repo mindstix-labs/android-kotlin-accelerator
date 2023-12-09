@@ -1,3 +1,6 @@
+<!--
+Copyright (c) 2023 Mindstix Software Labs All rights reserved.
+-->
 <resources>
-    <string name="app_name">baseline</string>
+    <string name="app_name">MSX Baseline</string>
 </resources>

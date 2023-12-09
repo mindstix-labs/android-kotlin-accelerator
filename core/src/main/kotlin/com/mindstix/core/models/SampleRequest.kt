@@ -1,4 +1,3 @@
 package com.mindstix.core.models
 
-class SampleRequest {
-}
+class SampleRequest

@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.capabilities.presentation.theme
 
 import androidx.compose.material3.Typography
@@ -6,10 +11,16 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+/**
+ * Typography for defining text styles.
+ *
+ * @author Abhijeet Kokane
+ */
+
 val Typography = Typography(
     displayLarge = TextStyle(
-        fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp,
+        fontFamily = FontFamily.Default, // Default font family
+        fontWeight = FontWeight.Normal, // Normal font weight
+        fontSize = 16.sp, // Font size of 16sp
     ),
 )
