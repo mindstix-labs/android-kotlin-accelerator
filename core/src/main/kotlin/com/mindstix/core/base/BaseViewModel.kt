@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.core.base
 
 import androidx.lifecycle.ViewModel
@@ -26,7 +31,12 @@ interface UserIntent
 interface NavEffect
 
 /**
- * This is the Base view model.
+ * This is the Base view model implementing the MVI (Model-View-Intent) architecture.
+ * @param Intent: The user intent that triggers changes in the view model.
+ * @param State: The view state representing the current state of the UI.
+ * @param Effect: The navigation effect representing UI-related side effects.
+ *
+ * @author Abhijeet Kokane
  */
 abstract class BaseViewModel<Intent : UserIntent, State : ViewState, Effect : NavEffect> :
     ViewModel() {
@@ -39,24 +49,28 @@ abstract class BaseViewModel<Intent : UserIntent, State : ViewState, Effect : Na
     val currentState: State
         get() = viewState.value
 
+    // MutableStateFlow to hold the current view state.
     private val _viewState: MutableStateFlow<State> = MutableStateFlow(initialState)
     val viewState
         get() = _viewState.asStateFlow()
 
+    // MutableSharedFlow to handle user intents.
     private val _intent: MutableSharedFlow<Intent> = MutableSharedFlow()
     val intent
         get() = _intent.asSharedFlow()
 
+    // Channel to handle navigation effects.
     private val _effect: Channel<Effect> = Channel()
     val effect
         get() = _effect.receiveAsFlow()
 
     init {
+        // Start listening to the user intents.
         subscribeIntent()
     }
 
     /**
-     * Start listening to the intent.
+     * Start listening to the user intent flow.
      */
     private fun subscribeIntent() {
         viewModelScope.launch {
@@ -67,12 +81,14 @@ abstract class BaseViewModel<Intent : UserIntent, State : ViewState, Effect : Na
     }
 
     /**
-     * Handle each intent.
+     * Handle each user intent.
+     * @param intent: The user's intent that triggers changes in the view model.
      */
     abstract fun handleIntent(intent: Intent)
 
     /**
-     * Set newUserIntent.
+     * Set a new user intent to trigger a change in the view model.
+     * @param intent: The user's intent.
      */
     fun performAction(intent: Intent) {
         val newUserIntent = intent
@@ -80,7 +96,8 @@ abstract class BaseViewModel<Intent : UserIntent, State : ViewState, Effect : Na
     }
 
     /**
-     * Emit the new ViewState.
+     * Emit a new view state by applying a reduction function to the current state.
+     * @param reduce: The reduction function that defines how to derive the new state.
      */
     protected fun emitViewState(reduce: State.() -> State) {
         val newState = currentState.reduce()
@@ -88,7 +105,8 @@ abstract class BaseViewModel<Intent : UserIntent, State : ViewState, Effect : Na
     }
 
     /**
-     * Set the new NavEffect.
+     * Set a new navigation effect to trigger UI-related side effects.
+     * @param builder: A lambda function that constructs the navigation effect.
      */
     protected fun sendNavEffect(builder: () -> Effect) {
         val effectValue = builder()

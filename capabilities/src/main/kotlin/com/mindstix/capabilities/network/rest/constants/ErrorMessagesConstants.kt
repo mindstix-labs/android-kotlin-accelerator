@@ -1,10 +1,14 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
 package com.mindstix.capabilities.network.rest.constants
 
 /**
- * This class contains all the UI constants.
+ * Object containing constants for error messages in the network layer.
+ *
+ * @author Abhijeet Kokane
  */
 object ErrorMessagesConstants {
-
-    const val VERIFICATION_FAILED =
-        "Please contact customer support."
+    const val VERIFICATION_FAILED = "Please contact customer support."
 }

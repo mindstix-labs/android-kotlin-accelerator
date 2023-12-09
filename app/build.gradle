@@ -1,24 +1,41 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
 plugins {
+    // Android application plugin
     id 'com.android.application'
+    // Kotlin Android plugin
     id 'org.jetbrains.kotlin.android'
+    // Kotlin Annotation Processing Tool plugin
     id 'kotlin-kapt'
+    // Dagger Hilt Android plugin
     id 'com.google.dagger.hilt.android'
 }
 
+// Apply custom configurations from app-flavours.gradle file
 apply from: 'app-flavours.gradle'
 
 android {
+    // Set the namespace for the application
     namespace 'com.mindstix.baseline'
+    // Set the compile SDK version
     compileSdk BuildConfig.compileSdk
 
     defaultConfig {
+        // Application ID
         applicationId "com.mindstix.baseline"
+        // Minimum SDK version
         minSdk BuildConfig.minSdk
+        // Target SDK version
         targetSdk BuildConfig.targetSdk
+        // Version code and version name
         versionCode BuildConfig.versionCode
         versionName BuildConfig.versionName
 
+        // Test instrumentation runner for unit tests
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // Enable vector drawables using the support library
         vectorDrawables {
             useSupportLibrary true
         }
@@ -26,30 +43,41 @@ android {
 
     buildTypes {
         release {
+            // Disable minification for release builds
             minifyEnabled false
+            // Specify ProGuard files
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
+        // Set Java source and target compatibility to version 17
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
+        // Set JVM target version
         jvmTarget = BuildConfig.jvmTarget
     }
+
     buildFeatures {
+        // Enable Compose support
         compose true
     }
+
     composeOptions {
+        // Set the Kotlin compiler extension version for Compose
         kotlinCompilerExtensionVersion BuildConfig.kotlinCompilerExtensionVersion
     }
+
     packagingOptions {
         resources {
+            // Exclude specific resources from packaging
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
 }
-
 
 dependencies {
     // Core, Capabilities, Features Module Integration in the main app
@@ -57,35 +85,41 @@ dependencies {
     implementation project(':capabilities')
     implementation project(':features-login')
 
+    // Core dependencies
     implementation Deps.kore_ktx
     implementation Deps.lifecycle_runtime
     implementation Deps.activity_compose
+
+    // Compose dependencies
     implementation platform(Deps.compose_bom)
     implementation Deps.compose_ui
     implementation Deps.compose_ui_graphics
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
-    implementation 'androidx.navigation:navigation-runtime-ktx:2.7.5'
-    //junit
+    implementation Deps.navigation_runtime_ktx
+
+    // Testing dependencies
+    // JUnit
     testImplementation Deps.junit
+    // Android JUnit
     androidTestImplementation Deps.test_ext_junit
-    //espresso
+    // Espresso
     androidTestImplementation Deps.espresso
+    // Compose testing
     androidTestImplementation platform(Deps.test_compose_bom)
     androidTestImplementation Deps.ui_test_junit4
     debugImplementation Deps.ui_tooling
     debugImplementation Deps.ui_test_manifest
-    // dagger hilt
-    implementation  Deps.hilt_android
-    kapt Deps.hilt_compiler
-    // mockk unit test
+
+    // Mockk for unit tests
     testImplementation Deps.mockk
-    // retrofit
+
+    // Retrofit and networking dependencies
     implementation Deps.retrofit
     implementation Deps.retrofit_gson
     implementation Deps.okhttp
 
-    // Hilt
+    // Dagger Hilt
     implementation Deps.hilt_android
     implementation Deps.hilt_navigation_compose
     kapt Deps.hilt_android_compiler

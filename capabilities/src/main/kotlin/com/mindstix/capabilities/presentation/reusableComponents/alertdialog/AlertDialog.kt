@@ -1,3 +1,7 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
 package com.mindstix.capabilities.presentation.reusableComponents.alertdialog
 
 import androidx.compose.foundation.layout.Column
@@ -16,6 +20,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mindstix.capabilities.presentation.theme.AppTheme
 
+/**
+ * Composable function demonstrating the usage of AlertDialog in Jetpack Compose.
+ *
+ * @author Abhijeet Kokane
+ */
 @Composable
 fun AlertDialogSample() {
     var showDialog by remember { mutableStateOf(false) }
