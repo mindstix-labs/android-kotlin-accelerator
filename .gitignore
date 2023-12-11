@@ -160,8 +160,11 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+app/src/main/res/.DS_Store
+
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio
+
