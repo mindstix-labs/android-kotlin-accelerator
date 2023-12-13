@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.models
 
 import com.mindstix.core.utils.DataStatus
@@ -6,9 +11,15 @@ import org.junit.Test
 
 /**
  * This unit test exercises the LoginScreenDataModel class.
+ *
+ * @author Abhishek Singh
  */
 class LoginScreenDataModelTest {
 
+    /**
+     * This test verifies that creating a LoginScreenDataModel using the defaultValue companion object
+     * results in a model with default values for various properties such as status, screenTitle, screenDescription, etc.
+     */
     @Test
     fun `create LoginScreenDataModel with default values`() {
         // When
@@ -26,6 +37,10 @@ class LoginScreenDataModelTest {
         assertEquals("Login", loginScreenDataModel.loginCtaLabel)
     }
 
+    /**
+     * This test verifies that creating a LoginScreenDataModel with custom values for properties such as status, screenTitle, screenDescription, etc.
+     * results in a model with the specified values.
+     */
     @Test
     fun `create LoginScreenDataModel with custom values`() {
         // Given

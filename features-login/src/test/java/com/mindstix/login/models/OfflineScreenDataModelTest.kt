@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.models
 
 import junit.framework.TestCase.assertEquals
@@ -5,9 +10,15 @@ import org.junit.Test
 
 /**
  * This unit test exercises the OfflineScreenDataModel class.
+ *
+ * @author Abhishek Singh
  */
 class OfflineScreenDataModelTest {
 
+    /**
+     * This test verifies that creating an OfflineScreenDataModel using the emptyValue companion object
+     * results in a model with default values for title, subTitle, imageUrl, and offlineCTALabel.
+     */
     @Test
     fun `create OfflineScreenDataModel with default values`() {
         // When
@@ -20,6 +31,10 @@ class OfflineScreenDataModelTest {
         assertEquals("", offlineScreenDataModel.offlineCTALabel)
     }
 
+    /**
+     * This test verifies that creating an OfflineScreenDataModel with custom values for title, subTitle, imageUrl, and offlineCTALabel
+     * results in a model with the specified values.
+     */
     @Test
     fun `create OfflineScreenDataModel with custom values`() {
         // Given

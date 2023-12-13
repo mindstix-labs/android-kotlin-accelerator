@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.network.rest.api
 
 import com.mindstix.capabilities.network.rest.api.AuthInterceptor
@@ -17,16 +22,24 @@ import org.junit.Test
 
 /**
  * This unit test exercises the AuthInterceptor class.
+ *
+ * @author Abhishek Singh
  */
 class AuthInterceptorTest {
     private lateinit var authInterceptor: AuthInterceptor
 
+    /**
+     * This function executes before every test.
+     */
     @Before
     fun setup() {
         MockKAnnotations.init(this)
         authInterceptor = AuthInterceptor()
     }
 
+    /**
+     * This test verifies that the intercept function returns a response when the authorizationHeaderValue is set.
+     */
     @Test
     fun `intercept returns response when authorizationHeaderValue is set`() {
         // Given
@@ -54,6 +67,9 @@ class AuthInterceptorTest {
         assertTrue(result is Response)
     }
 
+    /**
+     * This test verifies that the intercept function does not add the Authorization Header when authorizationHeaderValue is null.
+     */
     @Test
     fun `intercept does not add Authorization Header when authorizationHeaderValue is null`() {
         // Given

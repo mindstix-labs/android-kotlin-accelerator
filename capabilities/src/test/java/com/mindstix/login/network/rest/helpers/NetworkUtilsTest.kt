@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.network.rest.helpers
 
 import android.content.Context
@@ -14,6 +19,8 @@ import org.junit.Test
 
 /**
  * This unit test exercises the NetworkUtils class.
+ *
+ * @author Abhishek Singh
  */
 class NetworkUtilsTest {
 
@@ -21,6 +28,9 @@ class NetworkUtilsTest {
     private lateinit var connectivityManager: ConnectivityManager
     private lateinit var networkInfo: NetworkInfo
 
+    /**
+     * This function executes before every test.
+     */
     @Before
     fun setUp() {
         context = mockk(relaxed = true)
@@ -33,6 +43,9 @@ class NetworkUtilsTest {
         mockkStatic(NetworkInfo::class)
     }
 
+    /**
+     * This test verifies that the isNetworkAvailable() function returns true when the network is connected.
+     */
     @Test
     fun `isNetworkAvailable returns true when network is connected`() {
         // Given
@@ -45,6 +58,9 @@ class NetworkUtilsTest {
         assertTrue(result)
     }
 
+    /**
+     * This test verifies that the isNetworkAvailable() function returns false when the network is not connected.
+     */
     @Test
     fun `isNetworkAvailable returns false when network is not connected`() {
         // Given
@@ -57,6 +73,9 @@ class NetworkUtilsTest {
         assertFalse(result)
     }
 
+    /**
+     * This test verifies that the isNetworkAvailable() function returns false when the `activeNetworkInfo` is null.
+     */
     @Test
     fun `isNetworkAvailable returns false when activeNetworkInfo is null`() {
         // Given
@@ -69,6 +88,10 @@ class NetworkUtilsTest {
         assertFalse(result)
     }
 
+    /**
+     * This test verifies that the isNetworkAvailable() function returns false when both the `activeNetworkInfo` is null
+     * and `networkInfo` isConnected is false.
+     */
     @Test
     fun `isNetworkAvailable returns false when activeNetworkInfo is null and networkInfo isConnected is false`() {
         // Given
@@ -82,6 +105,9 @@ class NetworkUtilsTest {
         assertFalse(result)
     }
 
+    /**
+     * This test verifies that the isNetworkAvailable() function returns false when the `activeNetworkInfo` isConnected is false.
+     */
     @Test
     fun `isNetworkAvailable returns false when activeNetworkInfo isConnected is false`() {
         // Given

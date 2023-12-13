@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.network.rest.data
 
 import com.mindstix.capabilities.network.rest.data.GenericErrorModel
@@ -8,14 +13,22 @@ import org.junit.Test
 
 /**
  * This unit test exercises the GenericErrorModel class.
+ *
+ * @author Abhishek Singh
  */
 class GenericErrorModelTest {
 
+    /**
+     * This function executes before every test.
+     */
     @Before
     fun setup() {
         MockKAnnotations.init(this)
     }
 
+    /**
+     * This test verifies that the GenericErrorModel class is created with default values.
+     */
     @Test
     fun `create GenericErrorModel with default values`() {
         // When
@@ -28,6 +41,9 @@ class GenericErrorModelTest {
         assertEquals("", genericErrorModel.errorCode)
     }
 
+    /**
+     * This test verifies that the GenericErrorModel class is created with custom values.
+     */
     @Test
     fun `create GenericErrorModel with custom values`() {
         // Given
@@ -46,6 +62,9 @@ class GenericErrorModelTest {
         assertEquals(errorCode, genericErrorModel.errorCode)
     }
 
+    /**
+     * This test verifies that the GenericErrorModel class is created with a null message.
+     */
     @Test
     fun `create GenericErrorModel with null message`() {
         // Given

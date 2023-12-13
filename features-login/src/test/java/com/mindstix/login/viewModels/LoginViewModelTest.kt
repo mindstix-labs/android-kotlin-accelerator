@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.viewModels
 
 import com.mindstix.login.intents.LoginIntent
@@ -20,6 +25,8 @@ import org.junit.Test
 
 /**
  * This unit test exercises the LoginViewModel class.
+ *
+ * @author Abhishek Singh
  */
 class LoginViewModelTest {
 
@@ -27,6 +34,9 @@ class LoginViewModelTest {
 
     private val loginUseCase: LoginUseCase = spyk()
 
+    /**
+     * This function executes before every test.
+     */
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
@@ -34,11 +44,17 @@ class LoginViewModelTest {
         loginViewModel = LoginViewModel(loginUseCase)
     }
 
+    /**
+     * This function executes after every test.
+     */
     @After
     fun tearDown() {
         Dispatchers.resetMain()
     }
 
+    /**
+     * This test ensures that the createInitialState function returns an instance of LoginViewState.
+     */
     @Test
     fun `given createInitialState creates the state, when createInitialState is called, then it should return instance of LoginViewState`() {
         runBlocking {
@@ -49,6 +65,10 @@ class LoginViewModelTest {
         }
     }
 
+    /**
+     * This test verifies that when the handleIntent function is called with LoginIntent.FetchLoginData,
+     * the FetchLoginData block should be called.
+     */
     @Test
     fun `given LoginIntent FetchLoginData, when handleIntent is called, then FetchLoginData block should be called`() {
         runBlocking {

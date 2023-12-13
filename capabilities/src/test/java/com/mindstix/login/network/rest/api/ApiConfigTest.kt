@@ -1,3 +1,8 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.login.network.rest.api
 
 import com.mindstix.capabilities.network.rest.api.ApiConfig
@@ -17,11 +22,16 @@ import retrofit2.Response
 
 /**
  * This unit test exercises the ApiConfig.
+ * 
+ * @author Abhishek Singh
  */
 class ApiConfigTest {
 
     private val apiConfigMock: ApiConfig = mockk()
 
+    /**
+     * This test verifies the behavior of the getAccount() function when a success response is received.
+     */
     @Test
     fun `getAccount success response`() = runBlocking {
         // Given
@@ -43,6 +53,9 @@ class ApiConfigTest {
         assertEquals(successResponse, result.body())
     }
 
+    /**
+     * This test verifies the behavior of the getAccount() function when an error response is received.
+     */
     @Test
     fun `getAccount error response`() = runBlocking {
         // Given
