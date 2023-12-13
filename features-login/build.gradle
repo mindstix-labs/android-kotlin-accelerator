@@ -84,6 +84,7 @@ dependencies {
 
     // Mocking library for testing
     testImplementation Deps.mockk
+    testImplementation Deps.kotlinx_coroutines_test
 
     // Retrofit for networking
     implementation Deps.retrofit
