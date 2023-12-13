@@ -10,6 +10,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.util.Patterns
+import com.mindstix.capabilities.util.Constants.DEFAULT_EMPTY_STRING
 import java.net.URL
 import java.net.URLDecoder
 import java.time.LocalDate
@@ -29,9 +30,6 @@ import java.util.Locale
  * @author Pranav Hadawale
  */
 object CommonUtilityExtensions {
-
-    // Constants
-    private const val DEFAULT_EMPTY_STRING = ""
 
     /**
      * Checks whether the device is currently connected to a mobile or Wi-Fi network.
@@ -93,7 +91,7 @@ object CommonUtilityExtensions {
      *
      * @return The default empty boolean value (false).
      */
-    fun Boolean.Companion.defaultEmpty() = false
+    fun Boolean.Companion.defaultFalse() = false
 
     /**
      * Checks if a nullable String is either null, empty, or consists of only whitespace characters
@@ -214,8 +212,6 @@ object CommonUtilityExtensions {
         return LocalDateTime.now()
     }
 
-    // Format a date to a string
-
     /**
      * Formats the provided [date] to a string representation based on the specified [pattern].
      * The default pattern is "yyyy-MM-dd".
@@ -293,7 +289,7 @@ object CommonUtilityExtensions {
      *
      * @return The URL-encoded string.
      */
-    fun String.urlEncodeToUTF8(): String {
+    private fun String.urlEncodeToUTF8(): String {
         return java.net.URLEncoder.encode(this, "UTF-8")
     }
 
