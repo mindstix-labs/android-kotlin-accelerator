@@ -18,6 +18,9 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * This unit test exercises the LoginViewModel class.
+ */
 class LoginViewModelTest {
 
     private lateinit var loginViewModel: LoginViewModel
