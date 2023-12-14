@@ -111,6 +111,9 @@ object Logger {
         log { Timber.tag(getTagName()).d(message()) }
     }
 
+    /**
+     * Logs a debug message using Timber with optional tag, message, and throwable.
+     */
     fun d(
         tag: String = getTagName(),
         message: () -> String,
@@ -119,6 +122,9 @@ object Logger {
         log { Timber.tag(tag).d(throwable, message()) }
     }
 
+    /**
+     * Logs a error message using Timber with optional tag, message, and throwable.
+     */
     fun e(
         tag: String = getTagName(),
         message: () -> String,
@@ -129,6 +135,9 @@ object Logger {
         log { Timber.tag(tag).e(throwable, message()) }
     }
 
+    /**
+     * Logs a info message using Timber with optional tag, message, and throwable.
+     */
     fun i(
         tag: String = getTagName(),
         message: () -> String,
@@ -139,6 +148,9 @@ object Logger {
         log { Timber.tag(tag).i(throwable, message()) }
     }
 
+    /**
+     * Logs a verbose message using Timber with optional tag, message, and throwable.
+     */
     fun v(
         tag: String = getTagName(),
         message: () -> String,
@@ -147,6 +159,9 @@ object Logger {
         log { Timber.tag(tag).v(throwable, message()) }
     }
 
+    /**
+     * Logs a warn message using Timber with optional tag, message, and throwable.
+     */
     fun w(
         tag: String = getTagName(),
         message: () -> String,
