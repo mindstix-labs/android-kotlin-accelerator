@@ -61,14 +61,15 @@ fun MainDestination() {
     ) { innerPadding ->
         // Box is used to apply custom padding to the content
         Box(
-            modifier = Modifier.padding(
-                PaddingValues(
-                    zeroInternalSpacing,
-                    zeroInternalSpacing,
-                    zeroInternalSpacing,
-                    innerPadding.calculateBottomPadding(),
+            modifier =
+                Modifier.padding(
+                    PaddingValues(
+                        zeroInternalSpacing,
+                        zeroInternalSpacing,
+                        zeroInternalSpacing,
+                        innerPadding.calculateBottomPadding(),
+                    ),
                 ),
-            ),
         ) {
             // Include the NavigationHost composable within the Box
             NavigationHost(

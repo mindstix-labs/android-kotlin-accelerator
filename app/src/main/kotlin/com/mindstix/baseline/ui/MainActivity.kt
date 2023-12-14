@@ -25,7 +25,6 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     /**
      * Called when the activity is first created.
      *

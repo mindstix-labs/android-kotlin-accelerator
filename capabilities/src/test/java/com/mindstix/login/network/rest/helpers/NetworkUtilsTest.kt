@@ -23,7 +23,6 @@ import org.junit.Test
  * @author Abhishek Singh
  */
 class NetworkUtilsTest {
-
     private lateinit var context: Context
     private lateinit var connectivityManager: ConnectivityManager
     private lateinit var networkInfo: NetworkInfo

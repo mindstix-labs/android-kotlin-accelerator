@@ -17,7 +17,6 @@ import org.junit.Test
  * @author Abhishek Singh
  */
 class GenericErrorModelTest {
-
     /**
      * This function executes before every test.
      */

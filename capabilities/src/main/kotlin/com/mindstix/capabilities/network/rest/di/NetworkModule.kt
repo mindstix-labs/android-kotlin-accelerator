@@ -35,7 +35,6 @@ private const val CONNECT_TIMEOUT = 60L
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     /**
      * Provides the [AuthInterceptor] with a named annotation.
      */
@@ -86,11 +85,12 @@ object NetworkModule {
     fun provideRetrofit(
         @Named(NETWORK_NAMED_ARGUMENTS) okHttpClient: OkHttpClient,
         @Named(NETWORK_NAMED_ARGUMENTS) gson: Gson,
-    ): Retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .baseUrl("") // TODO: Provide base URL
-        .client(okHttpClient)
-        .build()
+    ): Retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl("") // TODO: Provide base URL
+            .client(okHttpClient)
+            .build()
 
     /**
      * Provides the implementation of [ApiConfig] for network operations.

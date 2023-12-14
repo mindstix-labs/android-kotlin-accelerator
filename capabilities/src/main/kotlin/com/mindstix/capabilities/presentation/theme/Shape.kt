@@ -15,8 +15,12 @@ import androidx.compose.ui.unit.dp
  * @author Abhijeet Kokane
  */
 
-val Shapes = Shapes(
-    small = RoundedCornerShape(4.dp), // Small rounded corner shape with 4.dp radius
-    medium = RoundedCornerShape(4.dp), // Medium rounded corner shape with 4.dp radius
-    large = RoundedCornerShape(0.dp), // Large rounded corner shape with 0.dp radius (no rounding)
-)
+val Shapes =
+    Shapes(
+        // Small rounded corner shape with 4.dp radius
+        small = RoundedCornerShape(4.dp),
+        // Medium rounded corner shape with 4.dp radius
+        medium = RoundedCornerShape(4.dp),
+        // Large rounded corner shape with 0.dp radius (no rounding)
+        large = RoundedCornerShape(0.dp),
+    )

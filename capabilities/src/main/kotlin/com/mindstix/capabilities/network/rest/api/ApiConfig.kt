@@ -18,7 +18,6 @@ import retrofit2.http.Path
  * @author Abhijeet Kokane
  */
 interface ApiConfig {
-
     /**
      * Example API call to retrieve account information.
      *

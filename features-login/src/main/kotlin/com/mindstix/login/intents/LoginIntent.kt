@@ -38,7 +38,6 @@ sealed class LoginNavEffect : NavEffect {
  * @author Abhijeet Kokane
  */
 sealed class LoginViewStates {
-
     /**
      * Data class representing the loaded data state.
      *

@@ -17,5 +17,9 @@ package com.mindstix.core.utils
  * @author Abhijeet Kokane
  */
 enum class DataStatus {
-    Empty, Offline, Error, Success, Loading
+    Empty,
+    Offline,
+    Error,
+    Success,
+    Loading,
 }

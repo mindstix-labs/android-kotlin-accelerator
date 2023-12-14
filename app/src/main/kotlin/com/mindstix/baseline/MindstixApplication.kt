@@ -22,7 +22,6 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class MindstixApplication : Application() {
-
     /**
      * Called when the application is starting.
      *

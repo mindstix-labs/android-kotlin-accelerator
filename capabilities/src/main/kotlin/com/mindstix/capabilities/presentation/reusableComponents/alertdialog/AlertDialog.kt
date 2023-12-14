@@ -30,8 +30,9 @@ fun AlertDialogSample() {
     var showDialog by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
-            .padding(4.dp),
+        modifier =
+            Modifier
+                .padding(4.dp),
     ) {
         Button(onClick = { showDialog = true }) {
             Text("Show Alert Dialog")

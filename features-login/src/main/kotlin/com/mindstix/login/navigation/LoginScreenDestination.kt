@@ -83,16 +83,18 @@ fun LoginScreenDestination(
      *
      * @return A function that takes [LoginIntent] as a parameter.
      */
-    fun onUserAction(): (LoginIntent) -> Unit = {
-        // Perform the specified user action using the ViewModel.
-        loginViewModel.performAction(it)
-    }
+    fun onUserAction(): (LoginIntent) -> Unit =
+        {
+            // Perform the specified user action using the ViewModel.
+            loginViewModel.performAction(it)
+        }
 
     // Main content of the Login Screen Destination.
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.White),
         contentAlignment = Alignment.BottomCenter,
     ) {
         // Choose the appropriate content based on the current state of the Login Screen.
