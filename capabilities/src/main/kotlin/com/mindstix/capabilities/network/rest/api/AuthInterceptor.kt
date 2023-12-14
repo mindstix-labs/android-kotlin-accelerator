@@ -43,7 +43,7 @@ class AuthInterceptor @Inject constructor() : Interceptor {
      *
      * @param authToken The new Authorization token to be set.
      */
-    private fun setAuthHeaderValue(authToken: String?) {
+    fun setAuthHeaderValue(authToken: String?) {
         if (authToken != null) {
             this.anonymousHeaderValue = authToken
         }

@@ -23,6 +23,7 @@ object Versions {
     const val test_ext_junit = "1.1.5"
     const val espresso = "3.5.1"
     const val mockk = "1.13.8"
+    const val kotlinx_coroutines_test = "1.8.0-RC"
 
     // Networking dependencies
     const val retrofit = "2.9.0"
