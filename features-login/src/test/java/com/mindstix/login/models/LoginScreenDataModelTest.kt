@@ -15,7 +15,6 @@ import org.junit.Test
  * @author Abhishek Singh
  */
 class LoginScreenDataModelTest {
-
     /**
      * This test verifies that creating a LoginScreenDataModel using the defaultValue companion object
      * results in a model with default values for various properties such as status, screenTitle, screenDescription, etc.
@@ -55,17 +54,18 @@ class LoginScreenDataModelTest {
         val loginCtaLabel = "cta lable"
 
         // When
-        val loginScreenDataModel = LoginScreenDataModel(
-            status = status,
-            screenTitle = screenTitle,
-            screenDescription = screenDescription,
-            backgroundImageUrl = backgroundImageUrl,
-            emailPlaceHolder = emailPlaceHolder,
-            passwordPlaceHolder = passwordPlaceHolder,
-            emailValue = emailValue,
-            passwordValue = passwordValue,
-            loginCtaLabel = loginCtaLabel,
-        )
+        val loginScreenDataModel =
+            LoginScreenDataModel(
+                status = status,
+                screenTitle = screenTitle,
+                screenDescription = screenDescription,
+                backgroundImageUrl = backgroundImageUrl,
+                emailPlaceHolder = emailPlaceHolder,
+                passwordPlaceHolder = passwordPlaceHolder,
+                emailValue = emailValue,
+                passwordValue = passwordValue,
+                loginCtaLabel = loginCtaLabel,
+            )
 
         // Then
         assertEquals(status, loginScreenDataModel.status)

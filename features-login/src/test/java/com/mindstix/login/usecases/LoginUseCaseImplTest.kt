@@ -16,7 +16,6 @@ import org.junit.Test
  * @author Abhishek Singh
  */
 class LoginUseCaseImplTest {
-
     private lateinit var loginUseCaseImpl: LoginUseCaseImpl
 
     /**
@@ -33,7 +32,7 @@ class LoginUseCaseImplTest {
      * it should return an instance of LoginScreenDataModel.
      */
     @Test
-    fun `given getLoginScreenContent() helps to get data for login screen, when getLoginScreenContent() is called, then it should return LoginScreenDataModel`() {
+    fun `given getLoginScreenContent(), when getLoginScreenContent() is called, then it should return LoginScreenDataModel`() {
         // When
         val result = loginUseCaseImpl.getLoginScreenContent()
         // Then

@@ -26,56 +26,57 @@ import retrofit2.Response
  * @author Abhishek Singh
  */
 class ApiConfigTest {
-
     private val apiConfigMock: ApiConfig = mockk()
 
     /**
      * This test verifies the behavior of the getAccount() function when a success response is received.
      */
     @Test
-    fun `getAccount success response`() = runBlocking {
-        // Given
-        val userId = "123"
-        val authToken = "your_auth_token"
-        val sampleRequest = SampleRequest()
+    fun `getAccount success response`() =
+        runBlocking {
+            // Given
+            val userId = "123"
+            val authToken = "your_auth_token"
+            val sampleRequest = SampleRequest()
 
-        val successResponse = SampleResponse()
+            val successResponse = SampleResponse()
 
-        coEvery {
-            apiConfigMock.getAccount(userId, authToken, sampleRequest)
-        } returns Response.success(successResponse)
+            coEvery {
+                apiConfigMock.getAccount(userId, authToken, sampleRequest)
+            } returns Response.success(successResponse)
 
-        // When
-        val result = apiConfigMock.getAccount(userId, authToken, sampleRequest)
+            // When
+            val result = apiConfigMock.getAccount(userId, authToken, sampleRequest)
 
-        // Then
-        assertTrue(result.isSuccessful)
-        assertEquals(successResponse, result.body())
-    }
+            // Then
+            assertTrue(result.isSuccessful)
+            assertEquals(successResponse, result.body())
+        }
 
     /**
      * This test verifies the behavior of the getAccount() function when an error response is received.
      */
     @Test
-    fun `getAccount error response`() = runBlocking {
-        // Given
-        val userId = "123"
-        val authToken = "your_auth_token"
-        val sampleRequest = SampleRequest()
+    fun `getAccount error response`() =
+        runBlocking {
+            // Given
+            val userId = "123"
+            val authToken = "your_auth_token"
+            val sampleRequest = SampleRequest()
 
-        val errorResponseBody = "Error message".toResponseBody("text/plain".toMediaType())
-        val errorResponse = Response.error<SampleResponse?>(400, errorResponseBody)
+            val errorResponseBody = "Error message".toResponseBody("text/plain".toMediaType())
+            val errorResponse = Response.error<SampleResponse?>(400, errorResponseBody)
 
-        coEvery {
-            apiConfigMock.getAccount(userId, authToken, sampleRequest)
-        } returns errorResponse
+            coEvery {
+                apiConfigMock.getAccount(userId, authToken, sampleRequest)
+            } returns errorResponse
 
-        // When
-        val result = apiConfigMock.getAccount(userId, authToken, sampleRequest)
+            // When
+            val result = apiConfigMock.getAccount(userId, authToken, sampleRequest)
 
-        // Then
-        assertFalse(result.isSuccessful)
-        assertEquals(400, result.code())
-        assertNotNull(result.errorBody())
-    }
+            // Then
+            assertFalse(result.isSuccessful)
+            assertEquals(400, result.code())
+            assertNotNull(result.errorBody())
+        }
 }

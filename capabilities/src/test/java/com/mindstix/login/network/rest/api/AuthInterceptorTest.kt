@@ -46,19 +46,22 @@ class AuthInterceptorTest {
         val authToken = "YOUR_AUTH_TOKEN"
         authInterceptor.setAuthHeaderValue(authToken)
 
-        val mockChain: Interceptor.Chain = mockk(relaxed = true) {
-            every { request() } returns Request.Builder()
-                .url("http://somehost/somepath")
-                .build()
+        val mockChain: Interceptor.Chain =
+            mockk(relaxed = true) {
+                every { request() } returns
+                    Request.Builder()
+                        .url("http://somehost/somepath")
+                        .build()
 
-            every { proceed(any()) } returns Response.Builder()
-                .request(request())
-                .protocol(Protocol.HTTP_1_1)
-                .code(200)
-                .message("Test")
-                .body("abc".toResponseBody())
-                .build()
-        }
+                every { proceed(any()) } returns
+                    Response.Builder()
+                        .request(request())
+                        .protocol(Protocol.HTTP_1_1)
+                        .code(200)
+                        .message("Test")
+                        .body("abc".toResponseBody())
+                        .build()
+            }
 
         // When
         val result = authInterceptor.intercept(mockChain)

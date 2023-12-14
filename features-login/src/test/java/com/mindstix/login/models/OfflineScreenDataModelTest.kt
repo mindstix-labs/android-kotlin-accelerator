@@ -14,7 +14,6 @@ import org.junit.Test
  * @author Abhishek Singh
  */
 class OfflineScreenDataModelTest {
-
     /**
      * This test verifies that creating an OfflineScreenDataModel using the emptyValue companion object
      * results in a model with default values for title, subTitle, imageUrl, and offlineCTALabel.
@@ -44,12 +43,13 @@ class OfflineScreenDataModelTest {
         val offlineCTALabel = "Retry"
 
         // When
-        val offlineScreenDataModel = OfflineScreenDataModel(
-            title = title,
-            subTitle = subTitle,
-            imageUrl = imageUrl,
-            offlineCTALabel = offlineCTALabel,
-        )
+        val offlineScreenDataModel =
+            OfflineScreenDataModel(
+                title = title,
+                subTitle = subTitle,
+                imageUrl = imageUrl,
+                offlineCTALabel = offlineCTALabel,
+            )
 
         // Then
         assertEquals(title, offlineScreenDataModel.title)

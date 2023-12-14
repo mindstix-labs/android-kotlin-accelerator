@@ -29,7 +29,6 @@ import org.junit.Test
  * @author Abhishek Singh
  */
 class LoginViewModelTest {
-
     private lateinit var loginViewModel: LoginViewModel
 
     private val loginUseCase: LoginUseCase = spyk()
@@ -56,7 +55,7 @@ class LoginViewModelTest {
      * This test ensures that the createInitialState function returns an instance of LoginViewState.
      */
     @Test
-    fun `given createInitialState creates the state, when createInitialState is called, then it should return instance of LoginViewState`() {
+    fun `creates the createInitialState, when createInitialState is called, then return instance of LoginViewState`() {
         runBlocking {
             // When
             val result = loginViewModel.createInitialState()
