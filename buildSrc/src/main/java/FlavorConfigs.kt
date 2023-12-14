@@ -24,10 +24,12 @@ object BuildConfig {
     const val appName = "BaseLine"
 }
 
+// Object representing configurations specific to the India flavor
 object India {
     const val suffix = ".india"
 }
 
+// Object representing configurations specific to the UAT flavor
 object UAT {
     const val versionName = "1.0.0"
     const val prefix = "UAT-"
@@ -37,6 +39,7 @@ object UAT {
     const val appName = "${BuildConfig.appName}$suffix"
 }
 
+// Object representing configurations specific to the QA flavor
 object QA {
     const val versionName = "1.0.0"
     const val prefix = "QA"
@@ -46,6 +49,7 @@ object QA {
     const val appName = "${BuildConfig.appName}$suffix"
 }
 
+// Object representing configurations specific to the DEV flavor
 object DEV {
     const val versionName = "1.0.0"
     const val prefix = "DEV-"
@@ -55,6 +59,7 @@ object DEV {
     const val appName = "${BuildConfig.appName}$suffix"
 }
 
+// Object representing configurations specific to the PROD flavor
 object PROD {
     const val versionName = "1.0.0"
     const val prefix = ""
