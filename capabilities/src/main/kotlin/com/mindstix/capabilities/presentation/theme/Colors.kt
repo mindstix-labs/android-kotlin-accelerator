@@ -28,23 +28,25 @@ val md_theme_dark_error = Color(0xFFFFB4AB)
 val md_theme_dark_errorContainer = Color(0xFF93000A)
 
 // Light color scheme
-val LightColors = lightColorScheme(
-    primary = md_theme_light_primary,
-    onPrimary = md_theme_light_onPrimary,
-    secondary = md_theme_light_secondary,
-    onSecondary = md_theme_light_onSecondary,
-    background = md_theme_light_background,
-    error = md_theme_light_error,
-    errorContainer = md_theme_light_errorContainer,
-)
+val LightColors =
+    lightColorScheme(
+        primary = md_theme_light_primary,
+        onPrimary = md_theme_light_onPrimary,
+        secondary = md_theme_light_secondary,
+        onSecondary = md_theme_light_onSecondary,
+        background = md_theme_light_background,
+        error = md_theme_light_error,
+        errorContainer = md_theme_light_errorContainer,
+    )
 
 // Dark color scheme
-val DarkColors = darkColorScheme(
-    primary = md_theme_dark_primary,
-    onPrimary = md_theme_dark_onPrimary,
-    secondary = md_theme_dark_secondary,
-    onSecondary = md_theme_dark_onSecondary,
-    background = md_theme_dark_background,
-    error = md_theme_dark_error,
-    errorContainer = md_theme_dark_errorContainer,
-)
+val DarkColors =
+    darkColorScheme(
+        primary = md_theme_dark_primary,
+        onPrimary = md_theme_dark_onPrimary,
+        secondary = md_theme_dark_secondary,
+        onSecondary = md_theme_dark_onSecondary,
+        background = md_theme_dark_background,
+        error = md_theme_dark_error,
+        errorContainer = md_theme_dark_errorContainer,
+    )

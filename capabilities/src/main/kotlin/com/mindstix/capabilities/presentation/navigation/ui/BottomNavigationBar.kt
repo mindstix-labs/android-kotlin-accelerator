@@ -35,23 +35,24 @@ import com.mindstix.capabilities.presentation.navigation.Destinations
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     // List of Bottom Navigation items, each representing a screen in the app.
-    val items = listOf(
-        BottomNavItem(
-            name = "Home",
-            route = Destinations.HomeDestination.route,
-            icon = Icons.Default.Home,
-        ),
-        BottomNavItem(
-            name = "Profile",
-            route = Destinations.ProfileDestination.route,
-            icon = Icons.Default.Person,
-        ),
-        BottomNavItem(
-            name = "Settings",
-            route = Destinations.SettingsDestination.route,
-            icon = Icons.Default.Settings,
-        ),
-    )
+    val items =
+        listOf(
+            BottomNavItem(
+                name = "Home",
+                route = Destinations.HomeDestination.route,
+                icon = Icons.Default.Home,
+            ),
+            BottomNavItem(
+                name = "Profile",
+                route = Destinations.ProfileDestination.route,
+                icon = Icons.Default.Person,
+            ),
+            BottomNavItem(
+                name = "Settings",
+                route = Destinations.SettingsDestination.route,
+                icon = Icons.Default.Settings,
+            ),
+        )
 
     // State variables to track the selected item and current route.
     var selectedItem by remember { mutableIntStateOf(0) }

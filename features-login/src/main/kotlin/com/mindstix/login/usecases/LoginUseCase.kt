@@ -13,7 +13,6 @@ import com.mindstix.login.models.LoginScreenDataModel
  * Abhijeet Kokane
  */
 interface LoginUseCase {
-
     /**
      * Retrieves the content for the Login Screen.
      *

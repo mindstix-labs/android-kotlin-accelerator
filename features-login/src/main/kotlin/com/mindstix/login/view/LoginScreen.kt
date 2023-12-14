@@ -36,7 +36,8 @@ fun LoginScreen(
     userIntent: (LoginIntent) -> Unit,
 ) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
         verticalArrangement = Arrangement.Center,

@@ -17,10 +17,15 @@ import androidx.compose.ui.unit.sp
  * @author Abhijeet Kokane
  */
 
-val Typography = Typography(
-    displayLarge = TextStyle(
-        fontFamily = FontFamily.Default, // Default font family
-        fontWeight = FontWeight.Normal, // Normal font weight
-        fontSize = 16.sp, // Font size of 16sp
-    ),
-)
+val Typography =
+    Typography(
+        displayLarge =
+            TextStyle(
+                // Default font family
+                fontFamily = FontFamily.Default,
+                // Normal font weight
+                fontWeight = FontWeight.Normal,
+                // Font size of 16sp
+                fontSize = 16.sp,
+            ),
+    )

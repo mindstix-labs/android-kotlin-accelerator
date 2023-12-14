@@ -20,7 +20,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 class LoginModule {
-
     /**
      * Provides the implementation of the [LoginUseCase] interface.
      *
@@ -28,7 +27,5 @@ class LoginModule {
      * @return An instance of [LoginUseCase].
      */
     @Provides
-    fun provideLoginRepo(
-        loginUseCaseImpl: LoginUseCaseImpl,
-    ): LoginUseCase = loginUseCaseImpl
+    fun provideLoginRepo(loginUseCaseImpl: LoginUseCaseImpl): LoginUseCase = loginUseCaseImpl
 }

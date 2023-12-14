@@ -168,3 +168,6 @@ app/src/main/res/.DS_Store
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio
 
+.DS_Store
+buildSrc/build/kotlin/compileKotlin/cacheable/last-build.bin
+buildSrc/build/kotlin/compileKotlin/local-state/build-history.bin

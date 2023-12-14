@@ -27,11 +27,12 @@ data class OfflineScreenDataModel(
         /**
          * A default empty value for the OfflineScreenDataModel.
          */
-        val emptyValue = OfflineScreenDataModel(
-            title = String.emptyValue(),
-            subTitle = String.emptyValue(),
-            imageUrl = String.emptyValue(),
-            offlineCTALabel = String.emptyValue(),
-        )
+        val emptyValue =
+            OfflineScreenDataModel(
+                title = String.emptyValue(),
+                subTitle = String.emptyValue(),
+                imageUrl = String.emptyValue(),
+                offlineCTALabel = String.emptyValue(),
+            )
     }
 }

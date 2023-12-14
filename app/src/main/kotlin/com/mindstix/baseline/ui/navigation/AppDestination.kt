@@ -61,7 +61,8 @@ fun MainDestination() {
     ) { innerPadding ->
         // Box is used to apply custom padding to the content
         Box(
-            modifier = Modifier.padding(
+            modifier =
+            Modifier.padding(
                 PaddingValues(
                     zeroInternalSpacing,
                     zeroInternalSpacing,
