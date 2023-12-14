@@ -200,5 +200,3 @@ SOFTWARE.
 ### Get in touch ###
 
 [Mindstix](https://www.mindstix.com/)
-
-[connect@mindstix.com](mailto: connect@mindstix.com)
