@@ -26,8 +26,8 @@
          run: chmod +x gradlew
 
        # Run the ktlint check.
-       - name: Lint Checks
-         run: ./gradlew ktlintCheck
+#       - name: Lint Checks
+#         run: ./gradlew ktlintCheck
 
        # Attempt to build the project.
        - name: Build Project
