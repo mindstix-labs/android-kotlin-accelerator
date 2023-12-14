@@ -1,1 +1,0 @@
-/Users/abhijeetkokane/Android-Mindstix/android-kotlin-accelerator/buildSrc/build/classes/kotlin/main/BuildConfig.class:/Users/abhijeetkokane/Android-Mindstix/android-kotlin-accelerator/buildSrc/build/classes/kotlin/main/Deps.class:/Users/abhijeetkokane/Android-Mindstix/android-kotlin-accelerator/buildSrc/build/classes/kotlin/main/Versions.class

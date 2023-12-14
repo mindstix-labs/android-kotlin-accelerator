@@ -31,6 +31,7 @@ object Deps {
     const val ui_tooling = "androidx.compose.ui:ui-tooling"
     const val ui_test_manifest = "androidx.compose.ui:ui-test-manifest"
     const val mockk = "io.mockk:mockk:${Versions.mockk}"
+    const val kotlinx_coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinx_coroutines_test}"
 
     // Networking dependencies
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"

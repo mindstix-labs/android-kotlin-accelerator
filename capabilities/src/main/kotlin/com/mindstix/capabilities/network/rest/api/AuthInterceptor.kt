@@ -24,31 +24,30 @@ import javax.inject.Singleton
  * @author Abhijeet Kokane
  */
 @Singleton
-class AuthInterceptor
-    @Inject
-    constructor() : Interceptor {
-        // Volatile variables for thread safety
-        @Volatile
-        var authorizationHeaderValue: String? = null
+class AuthInterceptor @Inject constructor() : Interceptor {
 
-        @Volatile
-        var anonymousHeaderValue = ""
+    // Volatile variables for thread safety
+    @Volatile
+    var authorizationHeaderValue: String? = null
+
+    @Volatile
+    var anonymousHeaderValue = ""
 
         // Initialize with a default anonymous token value
         init {
             setAuthHeaderValue("YOUR_TOKEN_HERE")
         }
 
-        /**
-         * Function to set the Authorization Header value dynamically.
-         *
-         * @param authToken The new Authorization token to be set.
-         */
-        private fun setAuthHeaderValue(authToken: String?) {
-            if (authToken != null) {
-                this.anonymousHeaderValue = authToken
-            }
+    /**
+     * Function to set the Authorization Header value dynamically.
+     *
+     * @param authToken The new Authorization token to be set.
+     */
+    fun setAuthHeaderValue(authToken: String?) {
+        if (authToken != null) {
+            this.anonymousHeaderValue = authToken
         }
+    }
 
         /**
          * Intercepts the request and adds the Authorization Header if available.
