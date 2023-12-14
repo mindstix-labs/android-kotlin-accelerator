@@ -51,4 +51,7 @@ object Deps {
     const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val viewmodel_lifecycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.viewmodel_ktx}"
+
+    // Timber
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }
