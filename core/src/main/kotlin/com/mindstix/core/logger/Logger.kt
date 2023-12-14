@@ -110,27 +110,6 @@ object Logger {
     fun d(message: () -> String) {
         log { Timber.tag(getTagName()).d(message()) }
     }
-//
-//    /**
-//     * Logs a debug message with a specified tag using a lambda function.
-//     */
-//    fun d(tag: String, message: () -> String) {
-//        log { Timber.tag(tag).d(message()) }
-//    }
-//
-//    /**
-//     * Logs a debug message with an optional throwable.
-//     */
-//    fun d(throwable: Throwable? = null) {
-//        log { Timber.tag(getTagName()).d(throwable) }
-//    }
-//
-//    /**
-//     * Logs a debug message with an optional throwable, using a lambda function to compute the message.
-//     */
-//    fun d(throwable: Throwable? = null, message: () -> String) {
-//        log { Timber.tag(getTagName()).d(throwable, message()) }
-//    }
 
     fun d(
         tag: String = getTagName(),
@@ -139,38 +118,6 @@ object Logger {
     ) {
         log { Timber.tag(tag).d(throwable, message()) }
     }
-
-//    /**
-//     * Logs an error message with optional remote logging.
-//     */
-//    fun e(message: () -> String, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = "", message = message())
-//        log { Timber.tag(getTagName()).e(message()) }
-//    }
-//
-//    /**
-//     * Logs an error message with a specified tag and optional remote logging.
-//     */
-//    fun e(tag: String, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message())
-//        log { Timber.tag(tag).e(message()) }
-//    }
-//
-//    /**
-//     * Logs an error message with a specified tag and optional throwable, supporting remote logging.
-//     */
-//    fun e(tag: String, throwable: Throwable? = null, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = "", throwable = throwable)
-//        log { Timber.tag(tag).e(throwable) }
-//    }
-//
-//    /**
-//     * Logs an error message with a specified tag, optional throwable, using a lambda function, and supports remote logging.
-//     */
-//    fun e(tag: String, throwable: Throwable? = null, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message(), throwable = throwable)
-//        log { Timber.tag(tag).e(throwable, message()) }
-//    }
 
     fun e(
         tag: String = getTagName(),
@@ -182,38 +129,6 @@ object Logger {
         log { Timber.tag(tag).e(throwable, message()) }
     }
 
-//    /**
-//     * Logs an info message with optional remote logging.
-//     */
-//    fun i(message: () -> String, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = "", message = message())
-//        log { Timber.tag(getTagName()).i(message()) }
-//    }
-//
-//    /**
-//     * Logs an info message with a specified tag and optional remote logging.
-//     */
-//    fun i(tag: String, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message())
-//        log { Timber.tag(tag).i(message()) }
-//    }
-//
-//    /**
-//     * Logs an info message with a specified tag, optional throwable, and supports remote logging.
-//     */
-//    fun i(tag: String, throwable: Throwable? = null, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = "", throwable = throwable)
-//        log { Timber.tag(tag).i(throwable) }
-//    }
-//
-//    /**
-//     * Logs an info message with a specified tag, optional throwable, using a lambda function, and supports remote logging.
-//     */
-//    fun i(tag: String, throwable: Throwable? = null, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
-//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message(), throwable = throwable)
-//        log { Timber.tag(tag).i(throwable, message()) }
-//    }
-
     fun i(
         tag: String = getTagName(),
         message: () -> String,
@@ -224,27 +139,6 @@ object Logger {
         log { Timber.tag(tag).i(throwable, message()) }
     }
 
-//    /**
-//     * Logs a verbose message using a lambda function.
-//     */
-//    fun v(message: () -> String) {
-//        log { Timber.tag(getTagName()).v(message()) }
-//    }
-//
-//    /**
-//     * Logs a verbose message with an optional throwable.
-//     */
-//    fun v(throwable: Throwable? = null) {
-//        log { Timber.tag(getTagName()).v(throwable) }
-//    }
-//
-//    /**
-//     * Logs a verbose message with an optional throwable, using a lambda function to compute the message.
-//     */
-//    fun v(throwable: Throwable? = null, message: () -> String) {
-//        log { Timber.tag(getTagName()).v(throwable, message()) }
-//    }
-
     fun v(
         tag: String = getTagName(),
         message: () -> String,
@@ -253,33 +147,6 @@ object Logger {
         log { Timber.tag(tag).v(throwable, message()) }
     }
 
-//    /**
-//     * Logs a warning message using a lambda function.
-//     */
-//    fun w(message: () -> String) {
-//        log { Timber.tag(getTagName()).w(message()) }
-//    }
-//
-//    /**
-//     * Logs a warning message with a specified tag using a lambda function.
-//     */
-//    fun w(tag: String, message: () -> String) {
-//        log { Timber.tag(tag).w(message()) }
-//    }
-//
-//    /**
-//     * Logs a warning message with a specified tag and optional throwable.
-//     */
-//    fun w(tag: String, throwable: Throwable? = null) {
-//        log { Timber.tag(tag).w(throwable) }
-//    }
-//
-//    /**
-//     * Logs a warning message with a specified tag, optional throwable, using a lambda function to compute the message.
-//     */
-//    fun w(tag: String, throwable: Throwable? = null, message: () -> String) {
-//        log { Timber.tag(tag).w(throwable, message()) }
-//    }
     fun w(
         tag: String = getTagName(),
         message: () -> String,

@@ -14,5 +14,4 @@ object Constants {
     // Constant for named arguments in Hilt to avoid the conflict with different provider.
     const val NETWORK_NAMED_ARGUMENTS = "mindstix_network_args"
     const val DEFAULT_EMPTY_STRING = ""
-
 }
