@@ -53,6 +53,7 @@ dependencies {
     implementation Deps.kore_ktx
     implementation Deps.lifecycle_runtime
     implementation Deps.viewmodel_lifecycle
+    implementation 'androidx.security:security-crypto-ktx:1.1.0-alpha03'
     // junit
     testImplementation Deps.junit
     androidTestImplementation Deps.test_ext_junit

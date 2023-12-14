@@ -1,0 +1,18 @@
+{
+  "dev": {
+    "base_url": "developer",
+    "a":"a"
+  },
+  "qa": {
+    "base_url": "qa",
+    "a":"a"
+  },
+  "uat": {
+    "base_url": "uat",
+    "a":"a"
+  },
+  "prod": {
+    "base_url": "prod",
+    "a":"a"
+  }
+}
