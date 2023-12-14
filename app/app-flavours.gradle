@@ -2,8 +2,14 @@
  * Copyright (c) 2023 Mindstix Software Labs
  * All rights reserved.
  */
+
+
+/**
+ * Define flavor dimensions for different markets and app
+ *
+ * @author Nirav Patel
+ */
 android {
-    // Define flavor dimensions for market and app
     flavorDimensions 'market', 'app'
 
     productFlavors {
@@ -11,20 +17,35 @@ android {
         india {
             dimension "market"
             // Customize application ID suffix for India flavor
-            applicationIdSuffix ".india"
+            applicationIdSuffix India.suffix
         }
 
         // Environment-specific flavors
         uat {
-            dimension "app"
+            dimension UAT.dimensions
+            versionNameSuffix UAT.suffix
+            applicationId UAT.extension
+            versionName UAT.versionName
+            resValue "string", "app_name", "${UAT.appName}"
         }
-
-        qa {
-            dimension "app"
-        }
-
         production {
-            dimension "app"
+            dimension PROD.dimensions
+            versionName PROD.versionName
+            resValue "string", "app_name", "${PROD.appName}"
+        }
+        qa {
+            dimension QA.dimensions
+            applicationId QA.extension
+            versionNameSuffix QA.suffix
+            versionName QA.versionName
+            resValue "string", "app_name", "${QA.appName}"
+        }
+        dev {
+            dimension DEV.dimensions
+            versionNameSuffix DEV.suffix
+            applicationId DEV.extension
+            versionName DEV.versionName
+            resValue "string", "app_name", "${DEV.appName}"
         }
     }
 }

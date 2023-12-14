@@ -1,3 +1,8 @@
+import groovy.json.JsonSlurper
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 /**
  * Copyright (c) 2023 Mindstix Software Labs
  * All rights reserved.
@@ -39,6 +44,32 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        def currentBuildFlavour = getCurrentFlavor()
+        if (currentBuildFlavour.isEmpty()) {
+            currentBuildFlavour = "indiadev"
+            // set default value to avoid compilation issue of UnresolvedReference HEAP_ENV_ID, etc.
+        }
+        print("Current Floavour " + currentBuildFlavour)
+        if (currentBuildFlavour.contains("india")) {
+            if (currentBuildFlavour.contains("uat")) {
+                getProps("./src/configuration/market/india/uat.props").each { props ->
+                    buildConfigField "String", props.key, props.value
+                }
+            } else if (currentBuildFlavour.contains("qa")) {
+                getProps("./src/configuration/market/india/qa.props").each { props ->
+                    buildConfigField "String", props.key, props.value
+                }
+            } else if (currentBuildFlavour.contains("prod")) {
+                getProps("./src/configuration/market/india/prod.props").each { props ->
+                    buildConfigField "String", props.key, props.value
+                }
+            } else if (currentBuildFlavour.contains("dev")) {
+                getProps("./src/configuration/market/india/dev.props").each { props ->
+                    buildConfigField 'String', props.key, props.value
+                }
+            }
+        }
     }
 
     buildTypes {
@@ -64,6 +95,8 @@ android {
     buildFeatures {
         // Enable Compose support
         compose true
+        //Enable Build Configs
+        buildConfig true
     }
 
     composeOptions {
@@ -126,3 +159,36 @@ dependencies {
     kapt Deps.hilt_compiler
     kapt Deps.hilt_compiler_android
 }
+
+def getCurrentFlavor() {
+    Gradle gradle = getGradle()
+    String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
+
+    Pattern pattern
+
+    if (tskReqStr.contains("assemble")) // to run ./gradlew assembleRelease to build APK
+        pattern = Pattern.compile("assemble(\\w+)(Release|Debug)")
+    else if (tskReqStr.contains("bundle")) // to run ./gradlew bundleRelease to build .aab
+        pattern = Pattern.compile("bundle(\\w+)(Release|Debug)")
+    else if (tskReqStr.contains("test")) // to run ./gradlew testDebug to test
+        pattern = Pattern.compile("test(\\w+)(Release|Debug)")
+    else if (tskReqStr.contains("sonarqube"))
+        pattern = Pattern.compile("sonarqube")
+    else
+        pattern = Pattern.compile("generate(\\w+)(Release|Debug)")
+
+    Matcher matcher = pattern.matcher(tskReqStr)
+
+    if (matcher.find() && matcher.groupCount() >= 2)
+        return matcher.group(1).toLowerCase()
+    else {
+        return ""
+    }
+}
+
+def getProps(path) {
+    Properties props = new Properties()
+    props.load(new FileInputStream(file(path)))
+    return props
+}
+
