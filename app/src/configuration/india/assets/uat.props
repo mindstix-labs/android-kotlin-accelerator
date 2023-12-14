@@ -1,0 +1,23 @@
+BASE_URL="https://conex-api.amwayglobal.com/rest/"
+
+#ContentStack
+CS_API_KEY="blt39c6f9e07c518a4b"
+CS_DELIVERY_TOKEN="cs5099f56e0e08c53401424c6b"
+CS_ENVIRONMENT="prod"
+
+#AmwayProductRegistration
+AMWAY_WARRANTY_REGISTRATION="https://amway-durableservices.azure-api.net/durables-api/Durables/"
+
+#WarrantyHeaderSubscriptionKey
+SUBSCRIPTION_KEY="5f4171ad8efc4a9096f2177d2624dd73"
+APPLICATION="HH-GLOBAL"
+
+#Prod
+AWS_BROKER_URL="axnk9oqlqxcqh-ats.iot.us-east-1.amazonaws.com"
+
+
+#FCM Application Name
+FCM_APP_NAME="neptune-prod-droid"
+
+#Heap Analytics Data
+HEAP_ENV_ID="2542254003"
