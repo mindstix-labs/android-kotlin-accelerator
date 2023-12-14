@@ -11,10 +11,11 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/mindstix_icon"
+        android:roundIcon="@mipmap/mindstix_icon_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Baseline"
+        android:theme="@style/Theme.BaselineSplash"
         tools:targetApi="s">
 
         <!-- Declaration of the MindstixApplication as the application class -->

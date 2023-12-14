@@ -158,6 +158,9 @@ dependencies {
     kapt Deps.hilt_android_compiler
     kapt Deps.hilt_compiler
     kapt Deps.hilt_compiler_android
+
+    // Splash Screen
+    implementation Deps.splash_screen
 }
 
 def getCurrentFlavor() {
