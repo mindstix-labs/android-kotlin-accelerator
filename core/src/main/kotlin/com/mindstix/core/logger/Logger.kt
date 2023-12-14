@@ -1,0 +1,373 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+package com.mindstix.core.logger
+
+import android.os.Build
+import android.util.Log.ASSERT
+import android.util.Log.DEBUG
+import android.util.Log.ERROR
+import android.util.Log.INFO
+import android.util.Log.VERBOSE
+import android.util.Log.WARN
+import timber.log.Timber
+
+/**
+ * Logger provides a simple logging mechanism for tracking events
+ * and debugging information in the application.
+ *
+ * @author Nirav Patel, Pranav Hadawale
+ */
+object Logger {
+    private val loggerClassName = this::class.java.name
+    private const val MAX_TAG_LENGTH = 23
+
+    /**
+     * Enable logs for build variant
+     * Do not use Logger in release variant
+     */
+    fun enableLogging() {
+        Timber.plant(DebugTree())
+        // Logging a message to display that logging is enabled
+        d { "Logger is enabled" }
+    }
+
+    /**
+     * Clears all debugging trees previously planted
+     * and disables logs
+     */
+    fun disableLogging() {
+        // Logging a message to display that logging is enabled
+        d { "Logger is disabled" }
+        Timber.uprootAll()
+    }
+
+    /**
+     * Executes a log message block if trees planted in the timber forest
+     * @param block() a logging function/lambda to invoke
+     */
+    private fun log(block: () -> Unit) {
+        if (Timber.treeCount > 0) block()
+    }
+
+    /**
+     * Creates a tag if found from the callers class name
+     * obtained from the stacktrace
+     * Tree should be planted to get tag created
+     * otherwise it will return the input param as default
+     * @param tag default tag name
+     * @return tag created from the stackTrace
+     */
+    private fun getTagName(tag: String = ""): String {
+        if (Timber.treeCount > 0) {
+            return Throwable().stackTrace
+                .first { isNotLoggerClass(it.className) }
+                .let(Logger::getTagFromElement)
+        }
+        return tag
+    }
+
+    /**
+     * Checks if the @param className and logger class are same
+     * @param className to check
+     * @return true if both are different false otherwise
+     */
+    private fun isNotLoggerClass(className: String): Boolean {
+        return when {
+            className.length == loggerClassName.length -> {
+                className != loggerClassName
+            }
+
+            className.length >= loggerClassName.length -> {
+                className.subSequence(loggerClassName.indices) != loggerClassName
+            }
+
+            else -> true
+        }
+    }
+
+    /**
+     * Get the tag from the StackTraceElement
+     * Limit the tag length as per android API level
+     * @param element StackTraceElement with details about the callers class
+     * @return tag created from the input param with appropriate length
+     * For below API 26 there is a length limit for tags
+     */
+    internal fun getTagFromElement(element: StackTraceElement): String {
+        val tag = "(${element.fileName}:${element.lineNumber}) :${element.methodName}"
+        // Tag length limit was removed in API 26.
+        return if (tag.length <= MAX_TAG_LENGTH || Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            tag
+        } else {
+            tag.substring(0, MAX_TAG_LENGTH)
+        }
+    }
+
+    /**
+     * Logs a debug message using a lambda function.
+     */
+    fun d(message: () -> String) {
+        log { Timber.tag(getTagName()).d(message()) }
+    }
+//
+//    /**
+//     * Logs a debug message with a specified tag using a lambda function.
+//     */
+//    fun d(tag: String, message: () -> String) {
+//        log { Timber.tag(tag).d(message()) }
+//    }
+//
+//    /**
+//     * Logs a debug message with an optional throwable.
+//     */
+//    fun d(throwable: Throwable? = null) {
+//        log { Timber.tag(getTagName()).d(throwable) }
+//    }
+//
+//    /**
+//     * Logs a debug message with an optional throwable, using a lambda function to compute the message.
+//     */
+//    fun d(throwable: Throwable? = null, message: () -> String) {
+//        log { Timber.tag(getTagName()).d(throwable, message()) }
+//    }
+
+    fun d(
+        tag: String = getTagName(),
+        message: () -> String,
+        throwable: Throwable? = null,
+    ) {
+        log { Timber.tag(tag).d(throwable, message()) }
+    }
+
+//    /**
+//     * Logs an error message with optional remote logging.
+//     */
+//    fun e(message: () -> String, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = "", message = message())
+//        log { Timber.tag(getTagName()).e(message()) }
+//    }
+//
+//    /**
+//     * Logs an error message with a specified tag and optional remote logging.
+//     */
+//    fun e(tag: String, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message())
+//        log { Timber.tag(tag).e(message()) }
+//    }
+//
+//    /**
+//     * Logs an error message with a specified tag and optional throwable, supporting remote logging.
+//     */
+//    fun e(tag: String, throwable: Throwable? = null, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = "", throwable = throwable)
+//        log { Timber.tag(tag).e(throwable) }
+//    }
+//
+//    /**
+//     * Logs an error message with a specified tag, optional throwable, using a lambda function, and supports remote logging.
+//     */
+//    fun e(tag: String, throwable: Throwable? = null, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message(), throwable = throwable)
+//        log { Timber.tag(tag).e(throwable, message()) }
+//    }
+
+    fun e(
+        tag: String = getTagName(),
+        message: () -> String,
+        throwable: Throwable? = null,
+        isRemoteLogsEnabled: Boolean = false,
+    ) {
+        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message(), throwable = throwable)
+        log { Timber.tag(tag).e(throwable, message()) }
+    }
+
+//    /**
+//     * Logs an info message with optional remote logging.
+//     */
+//    fun i(message: () -> String, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = "", message = message())
+//        log { Timber.tag(getTagName()).i(message()) }
+//    }
+//
+//    /**
+//     * Logs an info message with a specified tag and optional remote logging.
+//     */
+//    fun i(tag: String, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message())
+//        log { Timber.tag(tag).i(message()) }
+//    }
+//
+//    /**
+//     * Logs an info message with a specified tag, optional throwable, and supports remote logging.
+//     */
+//    fun i(tag: String, throwable: Throwable? = null, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = "", throwable = throwable)
+//        log { Timber.tag(tag).i(throwable) }
+//    }
+//
+//    /**
+//     * Logs an info message with a specified tag, optional throwable, using a lambda function, and supports remote logging.
+//     */
+//    fun i(tag: String, throwable: Throwable? = null, message: () -> String, isRemoteLogsEnabled: Boolean = false) {
+//        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message(), throwable = throwable)
+//        log { Timber.tag(tag).i(throwable, message()) }
+//    }
+
+    fun i(
+        tag: String = getTagName(),
+        message: () -> String,
+        throwable: Throwable? = null,
+        isRemoteLogsEnabled: Boolean = false,
+    ) {
+        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message(), throwable = throwable)
+        log { Timber.tag(tag).i(throwable, message()) }
+    }
+
+//    /**
+//     * Logs a verbose message using a lambda function.
+//     */
+//    fun v(message: () -> String) {
+//        log { Timber.tag(getTagName()).v(message()) }
+//    }
+//
+//    /**
+//     * Logs a verbose message with an optional throwable.
+//     */
+//    fun v(throwable: Throwable? = null) {
+//        log { Timber.tag(getTagName()).v(throwable) }
+//    }
+//
+//    /**
+//     * Logs a verbose message with an optional throwable, using a lambda function to compute the message.
+//     */
+//    fun v(throwable: Throwable? = null, message: () -> String) {
+//        log { Timber.tag(getTagName()).v(throwable, message()) }
+//    }
+
+    fun v(
+        tag: String = getTagName(),
+        message: () -> String,
+        throwable: Throwable? = null,
+    ) {
+        log { Timber.tag(tag).v(throwable, message()) }
+    }
+
+//    /**
+//     * Logs a warning message using a lambda function.
+//     */
+//    fun w(message: () -> String) {
+//        log { Timber.tag(getTagName()).w(message()) }
+//    }
+//
+//    /**
+//     * Logs a warning message with a specified tag using a lambda function.
+//     */
+//    fun w(tag: String, message: () -> String) {
+//        log { Timber.tag(tag).w(message()) }
+//    }
+//
+//    /**
+//     * Logs a warning message with a specified tag and optional throwable.
+//     */
+//    fun w(tag: String, throwable: Throwable? = null) {
+//        log { Timber.tag(tag).w(throwable) }
+//    }
+//
+//    /**
+//     * Logs a warning message with a specified tag, optional throwable, using a lambda function to compute the message.
+//     */
+//    fun w(tag: String, throwable: Throwable? = null, message: () -> String) {
+//        log { Timber.tag(tag).w(throwable, message()) }
+//    }
+    fun w(
+        tag: String = getTagName(),
+        message: () -> String,
+        throwable: Throwable? = null,
+    ) {
+        log { Timber.tag(tag).w(throwable, message()) }
+    }
+
+    /**
+     * Triggers Timber logging based on the specified priority, tag, and message with optional arguments.
+     */
+    private fun triggerLogger(priority: Int, tag: String, message: String, vararg args: Any) {
+        when (priority) {
+            ASSERT -> {
+                log { Timber.tag(tag).wtf(message = message, args = args) }
+            }
+
+            DEBUG -> {
+                log { Timber.tag(tag).d(message = message, args = args) }
+            }
+
+            ERROR -> {
+                log { Timber.tag(tag).e(message = message, args = args) }
+            }
+
+            INFO -> {
+                log { Timber.tag(tag).i(message = message, args = args) }
+            }
+
+            VERBOSE -> {
+                log { Timber.tag(tag).v(message = message, args = args) }
+            }
+
+            WARN -> {
+                log { Timber.tag(tag).w(message = message, args = args) }
+            }
+        }
+    }
+
+    /** Log an verbose message with optional format args.  */
+    fun v(tag: String, message: String, vararg args: Any) {
+        triggerLogger(VERBOSE, tag, message, *args)
+    }
+
+    /** Log an debug message with optional format args.  */
+    fun d(tag: String, message: String, vararg args: Any) {
+        triggerLogger(DEBUG, tag, message, *args)
+    }
+
+    /** Log an warn message with optional format args.  */
+    fun w(tag: String, message: String, vararg args: Any) {
+        triggerLogger(WARN, tag, message, *args)
+    }
+
+    /** Log an error message with optional format args.  */
+    fun e(tag: String, message: String, vararg args: Any, isRemoteLogsEnabled: Boolean = false) {
+        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message)
+        triggerLogger(ERROR, tag, message, *args)
+    }
+
+    /** Log an info message with optional format args.  */
+    fun i(tag: String, message: String, vararg args: Any, isRemoteLogsEnabled: Boolean = false) {
+        remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message)
+        triggerLogger(INFO, tag, message, *args)
+    }
+
+    /** Log an wtf message with optional format args.  */
+    fun wtf(tag: String, message: String, vararg args: Any) {
+        triggerLogger(ASSERT, tag, message, *args)
+    }
+
+    /**
+     * Logs messages remotely if remote isRemoteLogsEnabled is true.
+     *
+     * @param isRemoteLogsEnabled Indicates whether remote logging is enabled or not.
+     * @param tag The tag to categorize the log message.
+     * @param message The log message to be logged remotely.
+     * @param throwable An optional throwable associated with the log message (default is null).
+     */
+    private fun remoteLogging(
+        isRemoteLogsEnabled: Boolean,
+        tag: String,
+        message: String,
+        throwable: Throwable? = null,
+    ) {
+        if (isRemoteLogsEnabled) {
+            val remoteLoggingHelper = RemoteLoggingHelper()
+            remoteLoggingHelper.performRemoteLogging(tag, message, throwable)
+        }
+    }
+}

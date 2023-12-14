@@ -58,4 +58,6 @@ dependencies {
     androidTestImplementation Deps.test_ext_junit
     // mockk unit test
     testImplementation Deps.mockk
+    // Timber
+    implementation(Deps.timber)
 }

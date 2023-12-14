@@ -48,6 +48,9 @@ object Versions {
 
     // ViewModel dependencies
     const val viewmodel_ktx = "2.6.2"
+
+    // Timber
+    const val timber = "5.0.1"
 }
 
 object BuildConfig {
