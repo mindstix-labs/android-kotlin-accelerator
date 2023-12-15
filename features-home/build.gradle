@@ -1,0 +1,77 @@
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
+plugins {
+    // Apply necessary plugins for Android library development, Kotlin, Dagger Hilt
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    // Define the package namespace for the feature module
+    namespace 'com.mindstix.features.login'
+
+    // Set the compile SDK version
+    compileSdk BuildConfig.compileSdk
+
+    defaultConfig {
+        // Configure default settings such as minSdk, targetSdk, and test runner
+        minSdk BuildConfig.minSdk
+        targetSdk BuildConfig.targetSdk
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        // Enable Jetpack Compose features
+        compose true
+    }
+
+    composeOptions {
+        // Set the Kotlin compiler extension version for Jetpack Compose
+        kotlinCompilerExtensionVersion BuildConfig.kotlinCompilerExtensionVersion
+    }
+
+    buildTypes {
+        // Configure release build type
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        // Set source and target compatibility to Java 17
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        // Set the JVM target for Kotlin
+        jvmTarget = BuildConfig.jvmTarget
+    }
+}
+
+dependencies {
+    // Core, Capabilities Integration in Feature Modules
+    implementation project(':core')
+    implementation project(':capabilities')
+
+    // Third-party dependencies
+    implementation Deps.kore_ktx
+    implementation Deps.appcompat
+
+    // UI dependencies
+    implementation Deps.compose_ui
+    implementation Deps.compose_ui_graphics
+    implementation Deps.ui_tooling_preview
+    implementation Deps.material3
+    implementation Deps.navigation_runtime_ktx
+
+    // Mocking library for testing
+    testImplementation Deps.mockk
+    testImplementation Deps.kotlinx_coroutines_test
+
+}

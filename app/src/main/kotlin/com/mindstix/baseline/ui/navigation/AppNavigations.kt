@@ -19,12 +19,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.Destinations
-import com.mindstix.login.navigation.LoginScreenDestination
-import com.mindstix.login.view.HomeScreen
-import com.mindstix.login.view.ProfileScreen
-import com.mindstix.login.view.SettingsScreen
-import com.mindstix.login.view.SplashScreen
-import com.mindstix.login.viewModels.LoginViewModel
+import com.mindstix.onboarding.navigation.LoginScreenDestination
+import com.mindstix.home.view.HomeScreen
+import com.mindstix.home.view.ProfileScreen
+import com.mindstix.home.view.SettingsScreen
+import com.mindstix.onboarding.view.SplashScreen
+import com.mindstix.onboarding.viewModels.LoginViewModel
 import org.json.JSONObject
 
 /**
@@ -42,11 +42,11 @@ fun NavGraphBuilder.splashNavigationGraph(
         // deepLinks = listOf(navDeepLink { uriPattern = "example://splash" }),
         // Arguments to be passed from the current screen to the next destination
         arguments =
-            listOf(
-                navArgument("exampleArg") {
-                    type = NavType.StringType
-                },
-            ),
+        listOf(
+            navArgument("exampleArg") {
+                type = NavType.StringType
+            },
+        ),
         // Animation for this screen
         enterTransition = {
             slideIntoContainer(
