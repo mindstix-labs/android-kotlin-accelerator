@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023 Mindstix Software Labs.
+ *  All rights reserved.
+ */
+
 package com.mindstix.core.sharedpref
 
 import android.content.Context
@@ -7,11 +12,20 @@ import androidx.security.crypto.MasterKey
 import com.mindstix.core.models.SharedPrefType
 
 /**
+ * Custom SharedPreference manager class designed to handle different types of shared preferences.
  *
+ * This class allows the creation and management of SharedPreferences based on the specified [SharedPrefType].
  *
- * Author by Nirav Patel,
- * on 14,December
- **/
+ * @property context The context associated with the application or component using this SharedPref instance.
+ * @property type The type of shared preferences to be managed by this instance, as per the [SharedPrefType] enum.
+ * @property fileName The name of the file where shared preferences data will be stored.
+ *
+ * @see android.content.Context
+ * @see SharedPrefType
+ * @see android.content.SharedPreferences
+ *
+ * Author: Nirav Patel
+ */
 class SharedPref(context: Context, type: SharedPrefType, private val fileName: String) {
     private val TAG = SharedPref::class.java.simpleName
 
