@@ -29,11 +29,11 @@ class LoginUseCaseImpl
                 screenTitle = "Login",
                 screenDescription = "This is the login screen",
                 backgroundImageUrl = "",
-                emailPlaceHolder = "Email",
-                passwordPlaceHolder = "Password",
+                emailPlaceHolder = "Enter phone or email",
+                passwordPlaceHolder = "Enter password",
                 emailValue = "abc@xyz.com",
                 passwordValue = "1234567",
-                loginCtaLabel = "Login",
+                loginCtaLabel = "Sign In",
             )
         }
     }

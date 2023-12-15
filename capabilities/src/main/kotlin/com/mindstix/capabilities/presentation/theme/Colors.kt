@@ -50,3 +50,9 @@ val DarkColors =
         error = md_theme_dark_error,
         errorContainer = md_theme_dark_errorContainer,
     )
+
+//Login
+val text_field_bg_color = Color(0xFF1F1F1F)
+val login_in_button_bg_color = Color(0xFFF2F2F2)
+val text_field_label_color = Color(0xFFBDBDBD)
+val divider_text_color = Color(0xFF3C3C3C)
