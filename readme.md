@@ -66,6 +66,19 @@ The Android baseline, serving as the starting point for the application's develo
 ----
 ### Baseline Architecture Overview ###
 
+#### Clean Architecture ####
+##### Core #####
+The Core module is the foundational layer of your application. It consists of components and functionalities that are considered essential, universal, and stable. These components are less likely to undergo frequent changes, providing a stable and reliable base for the entire application. The purpose of the Core module is to establish a set of fundamental building blocks that can be leveraged across the application without significant modifications.
+
+##### Capabilities #####
+The Capabilities module groups together shared capabilities that are crucial for building the application. These capabilities might include functionalities related to networking, presentation, and utilities that are needed across different features. The goal is to create a modular and reusable set of tools that can be easily integrated into various parts of the application.
+
+##### Features #####
+Feature modules represent specific functionalities or components within the application. Each feature is designed to encapsulate a standalone piece of user-facing functionality. Features can be thought of as self-contained units, allowing for modularity, maintainability, and ease-of development.
+
+##### App #####
+The App module acts as the orchestrator, bringing together all the different elements of the application. It serves as the integration point for Core components, shared Capabilities, and individual Features. The App module is responsible for combining these elements to construct the final application. This module is where you define the overall structure, dependencies, and interactions between different parts of the application. The App module ensures that the Core functionalities are available, shared Capabilities are accessible, and individual Features are integrated to create a cohesive and functional Android application.
+
 #### Folder Structure ####
 
 ```
@@ -94,20 +107,6 @@ app
         └── storage
 ...............
 ```
-
-
-#### Clean Architecture ####
-##### Core #####
-The Core module is the foundational layer of your application. It consists of components and functionalities that are considered essential, universal, and stable. These components are less likely to undergo frequent changes, providing a stable and reliable base for the entire application. The purpose of the Core module is to establish a set of fundamental building blocks that can be leveraged across the application without significant modifications.
-
-##### Capabilities #####
-The Capabilities module groups together shared capabilities that are crucial for building the application. These capabilities might include functionalities related to networking, presentation, and utilities that are needed across different features. The goal is to create a modular and reusable set of tools that can be easily integrated into various parts of the application.
-
-##### Features #####
-Feature modules represent specific functionalities or components within the application. Each feature is designed to encapsulate a standalone piece of user-facing functionality. Features can be thought of as self-contained units, allowing for modularity, maintainability, and ease-of development.
-
-##### App #####
-The App module acts as the orchestrator, bringing together all the different elements of the application. It serves as the integration point for Core components, shared Capabilities, and individual Features. The App module is responsible for combining these elements to construct the final application. This module is where you define the overall structure, dependencies, and interactions between different parts of the application. The App module ensures that the Core functionalities are available, shared Capabilities are accessible, and individual Features are integrated to create a cohesive and functional Android application.
 
 #### Application Architecture ####
 ##### MVI #####
@@ -177,7 +176,7 @@ Reference Links:
 MIT License
 
 ```
-Copyright (c) 2023-24 Mindstix Software Labs, Inc.
+Copyright (c) 2023 Mindstix Software Labs, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

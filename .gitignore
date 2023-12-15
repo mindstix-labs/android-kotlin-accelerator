@@ -169,8 +169,3 @@ app/src/main/res/.DS_Store
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio
-
-buildSrc/build/kotlin/buildSrcjar-classes.txt
-buildSrc/build/kotlin/buildSrcjar-classes.txt
-buildSrc/build/kotlin/compileKotlin/cacheable/last-build.bin
-buildSrc/build/libs/buildSrc.jar
