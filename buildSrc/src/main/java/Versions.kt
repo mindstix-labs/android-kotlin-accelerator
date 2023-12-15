@@ -52,4 +52,7 @@ object Versions {
 
     // Timber
     const val timber = "5.0.1"
+
+    // Splash Screen
+    const val splash_screen = "1.0.0"
 }

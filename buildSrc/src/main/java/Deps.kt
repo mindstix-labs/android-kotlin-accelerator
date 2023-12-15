@@ -54,4 +54,7 @@ object Deps {
 
     // Timber
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    // Splash Screen
+    const val splash_screen =  "androidx.core:core-splashscreen:${Versions.splash_screen}"
 }
