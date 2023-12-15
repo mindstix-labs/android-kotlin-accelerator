@@ -25,7 +25,6 @@ import java.util.Locale
  * @author Pranav Hadawale
  */
 object CommonUtils {
-
     /**
      * Checks whether the device is currently connected to a mobile or Wi-Fi network.
      *
@@ -74,7 +73,10 @@ object CommonUtils {
      * @param pattern The pattern to use for formatting (default is "yyyy-MM-dd").
      * @return A formatted string representation of the [date].
      */
-    fun formatDateToString(date: LocalDate, pattern: String = "yyyy-MM-dd"): String {
+    fun formatDateToString(
+        date: LocalDate,
+        pattern: String = "yyyy-MM-dd",
+    ): String {
         val formatter = DateTimeFormatter.ofPattern(pattern)
         return date.format(formatter)
     }
@@ -88,7 +90,10 @@ object CommonUtils {
      * @return A [LocalDate] object representing the parsed date.
      * @throws DateTimeParseException if the input string is not in the expected format.
      */
-    fun parseStringToDate(dateString: String, pattern: String = "yyyy-MM-dd"): LocalDate {
+    fun parseStringToDate(
+        dateString: String,
+        pattern: String = "yyyy-MM-dd",
+    ): LocalDate {
         val formatter = DateTimeFormatter.ofPattern(pattern)
         return try {
             LocalDate.parse(dateString, formatter)
@@ -105,7 +110,10 @@ object CommonUtils {
      * @param parameters A map of key-value pairs representing the query parameters.
      * @return A new URL string with the appended query parameters.
      */
-    fun appendQueryParameters(url: String, parameters: Map<String, String>): String =
+    fun appendQueryParameters(
+        url: String,
+        parameters: Map<String, String>,
+    ): String =
         buildString {
             append(url)
             if (url.contains("?").not()) {
@@ -137,7 +145,10 @@ object CommonUtils {
      * @return A new [Uri] with the specified query parameter removed or the original [Uri]
      * if the parameter is not present.
      */
-    fun removeSpecifiedQueryParameter(url: String, key: String): Uri? {
+    fun removeSpecifiedQueryParameter(
+        url: String,
+        key: String,
+    ): Uri? {
         val uri = Uri.parse(url)
         val params = uri.queryParameterNames
         if (!params.contains(key)) {
@@ -167,7 +178,10 @@ object CommonUtils {
      * @param paramName The name of the query parameter whose value is to be retrieved.
      * @return The value of the specified query parameter, or null if the parameter is not found.
      */
-    fun getQueryParamValue(url: String, paramName: String): String? {
+    fun getQueryParamValue(
+        url: String,
+        paramName: String,
+    ): String? {
         val queryString = URL(url).query
         val params = queryString?.split("&") ?: emptyList()
 

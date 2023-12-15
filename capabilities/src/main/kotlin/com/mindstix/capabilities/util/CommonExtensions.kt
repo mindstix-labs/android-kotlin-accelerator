@@ -20,7 +20,6 @@ import java.util.Locale
  * @author Pranav Hadawale
  */
 object CommonExtensions {
-
     /**
      * Provides a default empty string value for scenarios
      * where you prefer to avoid null checks on string variables.

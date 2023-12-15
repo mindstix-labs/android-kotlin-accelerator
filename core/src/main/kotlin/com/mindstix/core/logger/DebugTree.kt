@@ -18,7 +18,6 @@ import timber.log.Timber
  * @author Nirav Patel
  */
 internal class DebugTree : Timber.DebugTree() {
-
     /**
      * Overrides the method to create a custom stack element tag using the Logger utility class.
      *

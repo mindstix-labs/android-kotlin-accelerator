@@ -173,7 +173,12 @@ object Logger {
     /**
      * Triggers Timber logging based on the specified priority, tag, and message with optional arguments.
      */
-    private fun triggerLogger(priority: Int, tag: String, message: String, vararg args: Any) {
+    private fun triggerLogger(
+        priority: Int,
+        tag: String,
+        message: String,
+        vararg args: Any,
+    ) {
         when (priority) {
             ASSERT -> {
                 log { Timber.tag(tag).wtf(message = message, args = args) }
@@ -202,34 +207,60 @@ object Logger {
     }
 
     /** Log an verbose message with optional format args.  */
-    fun v(tag: String, message: String, vararg args: Any) {
+    fun v(
+        tag: String,
+        message: String,
+        vararg args: Any,
+    ) {
         triggerLogger(VERBOSE, tag, message, *args)
     }
 
     /** Log an debug message with optional format args.  */
-    fun d(tag: String, message: String, vararg args: Any) {
+    fun d(
+        tag: String,
+        message: String,
+        vararg args: Any,
+    ) {
         triggerLogger(DEBUG, tag, message, *args)
     }
 
     /** Log an warn message with optional format args.  */
-    fun w(tag: String, message: String, vararg args: Any) {
+    fun w(
+        tag: String,
+        message: String,
+        vararg args: Any,
+    ) {
         triggerLogger(WARN, tag, message, *args)
     }
 
     /** Log an error message with optional format args.  */
-    fun e(tag: String, message: String, vararg args: Any, isRemoteLogsEnabled: Boolean = false) {
+    fun e(
+        tag: String,
+        message: String,
+        vararg args: Any,
+        isRemoteLogsEnabled: Boolean = false,
+    ) {
         remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message)
         triggerLogger(ERROR, tag, message, *args)
     }
 
     /** Log an info message with optional format args.  */
-    fun i(tag: String, message: String, vararg args: Any, isRemoteLogsEnabled: Boolean = false) {
+    fun i(
+        tag: String,
+        message: String,
+        vararg args: Any,
+        isRemoteLogsEnabled: Boolean = false,
+    ) {
         remoteLogging(isRemoteLogsEnabled = isRemoteLogsEnabled, tag = tag, message = message)
         triggerLogger(INFO, tag, message, *args)
     }
 
     /** Log an wtf message with optional format args.  */
-    fun wtf(tag: String, message: String, vararg args: Any) {
+    fun wtf(
+        tag: String,
+        message: String,
+        vararg args: Any,
+    ) {
         triggerLogger(ASSERT, tag, message, *args)
     }
 

@@ -64,39 +64,43 @@ fun Login(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
     ) {
         // Email TextField
         TextField(
             value = email,
             onValueChange = { email = it },
-            colors = TextFieldDefaults.colors(
-                focusedLabelColor = Color.Gray,
-                unfocusedLabelColor = text_field_label_color,
-                focusedTextColor = text_field_label_color,
-                focusedContainerColor = text_field_bg_color,
-                unfocusedContainerColor = text_field_bg_color,
-                disabledContainerColor = text_field_bg_color,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
+            colors =
+                TextFieldDefaults.colors(
+                    focusedLabelColor = Color.Gray,
+                    unfocusedLabelColor = text_field_label_color,
+                    focusedTextColor = text_field_label_color,
+                    focusedContainerColor = text_field_bg_color,
+                    unfocusedContainerColor = text_field_bg_color,
+                    disabledContainerColor = text_field_bg_color,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                ),
             shape = RoundedCornerShape(4.dp),
             singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxWidth(),
             label = {
                 Text(
                     text = state.data.emailPlaceHolder,
                     style = textFieldLabel,
                 )
             },
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Next
-            ),
-            keyboardActions = KeyboardActions(
-                onNext = { /* Handle next action */ }
-            )
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Next,
+                ),
+            keyboardActions =
+                KeyboardActions(
+                    onNext = { /* Handle next action */ },
+                ),
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -105,21 +109,23 @@ fun Login(
         TextField(
             value = password,
             onValueChange = { password = it },
-            colors = TextFieldDefaults.colors(
-                focusedLabelColor = Color.Gray,
-                unfocusedLabelColor = text_field_label_color,
-                focusedTextColor = text_field_label_color,
-                focusedContainerColor = text_field_bg_color,
-                unfocusedContainerColor = text_field_bg_color,
-                disabledContainerColor = text_field_bg_color,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
+            colors =
+                TextFieldDefaults.colors(
+                    focusedLabelColor = Color.Gray,
+                    unfocusedLabelColor = text_field_label_color,
+                    focusedTextColor = text_field_label_color,
+                    focusedContainerColor = text_field_bg_color,
+                    unfocusedContainerColor = text_field_bg_color,
+                    disabledContainerColor = text_field_bg_color,
+                    focusedIndicatorColor = Color.Transparent,
+                    unfocusedIndicatorColor = Color.Transparent,
+                    disabledIndicatorColor = Color.Transparent,
+                ),
             shape = RoundedCornerShape(4.dp),
             singleLine = true,
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier =
+                Modifier
+                    .fillMaxWidth(),
             label = {
                 Text(
                     text = state.data.passwordPlaceHolder,
@@ -129,23 +135,30 @@ fun Login(
             trailingIcon = {
                 // Password visibility toggle
                 IconButton(
-                    onClick = { isPasswordVisible = !isPasswordVisible }
+                    onClick = { isPasswordVisible = !isPasswordVisible },
                 ) {
                     Image(
-                        painter = if (isPasswordVisible) painterResource(id = R.drawable.visibility_off) else painterResource(
-                            id = R.drawable.visibility_on
-                        ),
-                        contentDescription = if (isPasswordVisible) "Hide Password" else "Show Password"
+                        painter =
+                            if (isPasswordVisible) {
+                                painterResource(id = R.drawable.visibility_off)
+                            } else {
+                                painterResource(
+                                    id = R.drawable.visibility_on,
+                                )
+                            },
+                        contentDescription = if (isPasswordVisible) "Hide Password" else "Show Password",
                     )
                 }
             },
             visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = { /* Handle login action */ }
-            )
+            keyboardOptions =
+                KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done,
+                ),
+            keyboardActions =
+                KeyboardActions(
+                    onDone = { /* Handle login action */ },
+                ),
         )
 
         Spacer(modifier = Modifier.height(25.dp))
@@ -154,20 +167,22 @@ fun Login(
         Button(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(4.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = text_field_label_color,
-                contentColor = text_field_bg_color,
-                disabledContainerColor = login_in_button_bg_color,
-                disabledContentColor = login_in_button_bg_color,
-            ),
+            colors =
+                ButtonDefaults.buttonColors(
+                    containerColor = text_field_label_color,
+                    contentColor = text_field_bg_color,
+                    disabledContainerColor = login_in_button_bg_color,
+                    disabledContentColor = login_in_button_bg_color,
+                ),
             onClick = {
                 keyboardController?.hide()
                 // Invoke the user intent to navigate to the Home Screen
                 userIntent.invoke(LoginIntent.NavigateToHomeScreen)
-            }) {
+            },
+        ) {
             Text(
                 style = buttonTextBold,
-                text = state.data.loginCtaLabel.toUpperCase(Locale.current), //S I G N    I N
+                text = state.data.loginCtaLabel.toUpperCase(Locale.current), // S I G N    I N
             )
         }
 

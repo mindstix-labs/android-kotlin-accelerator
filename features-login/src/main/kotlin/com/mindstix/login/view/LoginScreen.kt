@@ -52,11 +52,11 @@ fun LoginScreen(
 ) {
     Column(
         modifier =
-        Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-            .background(Color.Black)
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 90.dp),
+            Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .background(Color.Black)
+                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 90.dp),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -121,6 +121,5 @@ fun LoginScreen(
                 text = "Sign up here",
             )
         }
-
     }
 }

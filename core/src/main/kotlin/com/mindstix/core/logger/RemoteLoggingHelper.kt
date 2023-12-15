@@ -10,7 +10,6 @@ package com.mindstix.core.logger
  * @author Pranav Hadawale
  */
 class RemoteLoggingHelper {
-
     /**
      * This function is responsible for implementing the logic for remote logging.
      *
