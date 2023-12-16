@@ -7,10 +7,6 @@ package com.mindstix.baseline.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.mindstix.baseline.ui.navigation.MainDestination
 import com.mindstix.capabilities.presentation.theme.AppTheme
@@ -34,25 +30,15 @@ class MainActivity : ComponentActivity() {
      * Compose. The AppTheme composable is applied to the entire UI, providing a
      * consistent theme.
      *
-     * The Scaffold composable is used as a top-level container for the activity,
-     * providing the basic structure for a Material Design UI. In this case, it
-     * contains a single Row composable representing the MainDestination of the app.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
             AppTheme {
-                // A surface container using the 'background' color from the theme
-                Scaffold { paddingValues ->
-                    Row(
-                        modifier = Modifier.padding(paddingValues),
-                    ) {
-                        // MainDestination is a composable that represents the main content
-                        // of the app. It is included within the Row composable.
-                        MainDestination()
-                    }
-                }
+                // MainDestination is a composable that represents the main content
+                // of the app. It is included within the Row composable.
+                MainDestination()
             }
         }
     }

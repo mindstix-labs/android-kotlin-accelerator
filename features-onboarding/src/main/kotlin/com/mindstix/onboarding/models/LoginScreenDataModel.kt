@@ -27,11 +27,11 @@ data class LoginScreenDataModel(
     var screenTitle: String = "Login",
     var screenDescription: String = "This is the login screen",
     var backgroundImageUrl: String = "",
-    var emailPlaceHolder: String = "Email",
-    var passwordPlaceHolder: String = "Password",
+    var emailPlaceHolder: String = "Enter phone or email",
+    var passwordPlaceHolder: String = "Enter password",
     var emailValue: String = "abc@xyz.com",
     var passwordValue: String = "1234567",
-    var loginCtaLabel: String = "Login",
+    var loginCtaLabel: String = "Sign In",
 ) {
     companion object {
         val defaultValue = LoginScreenDataModel()

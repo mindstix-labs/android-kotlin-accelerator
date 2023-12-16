@@ -31,8 +31,8 @@ fun AlertDialogSample() {
 
     Column(
         modifier =
-        Modifier
-            .padding(4.dp),
+            Modifier
+                .padding(4.dp),
     ) {
         Button(onClick = { showDialog = true }) {
             Text("Show Alert Dialog")

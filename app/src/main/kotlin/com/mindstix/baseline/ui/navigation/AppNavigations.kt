@@ -19,10 +19,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.Destinations
-import com.mindstix.onboarding.navigation.LoginScreenDestination
 import com.mindstix.home.view.HomeScreen
 import com.mindstix.home.view.ProfileScreen
 import com.mindstix.home.view.SettingsScreen
+import com.mindstix.onboarding.navigation.LoginScreenDestination
 import com.mindstix.onboarding.view.SplashScreen
 import com.mindstix.onboarding.viewModels.LoginViewModel
 import org.json.JSONObject
@@ -79,16 +79,16 @@ fun NavGraphBuilder.loginNavigationGraph(
     baseComponentState: BaseComponentState,
 ) {
     composable(Destinations.LoginDestination.route) { _ ->
+        // Hide bottom bar and floating action button for the login screen
+        hideBottomBar(baseComponentState)
+        hideFloatingActionButton(baseComponentState)
+
         val viewModel: LoginViewModel = hiltViewModel()
         val viewState by viewModel.viewState.collectAsState()
         val effect = viewModel.effect
         val context = LocalContext.current
         val jsonArguments = JSONObject()
         val args = jsonArguments.toString()
-
-        // Hide bottom bar and floating action button for the login screen
-        hideBottomBar(baseComponentState)
-        hideFloatingActionButton(baseComponentState)
 
         // Display the LoginScreenDestination composable
         LoginScreenDestination(

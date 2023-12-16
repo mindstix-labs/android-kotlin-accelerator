@@ -14,26 +14,26 @@ import javax.inject.Inject
  * @author Abhijeet Kokane
  */
 class LoginUseCaseImpl
-    @Inject
-    constructor(
-        // private val downloadRequestDao: DownloadRequestDao,
-    ) : LoginUseCase {
-        /**
-         * Retrieves the content for the Login Screen.
-         *
-         * @return An instance of [LoginScreenDataModel] containing data for rendering the Login Screen.
-         */
-        override fun getLoginScreenContent(): LoginScreenDataModel {
-            return LoginScreenDataModel(
-                status = DataStatus.Success,
-                screenTitle = "Login",
-                screenDescription = "This is the login screen",
-                backgroundImageUrl = "",
-                emailPlaceHolder = "Enter phone or email",
-                passwordPlaceHolder = "Enter password",
-                emailValue = "abc@xyz.com",
-                passwordValue = "1234567",
-                loginCtaLabel = "Sign In",
-            )
-        }
+@Inject
+constructor(
+    // private val downloadRequestDao: DownloadRequestDao,
+) : LoginUseCase {
+    /**
+     * Retrieves the content for the Login Screen.
+     *
+     * @return An instance of [LoginScreenDataModel] containing data for rendering the Login Screen.
+     */
+    override fun getLoginScreenContent(): LoginScreenDataModel {
+        return LoginScreenDataModel(
+            status = DataStatus.Success,
+            screenTitle = "Login",
+            screenDescription = "This is the login screen",
+            backgroundImageUrl = "",
+            emailPlaceHolder = "Enter phone or email",
+            passwordPlaceHolder = "Enter password",
+            emailValue = "abc@xyz.com",
+            passwordValue = "1234567",
+            loginCtaLabel = "Sign In",
+        )
     }
+}

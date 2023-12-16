@@ -6,16 +6,10 @@
 package com.mindstix.onboarding.navigation
 
 import android.content.Context
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import com.mindstix.capabilities.presentation.navigation.Destinations
@@ -34,6 +28,8 @@ import kotlinx.coroutines.flow.Flow
  * @param loginViewState The current state of the Login Screen.
  * @param navEffect Flow representing navigation effects from the Login Screen.
  * @param navController The navigation controller for handling navigation actions.
+ *
+ * @author Abhijeet Kokane
  */
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -90,38 +86,30 @@ fun LoginScreenDestination(
         }
 
     // Main content of the Login Screen Destination.
-    Box(
-        modifier =
-            Modifier
-                .fillMaxSize()
-                .background(Color.White),
-        contentAlignment = Alignment.BottomCenter,
-    ) {
-        // Choose the appropriate content based on the current state of the Login Screen.
-        when (loginViewState) {
-            is LoginViewStates.LoadedData -> {
-                // Display the Login Screen with loaded data.
-                LoginScreen(
-                    state = loginViewState,
-                    keyboardController = keyboardController,
-                    userIntent = onUserAction(),
-                )
-            }
+    // Choose the appropriate content based on the current state of the Login Screen.
+    when (loginViewState) {
+        is LoginViewStates.LoadedData -> {
+            // Display the Login Screen with loaded data.
+            LoginScreen(
+                state = loginViewState,
+                keyboardController = keyboardController,
+                userIntent = onUserAction(),
+            )
+        }
 
-            is LoginViewStates.InitialLoading -> {
-                // Display a loading indicator for the initial loading state.
-                Text("InitialLoading")
-            }
+        is LoginViewStates.InitialLoading -> {
+            // Display a loading indicator for the initial loading state.
+            Text("InitialLoading")
+        }
 
-            is LoginViewStates.Offline -> {
-                // Display content for the offline state.
-                Text("Offline")
-            }
+        is LoginViewStates.Offline -> {
+            // Display content for the offline state.
+            Text("Offline")
+        }
 
-            is LoginViewStates.UnInitialized -> {
-                // Display content for the uninitialized state.
-                Text("UnInitialized")
-            }
+        is LoginViewStates.UnInitialized -> {
+            // Display content for the uninitialized state.
+            Text("UnInitialized")
         }
     }
 }

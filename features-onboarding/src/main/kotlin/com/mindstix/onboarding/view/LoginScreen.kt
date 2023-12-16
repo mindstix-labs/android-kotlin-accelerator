@@ -6,7 +6,6 @@
 package com.mindstix.onboarding.view
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.intl.Locale
@@ -52,11 +50,10 @@ fun LoginScreen(
 ) {
     Column(
         modifier =
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-                .background(Color.Black)
-                .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 90.dp),
+        Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 90.dp),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
