@@ -113,10 +113,11 @@ android {
 }
 
 dependencies {
-    // Core, Capabilities, Features Module Integration in the main app
+    // Core, Capabilities, Feature Modules Integration in the main app
     implementation project(':core')
     implementation project(':capabilities')
-    implementation project(':features-login')
+    implementation project(':features-onboarding')
+    implementation project(':features-home')
 
     // Core dependencies
     implementation Deps.kore_ktx

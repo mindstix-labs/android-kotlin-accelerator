@@ -4,9 +4,7 @@
  */
 package com.mindstix.baseline.ui.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.BottomAppBar
@@ -21,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.ui.BottomNavigationBar
-import com.mindstix.capabilities.presentation.theme.zeroInternalSpacing
 
 /**
  * Main destination composable function.
@@ -32,6 +29,7 @@ import com.mindstix.capabilities.presentation.theme.zeroInternalSpacing
  *
  * @author Abhijeet Kokane
  */
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainDestination() {
     // MutableState
@@ -45,9 +43,7 @@ fun MainDestination() {
         bottomBar = {
             // Display the BottomAppBar with BottomNavigationBar if specified by the state
             if (baseComponentState.displayBottomNavigationBar.value) {
-                BottomAppBar(modifier = Modifier) {
-                    BottomNavigationBar(navController = navController)
-                }
+                BottomNavigationBar(navController = navController)
             }
         },
         floatingActionButton = {
@@ -58,24 +54,11 @@ fun MainDestination() {
                 }
             }
         },
-    ) { innerPadding ->
-        // Box is used to apply custom padding to the content
-        Box(
-            modifier =
-                Modifier.padding(
-                    PaddingValues(
-                        zeroInternalSpacing,
-                        zeroInternalSpacing,
-                        zeroInternalSpacing,
-                        innerPadding.calculateBottomPadding(),
-                    ),
-                ),
-        ) {
-            // Include the NavigationHost composable within the Box
-            NavigationHost(
-                navController = navController,
-                baseComponentState = baseComponentState,
-            )
-        }
+    ) { _ ->
+        // Include the NavigationHost composable within the Box
+        NavigationHost(
+            navController = navController,
+            baseComponentState = baseComponentState,
+        )
     }
 }

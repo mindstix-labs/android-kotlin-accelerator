@@ -18,7 +18,7 @@ import androidx.compose.runtime.mutableStateOf
  * @author Abhijeet Kokane
  */
 data class BaseComponentState(
-    var displayToolBar: MutableState<Boolean> = mutableStateOf(true),
-    var displayBottomNavigationBar: MutableState<Boolean> = mutableStateOf(true),
-    var displayFloatingActionButton: MutableState<Boolean> = mutableStateOf(true),
+    var displayToolBar: MutableState<Boolean> = mutableStateOf(false),
+    var displayBottomNavigationBar: MutableState<Boolean> = mutableStateOf(false),
+    var displayFloatingActionButton: MutableState<Boolean> = mutableStateOf(false),
 )

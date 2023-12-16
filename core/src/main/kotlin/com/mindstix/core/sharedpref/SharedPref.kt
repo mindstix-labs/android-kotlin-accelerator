@@ -24,7 +24,7 @@ import com.mindstix.core.models.SharedPrefType
  * @see SharedPrefType
  * @see android.content.SharedPreferences
  *
- * Author: Nirav Patel
+ * @author Nirav Patel
  */
 class SharedPref(context: Context, type: SharedPrefType, private val fileName: String) {
     private val TAG = SharedPref::class.java.simpleName
@@ -45,34 +45,36 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
             type: SharedPrefType,
             fileName: String?,
         ): SharedPref {
-            val preferFileName = if (fileName.isNullOrEmpty()) {
-                if (type == SharedPrefType.NormalSharedPref) {
-                    FileNameNormal
+            val preferFileName =
+                if (fileName.isNullOrEmpty()) {
+                    if (type == SharedPrefType.NormalSharedPref) {
+                        FileNameNormal
+                    } else {
+                        FileNameEncrypted
+                    }
                 } else {
-                    FileNameEncrypted
+                    fileName
                 }
-            } else {
-                fileName
-            }
             instance = SharedPref(context, type, preferFileName)
             return requireNotNull(instance)
         }
     }
 
-    private val sharedPreferencesObject = if (type == SharedPrefType.SecuredSharedPref) {
-        // Initialize/open an instance of EncryptedSharedPreferences on below line.
-        EncryptedSharedPreferences.create(
-            context,
-            fileName,
-            MasterKey.Builder(context)
-                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-                .build(),
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
-        )
-    } else {
-        context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
-    }
+    private val sharedPreferencesObject =
+        if (type == SharedPrefType.SecuredSharedPref) {
+            // Initialize/open an instance of EncryptedSharedPreferences on below line.
+            EncryptedSharedPreferences.create(
+                context,
+                fileName,
+                MasterKey.Builder(context)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build(),
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
+            )
+        } else {
+            context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+        }
 
     /**
      * Function to save String data in specified shared preferences file.
@@ -81,7 +83,10 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param keyName - Name of the key to be stored in shared preferences file.
      * @param value - String value to be stored against the keyName.
      */
-    fun saveStringInPrefs(keyName: String, value: String) {
+    fun saveStringInPrefs(
+        keyName: String,
+        value: String,
+    ) {
         Log.v(TAG, "saveStringInPrefs() Inside saveStringInPrefs")
 
         // If shared preferences file name is not provided, return
@@ -119,7 +124,10 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param keyName - Name of the key to be stored in shared preferences file
      * @param value - Int value to be stored against the keyName
      */
-    fun saveIntInPrefs(keyName: String, value: Int) {
+    fun saveIntInPrefs(
+        keyName: String,
+        value: Int,
+    ) {
         Log.v(TAG, "saveIntInPrefs() Inside saveIntInPrefs")
 
         // If shared preferences file name is not provided, return
@@ -154,7 +162,10 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param keyName - Name of the key to be stored in shared preferences file
      * @param value - Boolean value to be stored against the keyName
      */
-    fun saveBooleanInPrefs(keyName: String, value: Boolean) {
+    fun saveBooleanInPrefs(
+        keyName: String,
+        value: Boolean,
+    ) {
         Log.v(TAG, "saveBooleanInPrefs() Inside saveBooleanInPrefs")
 
         // If shared preferences file name is not provided, return
@@ -189,7 +200,10 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param keyName - Name of the key to be stored in shared preferences file
      * @param value - Float value to be stored against the keyName
      */
-    fun saveFloatInPrefs(keyName: String, value: Float) {
+    fun saveFloatInPrefs(
+        keyName: String,
+        value: Float,
+    ) {
         Log.v(TAG, "saveFloatInPrefs() Inside saveFloatInPrefs")
 
         // If shared preferences file name is not provided, return
@@ -224,7 +238,10 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param keyName - Name of the key to be stored in shared preferences file
      * @param value - Long value to be stored against the keyName
      */
-    fun saveLongInPrefs(keyName: String, value: Long) {
+    fun saveLongInPrefs(
+        keyName: String,
+        value: Long,
+    ) {
         Log.v(TAG, "saveLongInPrefs() Inside saveLongInPrefs")
 
         // If shared preferences file name is not provided, return
