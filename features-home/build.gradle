@@ -65,13 +65,6 @@ dependencies {
 
     // UI dependencies
     implementation Deps.compose_ui
-    implementation Deps.compose_ui_graphics
-    implementation Deps.ui_tooling_preview
     implementation Deps.material3
-    implementation Deps.navigation_runtime_ktx
-
-    // Mocking library for testing
-    testImplementation Deps.mockk
-    testImplementation Deps.kotlinx_coroutines_test
 
 }

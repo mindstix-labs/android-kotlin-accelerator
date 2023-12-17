@@ -7,7 +7,6 @@ package com.mindstix.baseline.ui.navigation
 import android.annotation.SuppressLint
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -15,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.ui.BottomNavigationBar

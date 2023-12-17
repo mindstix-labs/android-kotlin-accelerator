@@ -57,4 +57,7 @@ object Deps {
 
     // Splash Screen
     const val splash_screen =  "androidx.core:core-splashscreen:${Versions.splash_screen}"
+
+    // Android Security Crypto
+    const val security_crypto =  "androidx.security:security-crypto-ktx:${Versions.security_crypto}"
 }

@@ -3,7 +3,7 @@
  *  All rights reserved.
  */
 
-package com.mindstix.core.sharedpref
+package com.mindstix.core.storage.sharedpref
 
 import android.content.Context
 import android.util.Log

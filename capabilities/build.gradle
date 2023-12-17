@@ -8,7 +8,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
+//    id 'com.google.dagger.hilt.android'
 }
 
 // Android library configuration
@@ -59,25 +59,17 @@ dependencies {
 
     // UI dependencies
     implementation Deps.compose_ui
-    implementation Deps.compose_ui_graphics
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
     implementation Deps.navigation_runtime_ktx
     implementation Deps.navigation_common_ktx
 
-    // Testing dependencies
-    testImplementation Deps.junit
-    androidTestImplementation Deps.test_ext_junit
-
     // Espresso for UI testing
-    androidTestImplementation Deps.espresso
+//    androidTestImplementation Deps.espresso
 
     // Dagger Hilt for dependency injection
     implementation Deps.hilt_android
     implementation Deps.hilt_navigation_compose
-    kapt Deps.hilt_android_compiler
-    kapt Deps.hilt_compiler
-    kapt Deps.hilt_compiler_android
 
     // Mocking library for testing
     testImplementation Deps.mockk

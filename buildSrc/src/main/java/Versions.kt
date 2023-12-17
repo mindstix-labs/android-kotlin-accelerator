@@ -55,4 +55,7 @@ object Versions {
 
     // Splash Screen
     const val splash_screen = "1.0.0"
+
+    // Splash Screen
+    const val security_crypto = "1.1.0-alpha06"
 }

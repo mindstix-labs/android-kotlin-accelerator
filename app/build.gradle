@@ -119,46 +119,13 @@ dependencies {
     implementation project(':features-onboarding')
     implementation project(':features-home')
 
-    // Core dependencies
-    implementation Deps.kore_ktx
-    implementation Deps.lifecycle_runtime
-    implementation Deps.activity_compose
-
-    // Compose dependencies
-    implementation platform(Deps.compose_bom)
-    implementation Deps.compose_ui
-    implementation Deps.compose_ui_graphics
-    implementation Deps.ui_tooling_preview
+    // Material design dependency
     implementation Deps.material3
-    implementation Deps.navigation_runtime_ktx
-
-    // Testing dependencies
-    // JUnit
-    testImplementation Deps.junit
-    // Android JUnit
-    androidTestImplementation Deps.test_ext_junit
-    // Espresso
-    androidTestImplementation Deps.espresso
-    // Compose testing
-    androidTestImplementation platform(Deps.test_compose_bom)
-    androidTestImplementation Deps.ui_test_junit4
-    debugImplementation Deps.ui_tooling
-    debugImplementation Deps.ui_test_manifest
-
-    // Mockk for unit tests
-    testImplementation Deps.mockk
-
-    // Retrofit and networking dependencies
-    implementation Deps.retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.okhttp
 
     // Dagger Hilt
     implementation Deps.hilt_android
     implementation Deps.hilt_navigation_compose
     kapt Deps.hilt_android_compiler
-    kapt Deps.hilt_compiler
-    kapt Deps.hilt_compiler_android
 
     // Splash Screen
     implementation Deps.splash_screen

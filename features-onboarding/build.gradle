@@ -66,17 +66,10 @@ dependencies {
 
     // UI dependencies
     implementation Deps.compose_ui
-    implementation Deps.compose_ui_graphics
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
     implementation Deps.navigation_runtime_ktx
 
-    // Testing dependencies
-    testImplementation Deps.junit
-    androidTestImplementation Deps.test_ext_junit
-
-    // Espresso for UI testing
-    androidTestImplementation Deps.espresso
 
     // Dagger Hilt for dependency injection
     implementation Deps.hilt_android
@@ -85,10 +78,4 @@ dependencies {
     // Mocking library for testing
     testImplementation Deps.mockk
     testImplementation Deps.kotlinx_coroutines_test
-
-    // Retrofit for networking
-    implementation Deps.retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.okhttp
-    implementation Deps.okhttpLogging
 }
