@@ -3,17 +3,17 @@
  * All rights reserved.
  */
 
-package com.mindstix.home.view
+package com.mindstix.home.extra
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 /**
- * Composable function representing the Settings Screen.
+ * Composable function representing the Profile Screen.
  *
  * @author Abhijeet Kokane
  */
 @Composable
-fun SettingsScreen() {
-    Text(text = "Settings")
+fun ProfileScreen() {
+    Text(text = "Profile")
 }

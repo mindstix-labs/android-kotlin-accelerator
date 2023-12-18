@@ -8,9 +8,14 @@ import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -19,9 +24,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.Destinations
-import com.mindstix.home.view.HomeScreen
-import com.mindstix.home.view.ProfileScreen
-import com.mindstix.home.view.SettingsScreen
+import com.mindstix.home.extra.ProfileScreen
+import com.mindstix.home.extra.SettingsScreen
+import com.mindstix.home.view.home.HomeScreen
 import com.mindstix.onboarding.navigation.LoginScreenDestination
 import com.mindstix.onboarding.view.SplashScreen
 import com.mindstix.onboarding.viewModels.LoginViewModel
@@ -114,8 +119,16 @@ fun NavGraphBuilder.homeNavigationGraph(
         showBottomBar(baseComponentState)
         hideFloatingActionButton(baseComponentState)
 
-        // Display the HomeScreen composable
-        HomeScreen()
+        // TODO: Move this Box Layout padding to the HomeDestination
+        Box(
+            modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(0.dp, 0.dp, 0.dp, 72.dp)
+        ) {
+            // Display the HomeScreen composable
+            HomeScreen()
+        }
     }
 }
 

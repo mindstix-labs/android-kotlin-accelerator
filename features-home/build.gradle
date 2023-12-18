@@ -67,4 +67,7 @@ dependencies {
     implementation Deps.compose_ui
     implementation Deps.material3
 
+    // Image Loading library
+    implementation Deps.image_coil
+
 }

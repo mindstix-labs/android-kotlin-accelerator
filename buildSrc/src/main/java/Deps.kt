@@ -60,4 +60,7 @@ object Deps {
 
     // Android Security Crypto
     const val security_crypto =  "androidx.security:security-crypto-ktx:${Versions.security_crypto}"
+
+    // Image Loading library
+    const val image_coil =  "io.coil-kt:coil-compose:${Versions.coil}"
 }

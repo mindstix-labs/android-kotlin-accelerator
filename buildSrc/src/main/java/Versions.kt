@@ -56,6 +56,9 @@ object Versions {
     // Splash Screen
     const val splash_screen = "1.0.0"
 
-    // Splash Screen
+    // Security Crypto
     const val security_crypto = "1.1.0-alpha06"
+
+    // Coil Image loading library
+    const val coil = "1.3.2"
 }
