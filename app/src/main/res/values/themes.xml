@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.Baseline" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowBackground">@android:color/black</item>
+    <style name="Theme.BaselineSplash" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/mindstix_splash</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
-
-    <style name="Theme.BaselineSplash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/mindstix_splash_icon</item>
-        <item name="windowSplashScreenAnimationDuration">500</item>
-        <item name="postSplashScreenTheme">@style/Theme.Baseline</item>
     </style>
 </resources>
