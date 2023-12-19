@@ -74,8 +74,10 @@ android {
 
     buildTypes {
         release {
-            // Disable minification for release builds
-            minifyEnabled false
+            // Enable Progaurd/R8 for release variants
+            minifyEnabled true
+            // Shrink Resources for release variants
+            shrinkResources true
             // Specify ProGuard files
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -129,6 +131,9 @@ dependencies {
 
     // Splash Screen
     implementation Deps.splash_screen
+
+    // Leakcanary Memory Leaks detection library
+    debugImplementation Deps.debug_leakcanary
 }
 
 def getCurrentFlavor() {

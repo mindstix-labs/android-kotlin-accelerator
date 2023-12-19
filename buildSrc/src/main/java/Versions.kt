@@ -61,4 +61,7 @@ object Versions {
 
     // Coil Image loading library
     const val coil = "1.3.2"
+
+    // Leakcanary library
+    const val leakcanary = "2.12"
 }

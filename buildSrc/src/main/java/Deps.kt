@@ -63,4 +63,6 @@ object Deps {
 
     // Image Loading library
     const val image_coil =  "io.coil-kt:coil-compose:${Versions.coil}"
+
+    const val debug_leakcanary =  "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
 }
