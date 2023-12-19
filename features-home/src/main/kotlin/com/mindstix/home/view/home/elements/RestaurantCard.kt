@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.mindstix.capabilities.presentation.theme.login_in_button_bg_color
+import com.mindstix.capabilities.presentation.theme.text_field_label_color
 import com.mindstix.home.data.RestaurantData
 
 /*
@@ -61,13 +63,13 @@ fun RestaurantCard(
             Text(
                 text = restaurantData.title,
                 style = MaterialTheme.typography.labelMedium,
-                color = Color.Black,
+                color = login_in_button_bg_color,
                 fontWeight = FontWeight.Bold,
             )
             Text(
                 text = restaurantData.rating,
                 style = MaterialTheme.typography.labelMedium,
-                color = Color.Black,
+                color = text_field_label_color,
             )
             Text(
                 text = restaurantData.type,
@@ -88,7 +90,7 @@ fun RestaurantCard(
                     text = foodDeliveryText,
                     modifier = Modifier.padding(top = 30.dp),
                     style = MaterialTheme.typography.labelMedium,
-                    color = Color.Black,
+                    color = Color.Yellow,
                 )
             }
         }
