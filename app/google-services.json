@@ -1,0 +1,191 @@
+{
+  "project_info": {
+    "project_number": "3",
+    "firebase_url": "https://mindstix-baseline.firebaseio.com",
+    "project_id": "mindstix-baseline",
+    "storage_bucket": "mindstix-baseline.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1",
+        "android_client_info": {
+          "package_name": "com.mindstix.baseline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "a"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2",
+              "client_type": 3
+            },
+            {
+              "client_id": "3",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mindstix.baseline"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1",
+        "android_client_info": {
+          "package_name": "com.mindstix.baseline.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "a"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "5",
+              "client_type": 3
+            },
+            {
+              "client_id": "6",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mindstix.baseline"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1",
+        "android_client_info": {
+          "package_name": "com.mindstix.baseline.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "7",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "a"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9",
+              "client_type": 3
+            },
+            {
+              "client_id": "10",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mindstix.baseline"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "11",
+        "android_client_info": {
+          "package_name": "com.mindstix.baseline.dev.india"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "a"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13",
+              "client_type": 3
+            },
+            {
+              "client_id": "14",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mindstix.baseline"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1",
+        "android_client_info": {
+          "package_name": "com.mindstix.baseline.qa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "a"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16",
+              "client_type": 3
+            },
+            {
+              "client_id": "17",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mindstix.baseline"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

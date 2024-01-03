@@ -79,4 +79,7 @@ dependencies {
     implementation Deps.retrofit_gson
     implementation Deps.okhttp
     implementation Deps.okhttpLogging
+
+    // Firebase
+    implementation Deps.firebase_remote_config
 }

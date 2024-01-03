@@ -6,9 +6,12 @@
 /**
  * Object containing dependency versions for the project.
  *
- * @author Abhijeet Kokane
+ * @author Abhijeet Kokane, Asim Shah
  */
 object Deps {
+    // Gradle
+    const val gradle = "com.android.tools.build:gradle:${Versions.gradle}"
+
     // Core dependencies
     const val kore_ktx = "androidx.core:core-ktx:${Versions.core_ktx}"
     const val navigation_common_ktx = "androidx.navigation:navigation-common-ktx:${Versions.navigation_common_ktx}"
@@ -65,4 +68,14 @@ object Deps {
     const val image_coil =  "io.coil-kt:coil-compose:${Versions.coil}"
 
     const val debug_leakcanary =  "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
+
+    // Firebase
+    const val google_services =  "com.google.gms:google-services:${Versions.google_services}"
+    const val firebase_crashlytics_gradle =  "com.google.firebase:firebase-crashlytics-gradle:${Versions.firebase_crashlytics_gradle}"
+    const val firebase_performance_plugin =  "com.google.firebase:perf-plugin:${Versions.firebase_performance_plugin}"
+    const val firebase_crashlytics =  "com.google.firebase:firebase-crashlytics:${Versions.firebase_crashlytics}"
+    const val firebase_analytics =  "com.google.firebase:firebase-analytics:${Versions.firebase_analytics}"
+    const val firebase_performance =  "com.google.firebase:firebase-perf:${Versions.firebase_performance}"
+    const val firebase_messaging =  "com.google.firebase:firebase-messaging:${Versions.firebase_messaging}"
+    const val firebase_remote_config =  "com.google.firebase:firebase-config:${Versions.firebase_remote_config}"
 }

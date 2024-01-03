@@ -6,9 +6,12 @@
 /**
  * Object containing dependency version constants for the project.
  *
- * @author Abhijeet Kokane
+ * @author Abhijeet Kokane, Asim Shah
  */
 object Versions {
+    // Gradle
+    const val gradle = "8.1.0"
+
     // Core dependencies
     const val core_ktx = "1.8.0"
     const val lifecycle_runtime = "2.3.1"
@@ -64,4 +67,14 @@ object Versions {
 
     // Leakcanary library
     const val leakcanary = "2.12"
+
+    // Firebase
+    const val google_services = "4.4.0"
+    const val firebase_crashlytics_gradle = "2.9.9"
+    const val firebase_performance_plugin = "1.4.2"
+    const val firebase_crashlytics = "18.6.0"
+    const val firebase_analytics = "21.5.0"
+    const val firebase_performance = "20.5.1"
+    const val firebase_messaging = "23.4.0"
+    const val firebase_remote_config = "21.6.0"
 }

@@ -3,6 +3,15 @@
  * All rights reserved.
  */
 
+buildscript {
+    dependencies {
+        classpath Deps.gradle
+        classpath Deps.google_services
+        classpath Deps.firebase_crashlytics_gradle
+        classpath Deps.firebase_performance_plugin
+    }
+}
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     // Android application plugin

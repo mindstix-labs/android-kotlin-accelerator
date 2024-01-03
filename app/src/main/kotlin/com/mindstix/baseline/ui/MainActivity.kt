@@ -9,8 +9,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.firebase.messaging.FirebaseMessaging
 import com.mindstix.baseline.ui.navigation.MainDestination
 import com.mindstix.capabilities.presentation.theme.AppTheme
+import com.mindstix.capabilities.remoteconfig.RemoteConfig
+import com.mindstix.core.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -19,10 +22,12 @@ import dagger.hilt.android.AndroidEntryPoint
  * The @AndroidEntryPoint annotation is used to indicate that Hilt should be used for
  * dependency injection in this Activity.
  *
- * @author Abhijeet Kokane
+ * @author Abhijeet Kokane, Asim Shah
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val mTAG = javaClass.simpleName
+
     /**
      * Called when the activity is first created.
      *
@@ -44,5 +49,12 @@ class MainActivity : ComponentActivity() {
                 MainDestination()
             }
         }
+
+        //Code just to view FCM token
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            Logger.d { "FCM Token -> ${task.result}" }
+        }
+
+        RemoteConfig.fetchAndActivate(this@MainActivity)
     }
 }
