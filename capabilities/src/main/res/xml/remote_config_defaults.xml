@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+  <entry>
+    <key>rc_key1</key>
+    <value>rc_default_value1</value>
+  </entry>
+  <entry>
+    <key>rc_key2</key>
+    <value>rc_default_value2</value>
+  </entry>
+</defaults>

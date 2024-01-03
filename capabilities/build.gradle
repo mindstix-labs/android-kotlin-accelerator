@@ -79,4 +79,6 @@ dependencies {
     implementation Deps.retrofit_gson
     implementation Deps.okhttp
     implementation Deps.okhttpLogging
+
+    implementation 'com.google.firebase:firebase-config:21.6.0'
 }

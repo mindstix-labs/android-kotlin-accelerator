@@ -5,6 +5,7 @@
 package com.mindstix.baseline
 
 import android.app.Application
+import com.mindstix.capabilities.remoteconfig.RemoteConfig
 import com.mindstix.core.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
 
@@ -35,5 +36,6 @@ class MindstixApplication : Application() {
         // Additional initialization logic can be added here
         // Based upon Variants and BUILD_TYPE we can enable Logging
         Logger.enableLogging()
+        RemoteConfig.initialise()
     }
 }

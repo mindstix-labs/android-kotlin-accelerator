@@ -12,6 +12,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mindstix.baseline.ui.navigation.MainDestination
 import com.mindstix.capabilities.presentation.theme.AppTheme
+import com.mindstix.capabilities.remoteconfig.RemoteConfig
 import com.mindstix.core.logger.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    private val mTAG = javaClass.simpleName
+
     /**
      * Called when the activity is first created.
      *
@@ -51,5 +54,7 @@ class MainActivity : ComponentActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             Logger.d { "FCM Token -> ${task.result}" }
         }
+
+        RemoteConfig.fetchAndActivate(this@MainActivity)
     }
 }
