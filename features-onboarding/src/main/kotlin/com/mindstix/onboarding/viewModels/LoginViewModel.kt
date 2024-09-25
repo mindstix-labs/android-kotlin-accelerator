@@ -49,7 +49,7 @@ constructor(
                 // renderLoginScreenDetails(loginDataModel)
             }
 
-            LoginIntent.NavigateToHomeScreen -> {
+            is LoginIntent.NavigateToHomeScreen -> {
                 // Trigger navigation to the Home Screen
                 sendNavEffect {
                     LoginNavEffect.OpenHomeScreen
