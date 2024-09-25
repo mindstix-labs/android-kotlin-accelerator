@@ -16,7 +16,9 @@ import com.mindstix.capabilities.presentation.navigation.Destinations
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewStates
-import com.mindstix.onboarding.view.LoginScreen
+import com.mindstix.onboarding.view.LoginScreenApp
+import com.mindstix.onboarding.view.Question
+import com.mindstix.onboarding.view.QuestionType
 import com.mindstix.onboarding.viewModels.LoginViewModel
 import kotlinx.coroutines.flow.Flow
 
@@ -34,7 +36,6 @@ import kotlinx.coroutines.flow.Flow
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenDestination(
-    context: Context,
     loginViewModel: LoginViewModel,
     loginViewState: LoginViewStates,
     navEffect: Flow<LoginNavEffect>,
@@ -89,11 +90,27 @@ fun LoginScreenDestination(
     // Choose the appropriate content based on the current state of the Login Screen.
     when (loginViewState) {
         is LoginViewStates.LoadedData -> {
+            val questions = listOf(
+                Question("Name", QuestionType.TEXT),
+                Question("Height (cm or ft/in)", QuestionType.TEXT),
+                Question("Weight (kg or lbs)", QuestionType.TEXT),
+                Question("Skin Tone", QuestionType.TEXT),
+                Question("Favorite Color", QuestionType.TEXT),
+                Question("Preferred Clothing Style", QuestionType.RADIO, listOf("Casual", "Formal", "Sporty", "Streetwear", "Bohemian")),
+                Question("Open to trying new styles", QuestionType.CHECKBOX, listOf("Yes", "No")),
+                Question("Fit Preference", QuestionType.RADIO, listOf("Loose", "Regular", "Fitted")),
+                Question("Typical Occasions", QuestionType.RADIO, listOf("Work", "Casual Outings", "Parties", "Special Events")),
+                Question("Consider local weather", QuestionType.CHECKBOX, listOf("Yes")),
+                Question("Budget", QuestionType.RADIO, listOf("Low", "Medium", "High")),
+                Question("Eco-friendly options", QuestionType.CHECKBOX, listOf("Yes")),
+                Question("Favorite Brands", QuestionType.TEXT)
+            )
             // Display the Login Screen with loaded data.
-            LoginScreen(
+            LoginScreenApp(
                 state = loginViewState,
                 keyboardController = keyboardController,
                 userIntent = onUserAction(),
+                questions = questions,
             )
         }
 
