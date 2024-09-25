@@ -15,5 +15,5 @@ import androidx.compose.runtime.Composable
  */
 @Composable
 fun SplashScreen() {
-    Text(text = "Splash")
+    Text(text = "Splash Screen")
 }
