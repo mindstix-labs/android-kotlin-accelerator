@@ -1,7 +1,4 @@
-/**
- * Copyright (c) 2023 Mindstix Software Labs
- * All rights reserved.
- */
+/** Copyright (c) 2023 Mindstix Software Labs All rights reserved. */
 
 package com.mindstix.onboarding.intents
 
@@ -18,8 +15,10 @@ import com.mindstix.onboarding.models.OfflineScreenDataModel
  * @author Abhijeet Kokane
  */
 sealed class LoginIntent : UserIntent {
-    object FetchLoginData : LoginIntent()
-    object NavigateToHomeScreen : LoginIntent()
+    data object FetchLoginData : LoginIntent()
+    data class NavigateToHomeScreen(
+        val answers: SnapshotStateMap<String, Any>
+    ) : LoginIntent()
 }
 
 /**
@@ -28,9 +27,11 @@ sealed class LoginIntent : UserIntent {
  * @author Abhijeet Kokane
  */
 sealed class LoginNavEffect : NavEffect {
-    object CloseLoginScreen : LoginNavEffect()
-    object OpenHomeScreen : LoginNavEffect()
-    object OpenExternalLink : LoginNavEffect()
+    data object CloseLoginScreen : LoginNavEffect()
+    data class OpenHomeScreen(
+        val answers: Map<String, Any>
+    ) : LoginNavEffect()
+    data object OpenExternalLink : LoginNavEffect()
 }
 
 /**
@@ -57,14 +58,10 @@ sealed class LoginViewStates {
         var offlineContentModel: OfflineScreenDataModel,
     ) : LoginViewStates()
 
-    /**
-     * Object representing the initial loading state.
-     */
+    /** Object representing the initial loading state. */
     object InitialLoading : LoginViewStates()
 
-    /**
-     * Object representing the uninitialized state.
-     */
+    /** Object representing the uninitialized state. */
     object UnInitialized : LoginViewStates()
 }
 

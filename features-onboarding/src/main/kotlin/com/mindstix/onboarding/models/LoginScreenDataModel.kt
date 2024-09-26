@@ -1,16 +1,15 @@
-/**
- * Copyright (c) 2023 Mindstix Software Labs
- * All rights reserved.
- */
+/** Copyright (c) 2023 Mindstix Software Labs All rights reserved. */
 
 package com.mindstix.onboarding.models
 
 import com.mindstix.core.utils.DataStatus
 
 /**
- * Data class representing the model used to render data on the Login Screen.
+ * Data class representing the model used to render data on the Login
+ * Screen.
  *
- * @param status The data status (e.g., Empty, Offline, Error, Success, Loading).
+ * @param status The data status (e.g., Empty, Offline, Error, Success,
+ *    Loading).
  * @param screenTitle The title of the login screen.
  * @param screenDescription The description of the login screen.
  * @param backgroundImageUrl The URL of the background image.
@@ -19,7 +18,6 @@ import com.mindstix.core.utils.DataStatus
  * @param emailValue The default value for the email input.
  * @param passwordValue The default value for the password input.
  * @param loginCtaLabel The label for the login call-to-action button.
- *
  * @author Abhijeet Kokane
  */
 data class LoginScreenDataModel(
@@ -35,5 +33,14 @@ data class LoginScreenDataModel(
 ) {
     companion object {
         val defaultValue = LoginScreenDataModel()
+    }
+}
+
+
+data class Answers(
+    val answers: Map<String,Any> = emptyMap()
+){
+    companion object{
+        val answers= Answers()
     }
 }
