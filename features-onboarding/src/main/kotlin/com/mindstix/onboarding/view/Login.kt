@@ -177,7 +177,7 @@ fun Login(
             onClick = {
                 keyboardController?.hide()
                 // Invoke the user intent to navigate to the Home Screen
-                userIntent.invoke(LoginIntent.NavigateToHomeScreen)
+//                userIntent.invoke(LoginIntent.NavigateToHomeScreen())
             },
         ) {
             Text(

@@ -51,8 +51,9 @@ constructor(
 
             LoginIntent.NavigateToHomeScreen -> {
                 // Trigger navigation to the Home Screen
+                val regularMap = intent.answers.toMap()
                 sendNavEffect {
-                    LoginNavEffect.OpenHomeScreen
+                    LoginNavEffect.OpenHomeScreen(regularMap)
                 }
             }
         }

@@ -10,7 +10,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 // Color constants for light theme
-val md_theme_light_primary = Color(0xFF825500)
+val md_theme_light_primary = Color.DarkGray
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_secondary = Color(0xFF6F5B40)
 val md_theme_light_onSecondary = Color(0xFFFFFFFF)
@@ -20,10 +20,10 @@ val md_theme_light_errorContainer = Color(0xFFFFDAD6)
 
 // Color constants for dark theme
 val md_theme_dark_primary = Color(0xFFFFB951)
-val md_theme_dark_onPrimary = Color(0xFF452B00)
+val md_theme_dark_onPrimary = Color.Black
 val md_theme_dark_secondary = Color(0xFFDDC2A1)
 val md_theme_dark_onSecondary = Color(0xFF3E2D16)
-val md_theme_dark_background = Color(0xFF1F1B16)
+val md_theme_dark_background = Color.Black
 val md_theme_dark_error = Color(0xFFFFB4AB)
 val md_theme_dark_errorContainer = Color(0xFF93000A)
 
