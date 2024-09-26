@@ -5,7 +5,6 @@
 
 package com.mindstix.onboarding.navigation
 
-import android.content.Context
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -94,8 +93,8 @@ fun LoginScreenDestination(
                 Question("Name", QuestionType.TEXT),
                 Question("Height (cm or ft/in)", QuestionType.TEXT),
                 Question("Weight (kg or lbs)", QuestionType.TEXT),
-                Question("Skin Tone", QuestionType.TEXT),
-                Question("Favorite Color", QuestionType.TEXT),
+                Question("Skin Tone", QuestionType.SKIN_TONE_PICKER),
+                Question("Favorite Color", QuestionType.COLOR_PICKER),
                 Question("Preferred Clothing Style", QuestionType.RADIO, listOf("Casual", "Formal", "Sporty", "Streetwear", "Bohemian")),
                 Question("Open to trying new styles", QuestionType.CHECKBOX, listOf("Yes", "No")),
                 Question("Fit Preference", QuestionType.RADIO, listOf("Loose", "Regular", "Fitted")),
