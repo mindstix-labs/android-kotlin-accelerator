@@ -8,12 +8,11 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
 }
 
 android {
     // Define the package namespace for the feature module
-    namespace 'com.mindstix.features.login'
+    namespace 'com.mindstix.features.floatingview'
 
     // Set the compile SDK version
     compileSdk BuildConfig.compileSdk
@@ -59,7 +58,6 @@ dependencies {
     // Core, Capabilities Integration in Feature Modules
     implementation project(':core')
     implementation project(':capabilities')
-    implementation project(':features-floating-view')
 
     // Third-party dependencies
     implementation Deps.kore_ktx
@@ -72,24 +70,11 @@ dependencies {
     implementation Deps.material3
     implementation Deps.navigation_runtime_ktx
 
-    // Testing dependencies
-    testImplementation Deps.junit
-    androidTestImplementation Deps.test_ext_junit
-
-    // Espresso for UI testing
-    androidTestImplementation Deps.espresso
-
-    // Dagger Hilt for dependency injection
-    implementation Deps.hilt_android
-    kapt Deps.hilt_compiler
-
     // Mocking library for testing
     testImplementation Deps.mockk
     testImplementation Deps.kotlinx_coroutines_test
 
-    // Retrofit for networking
-    implementation Deps.retrofit
-    implementation Deps.retrofit_gson
-    implementation Deps.okhttp
-    implementation Deps.okhttpLogging
+    implementation Deps.screen_easy
+    implementation Deps.dynamic_animation
+
 }

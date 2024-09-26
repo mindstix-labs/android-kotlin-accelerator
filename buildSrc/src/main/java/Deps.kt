@@ -57,4 +57,8 @@ object Deps {
 
     // Splash Screen
     const val splash_screen =  "androidx.core:core-splashscreen:${Versions.splash_screen}"
+
+    const val screen_easy =  "io.github.torrydo:screen-easy:${Versions.screen_easy}"
+
+    const val dynamic_animation =  "androidx.dynamicanimation:dynamicanimation:${Versions.dynamic_animation}"
 }

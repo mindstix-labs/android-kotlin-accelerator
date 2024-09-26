@@ -5,6 +5,12 @@
 
 package com.mindstix.onboarding.view
 
+import android.app.ActivityManager
+import android.app.Service
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +26,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateMapOf
@@ -29,8 +36,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import com.mindstix.core.logger.Logger
+import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginViewStates
 
@@ -48,11 +63,13 @@ data class Question(
     val questionText: String,
     val questionType: QuestionType,
     val options: List<String> = emptyList(),
-    val isMultiSelect: Boolean = false // For checkboxes
+    val isMultiSelect: Boolean = false, // For checkboxes
 )
 
 enum class QuestionType {
-    TEXT, RADIO, CHECKBOX
+    TEXT,
+    RADIO,
+    CHECKBOX,
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -63,13 +80,15 @@ fun LoginScreenApp(
     userIntent: (LoginIntent) -> Unit,
     questions: List<Question>,
 ) {
+    Logger.d { "hasOverlayPermission" }
     val answers = remember { mutableStateMapOf<String, Any>() }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
     ) {
         Text("Welcome to Fashion Suggester!", style = MaterialTheme.typography.bodyMedium)
 
@@ -86,7 +105,7 @@ fun LoginScreenApp(
                             textAnswer = it
                             answers[question.questionText] = it
                         },
-                        label = { Text("Enter your answer") }
+                        label = { Text("Enter your answer") },
                     )
                 }
 
@@ -99,7 +118,7 @@ fun LoginScreenApp(
                                 onClick = {
                                     selectedOption = option
                                     answers[question.questionText] = option
-                                }
+                                },
                             )
                             Text(option)
                         }
@@ -121,7 +140,7 @@ fun LoginScreenApp(
                                         selectedOptions.remove(option)
                                     }
                                     answers[question.questionText] = selectedOptions.toList()
-                                }
+                                },
                             )
                             Text(option)
                         }
@@ -137,6 +156,76 @@ fun LoginScreenApp(
         }) {
             Text("Submit")
         }
+
+        val context = LocalContext.current
+        val isServiceRunning = remember { mutableStateOf(isServiceRunning(context, FloatingBubbleServiceImpl::class.java)) }
+        val hasOverlayPermission = remember { mutableStateOf(Settings.canDrawOverlays(context)) }
+
+        // Get the current lifecycle owner
+        val lifecycleOwner = LocalLifecycleOwner.current
+
+        // Update permission state when the lifecycle state changes
+        DisposableEffect(lifecycleOwner) {
+            val observer =
+                LifecycleEventObserver { _, event ->
+                    if (event == Lifecycle.Event.ON_RESUME) {
+                        // Check permission when the app resumes
+                        hasOverlayPermission.value = Settings.canDrawOverlays(context)
+                    }
+                }
+            lifecycleOwner.lifecycle.addObserver(observer)
+
+            // Clean up the observer when this Composable leaves the composition
+            onDispose {
+                lifecycleOwner.lifecycle.removeObserver(observer)
+            }
+        }
+
+        Button(
+            onClick = {
+                if (!isServiceRunning.value) {
+                    // request display over app permission
+                    if (hasOverlayPermission.value) {
+                        val intent = Intent(context, FloatingBubbleServiceImpl::class.java)
+                        intent.putExtra("size", 60)
+                        intent.putExtra("noti_message", "HELLO FROM MAIN ACT")
+                        ContextCompat.startForegroundService(context, intent)
+                    } else {
+                        requestOverlayPermission(context)
+                    }
+                } else {
+                    val intent = Intent(context, FloatingBubbleServiceImpl::class.java)
+                    context.stopService(intent)
+                }
+
+                isServiceRunning.value = isServiceRunning(context, FloatingBubbleServiceImpl::class.java)
+            },
+        ) {
+            if (isServiceRunning.value) {
+                Text("Stop Service")
+            } else {
+                Text("Start Service")
+            }
+        }
     }
 }
 
+fun isServiceRunning(
+    context: Context,
+    serviceClass: Class<out Service>,
+): Boolean {
+    val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    for (service in manager.getRunningServices(Int.MAX_VALUE)) {
+        if (serviceClass.name == service.service.className) {
+            return true
+        }
+    }
+    return false
+}
+
+fun requestOverlayPermission(context: Context) {
+    if (!Settings.canDrawOverlays(context)) {
+        val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}"))
+        context.startActivity(intent)
+    }
+}

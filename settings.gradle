@@ -28,5 +28,6 @@ rootProject.name = "baseline"
 include ':app' // Main application module
 include ':features-home' // Feature module for Home
 include ':features-onboarding' // Feature module for Splash, Login, Signup
+include ':features-floating-view'
 include ':capabilities' // Capabilities module
 include ':core' // Core module
