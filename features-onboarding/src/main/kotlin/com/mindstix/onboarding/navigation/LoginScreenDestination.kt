@@ -18,14 +18,6 @@ import com.mindstix.capabilities.presentation.navigation.Destinations
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewStates
-<<<<<<< Updated upstream
-import com.mindstix.onboarding.view.LoginScreen
-=======
-import com.mindstix.onboarding.models.Answers.Companion.answers
-import com.mindstix.onboarding.view.LoginScreenApp
-import com.mindstix.onboarding.view.Question
-import com.mindstix.onboarding.view.QuestionType
->>>>>>> Stashed changes
 import com.mindstix.onboarding.view.LoginScreenApp
 import com.mindstix.onboarding.view.Question
 import com.mindstix.onboarding.view.QuestionType
@@ -46,7 +38,6 @@ import kotlinx.coroutines.flow.Flow
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreenDestination(
-    context: Context,
     loginViewModel: LoginViewModel,
     loginViewState: LoginViewStates,
     navEffect: Flow<LoginNavEffect>,
@@ -103,8 +94,6 @@ fun LoginScreenDestination(
     // Choose the appropriate content based on the current state of the Login Screen.
     when (loginViewState) {
         is LoginViewStates.LoadedData -> {
-<<<<<<< Updated upstream
-=======
             val questions = listOf(
                 Question("Name", QuestionType.TEXT),
                 Question("Age", QuestionType.TEXT),
@@ -120,7 +109,6 @@ fun LoginScreenDestination(
                 Question("Budget(Rs)", QuestionType.TEXT),
                 Question("Favorite Brands", QuestionType.TEXT)
             )
->>>>>>> Stashed changes
             // Display the Login Screen with loaded data.
             LoginScreenApp(
                 state = loginViewState,

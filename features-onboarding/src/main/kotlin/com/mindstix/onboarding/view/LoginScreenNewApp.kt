@@ -1,9 +1,6 @@
 /** Copyright (c) 2023 Mindstix Software Labs All rights reserved. */
 
-/**
- * Copyright (c) 2023 Mindstix Software Labs
- * All rights reserved.
- */
+/** Copyright (c) 2023 Mindstix Software Labs All rights reserved. */
 
 package com.mindstix.onboarding.view
 
@@ -52,20 +49,10 @@ import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginViewStates
-import RainbowColorSlider
-import SkinToneSlider
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 
 data class Question(
     val questionText: String,
@@ -87,14 +74,6 @@ fun LoginScreenApp(
     questions: List<Question>,
 ) {
     val context = LocalContext.current
-    val isServiceRunning = remember {
-        mutableStateOf(
-            isServiceRunning(
-                context,
-                FloatingBubbleServiceImpl::class.java
-            )
-        )
-    }
     val hasOverlayPermission =
         remember { mutableStateOf(Settings.canDrawOverlays(context)) }
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -136,14 +115,14 @@ fun LoginScreenApp(
                     .padding(bottom = 24.dp)
             )
 
-        questions.forEach { question ->
-            Spacer(modifier = Modifier.height(24.dp))
-            Text(
-                question.questionText,
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(bottom = 8.dp)
-            )
+            questions.forEach { question ->
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    question.questionText,
+                    style = MaterialTheme.typography.headlineMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                )
 
                 when (question.questionType) {
                     QuestionType.TEXT -> {
@@ -159,160 +138,109 @@ fun LoginScreenApp(
                         )
                     }
 
-                QuestionType.RADIO -> {
-                    var selectedOption by remember { mutableStateOf("") }
-                    Column {
-                        question.options.forEach { option ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        selectedOption = option
-                                        answers[question.questionText] = option
-                                    }
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                RadioButton(
-                                    selected = selectedOption == option,
-                                    onClick = {
-                                        selectedOption = option
-                                        answers[question.questionText] = option
-                                    }
-                                )
-                                Text(
-                                    text = option,
-                                    style = MaterialTheme.typography.headlineSmall,
-                                    modifier = Modifier.padding(start = 16.dp)
-                                )
+                    QuestionType.RADIO -> {
+                        var selectedOption by remember { mutableStateOf("") }
+                        Column {
+                            question.options.forEach { option ->
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            selectedOption = option
+                                            answers[question.questionText] = option
+                                        }
+                                        .padding(vertical = 8.dp)
+                                ) {
+                                    RadioButton(
+                                        selected = selectedOption == option,
+                                        onClick = {
+                                            selectedOption = option
+                                            answers[question.questionText] = option
+                                        }
+                                    )
+                                    Text(
+                                        text = option,
+                                        style = MaterialTheme.typography.headlineSmall,
+                                        modifier = Modifier.padding(start = 16.dp)
+                                    )
+                                }
                             }
                         }
                     }
-                }
 
-                QuestionType.CHECKBOX -> {
-                    val selectedOptions = remember { mutableStateListOf<String>() }
-                    Column {
-                        question.options.forEach { option ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        val isChecked = !selectedOptions.contains(option)
-                                        if (isChecked) {
-                                            selectedOptions.add(option)
-                                        } else {
-                                            selectedOptions.remove(option)
+                    QuestionType.CHECKBOX -> {
+                        val selectedOptions = remember { mutableStateListOf<String>() }
+                        Column {
+                            question.options.forEach { option ->
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .clickable {
+                                            val isChecked = !selectedOptions.contains(option)
+                                            if (isChecked) {
+                                                selectedOptions.add(option)
+                                            } else {
+                                                selectedOptions.remove(option)
+                                            }
+                                            answers[question.questionText] =
+                                                selectedOptions.toList()
                                         }
-                                        answers[question.questionText] =
-                                            selectedOptions.toList()
-                                    }
-                                    .padding(vertical = 8.dp)
-                            ) {
-                                Checkbox(
-                                    checked = selectedOptions.contains(option),
-                                    onCheckedChange = {
-                                        val isChecked = it
-                                        if (isChecked) {
-                                            selectedOptions.add(option)
-                                        } else {
-                                            selectedOptions.remove(option)
+                                        .padding(vertical = 8.dp)
+                                ) {
+                                    Checkbox(
+                                        checked = selectedOptions.contains(option),
+                                        onCheckedChange = {
+                                            val isChecked = it
+                                            if (isChecked) {
+                                                selectedOptions.add(option)
+                                            } else {
+                                                selectedOptions.remove(option)
+                                            }
+                                            answers[question.questionText] =
+                                                selectedOptions.toList()
                                         }
-                                        answers[question.questionText] =
-                                            selectedOptions.toList()
-                                    }
-                                )
-                                Text(
-                                    text = option,
-                                    style = MaterialTheme.typography.headlineSmall,
-                                    modifier = Modifier.padding(start = 16.dp)
-                                )
+                                    )
+                                    Text(
+                                        text = option,
+                                        style = MaterialTheme.typography.headlineSmall,
+                                        modifier = Modifier.padding(start = 16.dp)
+                                    )
+                                }
                             }
                         }
                     }
-                }
 
-                QuestionType.COLOR_PICKER -> {
-                    RainbowColorSlider(
-                    ) { selectedColorName ->
-                        answers[question.questionText] = selectedColorName
+                    QuestionType.COLOR_PICKER -> {
+                        RainbowColorSlider(
+                        ) { selectedColorName ->
+                            answers[question.questionText] = selectedColorName
+                        }
                     }
-                }
 
-                QuestionType.SKIN_TONE_PICKER -> {
-                    SkinToneSlider(
-                    ) { selectedColorName ->
-                        answers[question.questionText] = selectedColorName
+                    QuestionType.SKIN_TONE_PICKER -> {
+                        SkinToneSlider(
+                        ) { selectedColorName ->
+                            answers[question.questionText] = selectedColorName
+                        }
                     }
                 }
             }
-        }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-        Button(
-            onClick = {
-                userIntent.invoke(LoginIntent.NavigateToHomeScreen(answers))
-            },
-            modifier = Modifier.fillMaxWidth()
-                .align(Alignment.CenterHorizontally)
-        ) {
-            Text("Submit")
-        }
-        Spacer(modifier = Modifier.height(24.dp))
-        Button(
-            modifier = Modifier.align(Alignment.CenterHorizontally).fillMaxWidth(),
-            onClick = {
-                if (!isServiceRunning.value) {
-                    // request display over app permission
-                    if (hasOverlayPermission.value) {
-                        val intent = Intent(context, FloatingBubbleServiceImpl::class.java)
-                        intent.putExtra("size", 60)
-                        intent.putExtra("noti_message", "HELLO FROM MAIN ACT")
-                        ContextCompat.startForegroundService(context, intent)
-                    } else {
-                        requestOverlayPermission(context)
-                    }
-                } else {
-                    val intent = Intent(context, FloatingBubbleServiceImpl::class.java)
-                    context.stopService(intent)
-                }
-
-                isServiceRunning.value =
-                    isServiceRunning(context, FloatingBubbleServiceImpl::class.java)
-            },
-        ) {
-            if (isServiceRunning.value) {
-                Text("Stop Service")
-            } else {
-                Text("Start Service")
+            Button(
+                onClick = {
+                    userIntent.invoke(LoginIntent.NavigateToHomeScreen(answers))
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterHorizontally)
+            ) {
+                Text("Submit")
             }
+            Spacer(modifier = Modifier.height(24.dp))
         }
-
-    }
-}
-
-
-fun isServiceRunning(
-    context: Context,
-    serviceClass: Class<out Service>,
-): Boolean {
-    val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-    for (service in manager.getRunningServices(Int.MAX_VALUE)) {
-        if (serviceClass.name == service.service.className) {
-            return true
-        }
-    }
-    return false
-}
-
-fun requestOverlayPermission(context: Context) {
-    if (!Settings.canDrawOverlays(context)) {
-        val intent = Intent(
-            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            Uri.parse("package:${context.packageName}")
-        )
-        context.startActivity(intent)
     }
 }
