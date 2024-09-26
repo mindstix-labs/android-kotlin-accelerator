@@ -1,9 +1,8 @@
-/**
- * Copyright (c) 2023 Mindstix Software Labs
- * All rights reserved.
- */
+/** Copyright (c) 2023 Mindstix Software Labs All rights reserved. */
 package com.mindstix.baseline.ui.navigation
 
+import WelcomeScreen
+import android.net.Uri
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
@@ -17,9 +16,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.Destinations
-import com.mindstix.home.view.HomeScreen
 import com.mindstix.home.view.ProfileScreen
 import com.mindstix.home.view.SettingsScreen
 import com.mindstix.onboarding.navigation.LoginScreenDestination
@@ -71,9 +71,7 @@ fun NavGraphBuilder.splashNavigationGraph(
     }
 }
 
-/**
- * Defines the navigation graph for the Login screen.
- */
+/** Defines the navigation graph for the Login screen. */
 fun NavGraphBuilder.loginNavigationGraph(
     navController: NavHostController,
     baseComponentState: BaseComponentState,
@@ -100,27 +98,30 @@ fun NavGraphBuilder.loginNavigationGraph(
     }
 }
 
-/**
- * Defines the navigation graph for the Home screen.
- */
+/** Defines the navigation graph for the Home screen. */
 fun NavGraphBuilder.homeNavigationGraph(
     navController: NavHostController,
     baseComponentState: BaseComponentState,
 ) {
-    composable(Destinations.HomeDestination.route) { _ ->
+    composable(
+        route = Destinations.HomeDestination.route + "/{answersJson}",
+        arguments = listOf(navArgument("answersJson") { type = NavType.StringType })
+    ) { backStackEntry ->
 
-        // Show bottom bar and hide floating action button for the home screen
-        showBottomBar(baseComponentState)
+        val answersJson = Uri.decode(backStackEntry.arguments?.getString("answersJson"))
+        val gson = Gson()
+        val mapType = object : TypeToken<Map<String, Any>>() {}.type
+        val answers: Map<String, Any> = gson.fromJson(answersJson, mapType)
+
+        hideBottomBar(baseComponentState)
         hideFloatingActionButton(baseComponentState)
 
-        // Display the HomeScreen composable
-        HomeScreen()
+        WelcomeScreen(userAnswers = answers, {})
     }
+
 }
 
-/**
- * Defines the navigation graph for the Profile screen.
- */
+/** Defines the navigation graph for the Profile screen. */
 fun NavGraphBuilder.profileNavigationGraph(
     navController: NavHostController,
     baseComponentState: BaseComponentState,
@@ -136,9 +137,7 @@ fun NavGraphBuilder.profileNavigationGraph(
     }
 }
 
-/**
- * Defines the navigation graph for the Settings screen.
- */
+/** Defines the navigation graph for the Settings screen. */
 fun NavGraphBuilder.settingsNavigationGraph(
     navController: NavHostController,
     baseComponentState: BaseComponentState,
@@ -154,30 +153,22 @@ fun NavGraphBuilder.settingsNavigationGraph(
     }
 }
 
-/**
- * Utility function to hide the bottom navigation bar.
- */
+/** Utility function to hide the bottom navigation bar. */
 fun hideBottomBar(baseComponentState: BaseComponentState) {
     baseComponentState.displayBottomNavigationBar.value = false
 }
 
-/**
- * Utility function to show the bottom navigation bar.
- */
+/** Utility function to show the bottom navigation bar. */
 fun showBottomBar(baseComponentState: BaseComponentState) {
     baseComponentState.displayBottomNavigationBar.value = true
 }
 
-/**
- * Utility function to hide the floating action button.
- */
+/** Utility function to hide the floating action button. */
 fun hideFloatingActionButton(baseComponentState: BaseComponentState) {
     baseComponentState.displayFloatingActionButton.value = false
 }
 
-/**
- * Utility function to show the floating action button.
- */
+/** Utility function to show the floating action button. */
 fun showFloatingActionButton(baseComponentState: BaseComponentState) {
     baseComponentState.displayFloatingActionButton.value = true
 }

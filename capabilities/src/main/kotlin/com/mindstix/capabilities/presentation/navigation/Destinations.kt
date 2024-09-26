@@ -11,9 +11,9 @@ package com.mindstix.capabilities.presentation.navigation
  * @author Abhijeet Kokane
  */
 sealed class Destinations(val route: String) {
-    object SplashDestination : Destinations("splash")
-    object LoginDestination : Destinations("login")
-    object HomeDestination : Destinations("home")
-    object ProfileDestination : Destinations("profile")
-    object SettingsDestination : Destinations("settings")
+    data object SplashDestination : Destinations("splash")
+    data object LoginDestination : Destinations("login")
+    data object HomeDestination : Destinations("home")
+    data object ProfileDestination : Destinations("profile")
+    data object SettingsDestination : Destinations("settings")
 }
