@@ -26,6 +26,9 @@ import com.mindstix.onboarding.view.LoginScreenApp
 import com.mindstix.onboarding.view.Question
 import com.mindstix.onboarding.view.QuestionType
 >>>>>>> Stashed changes
+import com.mindstix.onboarding.view.LoginScreenApp
+import com.mindstix.onboarding.view.Question
+import com.mindstix.onboarding.view.QuestionType
 import com.mindstix.onboarding.viewModels.LoginViewModel
 import kotlinx.coroutines.flow.Flow
 
@@ -119,10 +122,11 @@ fun LoginScreenDestination(
             )
 >>>>>>> Stashed changes
             // Display the Login Screen with loaded data.
-            LoginScreen(
+            LoginScreenApp(
                 state = loginViewState,
                 keyboardController = keyboardController,
                 userIntent = onUserAction(),
+                questions = questions,
             )
         }
 

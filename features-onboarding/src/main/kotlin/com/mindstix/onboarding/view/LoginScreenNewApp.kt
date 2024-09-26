@@ -1,5 +1,10 @@
 /** Copyright (c) 2023 Mindstix Software Labs All rights reserved. */
 
+/**
+ * Copyright (c) 2023 Mindstix Software Labs
+ * All rights reserved.
+ */
+
 package com.mindstix.onboarding.view
 
 import android.app.ActivityManager
@@ -14,8 +19,15 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import RainbowColorSlider
+import SkinToneSlider
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -33,9 +45,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.SoftwareKeyboardController
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
@@ -99,20 +114,27 @@ fun LoginScreenApp(
     }
     val answers = remember { mutableStateMapOf<String, Any>() }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState())
+            .background(
+                color = Color.Black // Light gray background color
+            )
     ) {
-        Text(
-            "Welcome to the future of shopping!",
-            style = MaterialTheme.typography.headlineLarge,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
+        Column(
             modifier = Modifier
-                .padding(bottom = 24.dp)
-        )
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Text(
+                "Welcome to the future of shopping!",
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(bottom = 24.dp)
+            )
 
         questions.forEach { question ->
             Spacer(modifier = Modifier.height(24.dp))
@@ -123,19 +145,19 @@ fun LoginScreenApp(
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
-            when (question.questionType) {
-                QuestionType.TEXT -> {
-                    var textAnswer by remember { mutableStateOf("") }
-                    OutlinedTextField(
-                        value = textAnswer,
-                        onValueChange = {
-                            textAnswer = it
-                            answers[question.questionText] = it
-                        },
-                        label = { Text("Enter your answer") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
+                when (question.questionType) {
+                    QuestionType.TEXT -> {
+                        var textAnswer by remember { mutableStateOf("") }
+                        OutlinedTextField(
+                            value = textAnswer,
+                            onValueChange = {
+                                textAnswer = it
+                                answers[question.questionText] = it
+                            },
+                            label = { Text("Enter your answer") },
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
 
                 QuestionType.RADIO -> {
                     var selectedOption by remember { mutableStateOf("") }
@@ -227,7 +249,7 @@ fun LoginScreenApp(
             }
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
         Button(
             onClick = {

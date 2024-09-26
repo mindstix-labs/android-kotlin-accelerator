@@ -2,6 +2,7 @@
 
 package com.mindstix.onboarding.intents
 
+import androidx.compose.runtime.snapshots.SnapshotStateMap
 import com.mindstix.core.base.NavEffect
 import com.mindstix.core.base.UserIntent
 import com.mindstix.core.base.ViewState

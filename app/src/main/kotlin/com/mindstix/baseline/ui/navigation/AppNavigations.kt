@@ -90,7 +90,6 @@ fun NavGraphBuilder.loginNavigationGraph(
 
         // Display the LoginScreenDestination composable
         LoginScreenDestination(
-            context = context,
             loginViewModel = viewModel,
             loginViewState = viewState.loginViewState,
             navEffect = effect,
