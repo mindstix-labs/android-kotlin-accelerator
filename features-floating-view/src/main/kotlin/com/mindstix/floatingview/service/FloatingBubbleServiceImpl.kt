@@ -105,7 +105,7 @@ class FloatingBubbleServiceImpl: ExpandableBubbleService() {
         return ExpandedBubbleBuilder(this)
 //            .expandedView(expandedView)
             .expandedCompose {
-                ExpandedComposeView(popBack = { minimize() })
+                ExpandedComposeView(popBack = { minimize() }, expand = { expand()})
             }
             .onDispatchKeyEvent {
                 if(it.keyCode == KeyEvent.KEYCODE_BACK){
