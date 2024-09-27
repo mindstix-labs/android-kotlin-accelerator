@@ -44,7 +44,7 @@ fun BubbleComposeView(
             model = when (step.value) {
                 0 -> {
                     isDone.value = false
-                    R.drawable.boy_think
+                    R.drawable.blue_boy
                 }
 
                 1 -> {
