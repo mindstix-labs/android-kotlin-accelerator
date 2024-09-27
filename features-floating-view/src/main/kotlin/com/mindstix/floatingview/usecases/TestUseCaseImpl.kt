@@ -9,7 +9,10 @@ import android.content.Context
 import android.graphics.Bitmap
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.mindstix.capabilities.util.CommonExtensions.getValueOrEmpty
+import com.mindstix.core.sharedpref.accessToken.UserDataStorageContract
 import com.mindstix.core.utils.EMPTY_STRING
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +22,9 @@ import javax.inject.Inject
 /**
  * @author Pranav Hadawale
  */
-class TestUseCaseImpl
-@Inject
-constructor() : TestUseCase {
+class TestUseCaseImpl @Inject constructor(
+    private val userDataStorageContract: UserDataStorageContract
+) : TestUseCase {
     private val generativeModel =
         GenerativeModel(
             modelName = "models/gemini-1.5-flash-latest",
@@ -33,13 +36,19 @@ constructor() : TestUseCase {
         applicationContext: Context,
         callback: (String) -> Unit,
     ) {
-        val prompt = "I am a 26 years old guy, height 5.11 inch, weight around 72 kg, fair skin tone, " +
-            "I have a black, grey, brown pant available to pair with and a black formal shoes and white sneakers, " +
-            "this is one of the shirt, is this good for me? " +
-            "Give a exact only json object having two keys -'isGood'(true or false) and 'reason' " +
-            "with structure like - {'isGood': false,'reason': 'data....'}." +
-            "Tipe : if its Red shirt respond 'isGood' = 'false'"
-//        val bitmap = BitmapFactory.decodeResource(applicationContext.resources, image)
+        val gson = Gson()
+        val mapType = object : TypeToken<Map<String, Any>>() {}.type
+        val userDataMap = userDataStorageContract.getUserData()
+        val userData: Map<String, Any> = gson.fromJson(userDataMap, mapType)
+        val prompt1 = "These are my personal details - $userData Based on this data Give me opinion on this product image if its good for me or not, " +
+                "Give response exact only json object having two keys -'isGood'(true or false) and 'reason' " +
+                    "with structure like - {'isGood': false,'reason': 'data....'}." +
+                    "Tip : if its Red shirt respond 'isGood' = 'false'"
+        val prompt = "Here are my personal details: $userData. Based on this information, " +
+                "please provide your opinion on whether the product in the image is suitable for me or not. " +
+                "Respond only with a JSON object containing two keys: 'isGood' (true or false) and 'reason'.  reason should be consist of 20-25 words or less. " +
+                "The response should follow this structure: {'isGood': false, 'reason': 'data...'}, for decision making, pls use this data model "
+
         CoroutineScope(Dispatchers.IO).launch {
             val response =
                 try {

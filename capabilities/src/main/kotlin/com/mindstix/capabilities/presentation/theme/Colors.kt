@@ -29,7 +29,7 @@ val md_theme_dark_error = Color(0xFFFF647C)         // Soft red for error messag
 val md_theme_dark_errorContainer = Color(0xFF8D021F) // Dark red for error containers
 
 val green = Color(0xFF0D6B10)
-val card_background = Color(0xFFE0D1FF)
+val card_background = Color(0xFF6C79F0)
 
 // Light color scheme
 val LightColors =

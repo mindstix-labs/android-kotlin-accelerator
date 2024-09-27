@@ -25,6 +25,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.mindstix.capabilities.presentation.theme.card_background
 import com.mindstix.core.logger.Logger
 import com.mindstix.features.floatingview.R
+import com.mindstix.floatingview.service.isGoodChoice
 import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -47,11 +48,11 @@ fun BubbleComposeView(
                 }
 
                 1 -> {
-                    R.drawable.loading_circle
+                    R.drawable.loader_round
                 }
 
                 2 -> {
-                    if (good.value) {
+                    if (isGoodChoice.value) {
                         R.drawable.yes
                     } else {
                         R.drawable.no_response
@@ -65,9 +66,22 @@ fun BubbleComposeView(
             contentDescription = "",
             modifier =
             Modifier
-                .size(
-                    100.dp,
-                )
+                .let {
+                    if (step.value == 2) {
+                        it .padding(start = 20.dp)
+                        .size(60.dp)
+                        if (isGoodChoice.value) {
+                            it .padding(start = 16.dp)
+                                .size(70.dp)
+                        } else {
+                            it.padding(start = 20.dp)
+                                .size(60.dp)
+                        }
+                    } else {
+                        it.size(100.dp)
+                    }
+                }
+
                 .clickable {
                     when (step.value) {
                         0 -> {
@@ -78,7 +92,6 @@ fun BubbleComposeView(
                             runBlocking {
                                 expand()
                             }
-                            isDone
 //                                popBack.invoke()
 //                                coroutineScope.launch {
 //                                    delay(750)

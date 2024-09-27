@@ -20,9 +20,16 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 interface BubbleModule {
-    @Binds
-    fun provideTestUseCase(testUseCaseImpl: TestUseCaseImpl): TestUseCase
 
+    @Binds
+    abstract fun bindTestUseCase(
+        impl: TestUseCaseImpl
+    ): TestUseCase
+//    @Provides
+//    @Singleton
+//    fun provideTestUseCase(userDataStorageContract: UserDataStorageContract): TestUseCase {
+//        return TestUseCaseImpl(userDataStorageContract)
+//    }
     @Binds
     abstract fun provideFloatingBubbleServiceImpl(
         impl: FloatingBubbleServiceImpl,
