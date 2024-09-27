@@ -1,14 +1,21 @@
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -19,7 +26,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SkinToneSlider(onColorSelected: (String) -> Unit) {
-    var sliderPosition by remember { mutableStateOf(0f) }
+    var sliderPosition by remember { mutableFloatStateOf(0f) }
     val skinTones =
         listOf(
             SkinTone(Color(0xFFFFE0BD), "Very Fair"),
@@ -33,36 +40,47 @@ fun SkinToneSlider(onColorSelected: (String) -> Unit) {
 
     val selectedSkinTone = interpolateSkinTone(skinTones, sliderPosition)
 
-    Column(
-        modifier =
-        Modifier
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(
+        modifier = Modifier
+            .background(
+                color = MaterialTheme.colorScheme.secondary, // You can change this to any background color
+                shape = RoundedCornerShape(16.dp) // Adjust the corner radius here
+            )
+            .padding(16.dp) // Inner padding for the content inside the box
     ) {
-        Slider(
-            value = sliderPosition,
-            onValueChange = {
-                sliderPosition = it
-                onColorSelected(selectedSkinTone.name)
-            },
-            valueRange = 0f..1f,
-            colors =
-            SliderDefaults.colors(
-                thumbColor = selectedSkinTone.color,
-                activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f),
-            ),
-        )
-        Box(
-            modifier =
-            Modifier
-                .size(60.dp)
-                .background(selectedSkinTone.color, shape = CircleShape),
-        )
-        Text(
-            text = selectedSkinTone.name,
-            color = Color.White,
-            modifier = Modifier.padding(top = 8.dp),
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = selectedSkinTone.name,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSecondary,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+            Row {
+                Slider(
+                    modifier = Modifier.weight(1f),
+                    value = sliderPosition,
+                    onValueChange = {
+                        sliderPosition = it
+                        onColorSelected(selectedSkinTone.name)
+                    },
+                    valueRange = 0f..1f,
+                    colors = SliderDefaults.colors(
+                        thumbColor = Color.White,
+                        activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f)
+                    )
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+                Box(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .background(selectedSkinTone.color, shape = CircleShape)
+                )
+            }
+        }
     }
 }
 

@@ -110,11 +110,14 @@ fun NavGraphBuilder.homeNavigationGraph(
         val gson = Gson()
         val mapType = object : TypeToken<Map<String, Any>>() {}.type
         val userDataContract = userDataStorageContract.getUserData()
-        val answers: Map<String, Any> = gson.fromJson(userDataContract, mapType)
+        val answers: Map<String, Any> = if(userDataContract != null) gson.fromJson(userDataContract, mapType) else mapOf()
         hideBottomBar(baseComponentState)
         hideFloatingActionButton(baseComponentState)
 
-        WelcomeScreen(userAnswers = answers, {})
+        WelcomeScreen(userAnswers = answers, onDeleteClick = {
+            navController.navigate(Destinations.LoginDestination.route)
+            userDataStorageContract.removeSaveUserData()
+        })
     }
 }
 

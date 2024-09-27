@@ -12,28 +12,32 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -47,58 +51,62 @@ import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 @Composable
 fun WelcomeScreen(
     userAnswers: Map<String, Any>,
-    onTermsClicked: () -> Unit,
+    onDeleteClick: () -> Unit,
 ) {
-    Box(
-        modifier =
-        Modifier
+
+    Column(
+        modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
-            modifier =
-            Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+
+
+        val name =
+            if (userAnswers["What do people call you?"] != null) userAnswers["What do people call you?"] else ""
+
+        FormElements(
+            text = "Welcome! $name",
+            fontSize = 36.sp,
+            fontWeight = FontWeight.ExtraBold,
+        )
+
+        if (userAnswers.isNotEmpty()) {
             FormElements(
-                text = "Welcome!",
-                fontSize = 36.sp,
-                modifier = Modifier.padding(bottom = 24.dp),
+                text = "Here’s a summary of your input:",
+                fontSize = 20.sp,
+                modifier = Modifier.padding(top = 24.dp, bottom = 16.dp),
             )
-            StartService()
+        }
 
-            if (userAnswers.isNotEmpty()) {
-                FormElements(
-                    text = "Here’s a summary of your input:",
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(bottom = 16.dp),
-                )
-            }
-
-            userAnswers.forEach { (question, answer) ->
+        userAnswers.forEach { (question, answer) ->
+            if (question != "What do people call you?") {
                 AnswerRow(question, answer.toString())
                 Spacer(modifier = Modifier.height(20.dp))
             }
+        }
 
-            Spacer(modifier = Modifier.height(24.dp))
-
-            TextButton(
-                onClick = onTermsClicked,
-                modifier =
-                Modifier
-                    .padding(top = 16.dp)
-                    .shadow(10.dp), // Shadow effect
-            ) {
-                FormElements(
-                    text = "Read Terms and Conditions",
-                    fontSize = 18.sp,
+        Spacer(modifier = Modifier.weight(1f))
+        Row(
+            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
+        ) {
+            Button(colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error),
+                onClick = {
+                    onDeleteClick.invoke()
+                }) {
+                Text(
+                    text = "Delete", style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = 20.sp,
+                    ), color = MaterialTheme.colorScheme.onSecondary
                 )
             }
+
+            Spacer(modifier = Modifier.weight(1f))
+            StartService()
         }
+
     }
 }
 
@@ -113,14 +121,13 @@ fun AnswerRow(
             modifier = Modifier.padding(vertical = 4.dp),
         ) {
             Icon(
-                imageVector = Icons.Filled.List, // Placeholder icon, replace with actual icon id
+                imageVector = Icons.Filled.Search, // Placeholder icon, replace with actual icon id
                 contentDescription = null,
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.primary,
             )
             Spacer(modifier = Modifier.width(8.dp))
             FormElements(
-                text = question,
-                fontSize = 18.sp,
+                text = question, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold
             )
         }
         Row(
@@ -130,7 +137,8 @@ fun AnswerRow(
             Icon(
                 imageVector = Icons.Filled.ArrowForward, // Placeholder icon, replace with actual icon id
                 contentDescription = null,
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.align(Alignment.Top)
             )
             Spacer(modifier = Modifier.width(8.dp))
             FormElements(
@@ -146,6 +154,8 @@ fun FormElements(
     text: String,
     fontSize: TextUnit,
     modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onPrimary,
+    fontWeight: FontWeight = FontWeight.Bold
 ) {
     Box(modifier = modifier) {
         Canvas(modifier = Modifier.fillMaxSize()) {
@@ -153,10 +163,10 @@ fun FormElements(
         }
         Text(
             text = text,
+            color = color,
             fontSize = fontSize,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            color = Color.White,
+            fontWeight = fontWeight,
+            textAlign = TextAlign.Start,
             modifier = modifier,
         )
     }
@@ -165,20 +175,18 @@ fun FormElements(
 @Composable
 fun StartService() {
     Column(
-        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val context = LocalContext.current
-        val isServiceRunning =
-            remember {
-                mutableStateOf(
-                    isServiceRunning(
-                        context,
-                        FloatingBubbleServiceImpl::class.java,
-                    ),
-                )
-            }
+        val isServiceRunning = remember {
+            mutableStateOf(
+                isServiceRunning(
+                    context,
+                    FloatingBubbleServiceImpl::class.java,
+                ),
+            )
+        }
         val hasOverlayPermission = remember { mutableStateOf(Settings.canDrawOverlays(context)) }
 
         // Get the current lifecycle owner
@@ -186,13 +194,12 @@ fun StartService() {
 
         // Update permission state when the lifecycle state changes
         DisposableEffect(lifecycleOwner) {
-            val observer =
-                LifecycleEventObserver { _, event ->
-                    if (event == Lifecycle.Event.ON_RESUME) {
-                        // Check permission when the app resumes
-                        hasOverlayPermission.value = Settings.canDrawOverlays(context)
-                    }
+            val observer = LifecycleEventObserver { _, event ->
+                if (event == Lifecycle.Event.ON_RESUME) {
+                    // Check permission when the app resumes
+                    hasOverlayPermission.value = Settings.canDrawOverlays(context)
                 }
+            }
             lifecycleOwner.lifecycle.addObserver(observer)
 
             // Clean up the observer when this Composable leaves the composition
@@ -202,10 +209,12 @@ fun StartService() {
         }
 
         Button(
-            modifier =
-            Modifier
-                .height(50.dp)
-                .width(150.dp),
+            colors = if (isServiceRunning.value) {
+                ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error)
+            } else {
+                ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
+            },
+
             onClick = {
                 if (!isServiceRunning.value) {
                     // request display over app permission
@@ -227,12 +236,20 @@ fun StartService() {
             },
         ) {
             if (isServiceRunning.value) {
-                Text("Stop Service")
+                Text(
+                    "Stop", style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = 20.sp,
+                    ), color = MaterialTheme.colorScheme.onSecondary
+                )
             } else {
-                Text("Start Service")
+                Text(
+                    "Let's Go", style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = 20.sp,
+                    ), color = MaterialTheme.colorScheme.onSecondary
+                )
             }
         }
-        Spacer(modifier = Modifier.height(100.dp))
+//        Spacer(modifier = Modifier.height(100.dp))
     }
 }
 
@@ -251,11 +268,10 @@ fun isServiceRunning(
 
 fun requestOverlayPermission(context: Context) {
     if (!Settings.canDrawOverlays(context)) {
-        val intent =
-            Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:${context.packageName}"),
-            )
+        val intent = Intent(
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+            Uri.parse("package:${context.packageName}"),
+        )
         context.startActivity(intent)
     }
 }
