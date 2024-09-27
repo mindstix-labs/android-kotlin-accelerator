@@ -42,7 +42,7 @@ fun WelcomeScreen(
                 modifier = Modifier.padding(bottom = 24.dp)
             )
 
-            if(userAnswers.isNotEmpty()) {
+            if (userAnswers.isNotEmpty()) {
                 FormElements(
                     text = "Here’s a summary of your input:",
                     fontSize = 20.sp,
@@ -102,7 +102,7 @@ fun AnswerRow(question: String, answer: String) {
             Spacer(modifier = Modifier.width(8.dp))
             FormElements(
                 text = answer,
-                fontSize = 18.sp
+                fontSize = 18.sp,
             )
         }
     }

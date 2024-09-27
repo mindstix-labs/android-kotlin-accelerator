@@ -2,6 +2,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -41,28 +42,31 @@ fun SkinToneSlider(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Slider(
-            value = sliderPosition,
-            onValueChange = {
-                sliderPosition = it
-                onColorSelected(selectedSkinTone.name)
-            },
-            valueRange = 0f..1f,
-            colors = SliderDefaults.colors(
-                thumbColor = selectedSkinTone.color,
-                activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f)
-            )
-        )
-        Box(
-            modifier = Modifier
-                .size(60.dp)
-                .background(selectedSkinTone.color, shape = CircleShape)
-        )
         Text(
             text = selectedSkinTone.name,
             color = Color.White,
             modifier = Modifier.padding(top = 8.dp)
         )
+        Row {
+            Slider(
+                modifier = Modifier.weight(1f),
+                value = sliderPosition,
+                onValueChange = {
+                    sliderPosition = it
+                    onColorSelected(selectedSkinTone.name)
+                },
+                valueRange = 0f..1f,
+                colors = SliderDefaults.colors(
+                    thumbColor = selectedSkinTone.color,
+                    activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f)
+                )
+            )
+            Box(
+                modifier = Modifier
+                    .size(60.dp)
+                    .background(selectedSkinTone.color, shape = CircleShape)
+            )
+        }
     }
 }
 

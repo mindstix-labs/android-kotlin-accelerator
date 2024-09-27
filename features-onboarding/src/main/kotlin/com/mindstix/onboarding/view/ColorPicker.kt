@@ -2,10 +2,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -33,34 +35,40 @@ fun RainbowColorSlider(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Slider(
-            value = hue,
-            onValueChange = {
-                hue = it
-                onColorSelected(getColorNameForHue(hue))
-            },
-            valueRange = 0f..360f,
-            colors = SliderDefaults.colors(
-                thumbColor = Color.White,
-                activeTrackColor = color.copy(alpha = 0.5f)
-            )
+        Text(
+            text = colorName, color = Color.White,
+            modifier = Modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.headlineSmall,
         )
-
-        Box(
-            modifier = Modifier
-                .size(60.dp)
-                .background(color, shape = CircleShape)
-                .border(
-                    5.dp,
-                    Color.White,
-                    shape = CircleShape
+        Row {
+            Slider(
+                modifier = Modifier.weight(1f),
+                value = hue,
+                onValueChange = {
+                    hue = it
+                    onColorSelected(getColorNameForHue(hue))
+                },
+                valueRange = 0f..360f,
+                colors = SliderDefaults.colors(
+                    thumbColor = Color.White,
+                    activeTrackColor = color.copy(alpha = 0.5f)
                 )
-        )
+            )
 
-        // Display the color name
-        Text(text = colorName, color = Color.White, modifier = Modifier.padding(top = 8.dp))
+            Box(
+                modifier = Modifier
+                    .size(60.dp)
+                    .background(color, shape = CircleShape)
+                    .border(
+                        5.dp,
+                        Color.White,
+                        shape = CircleShape
+                    )
+            )
+        }
     }
 }
+
 fun getColorNameForHue(hue: Float): String {
     return when (hue) {
         0f -> "Black"
