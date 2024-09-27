@@ -28,14 +28,14 @@ class FloatingBubble(
     private val triggerClickableAreaPx: Float = 1f,
 ) : Bubble(
     context = context,
-    root = LayoutInflater.from(context).inflate(R.layout.bubble, null).apply {
+    root =
+    LayoutInflater.from(context).inflate(R.layout.bubble, null).apply {
         if (onDispatchKeyEvent != null) {
             (this as MyBubbleLayout).setOnDispatchKeyEvent(onDispatchKeyEvent)
         }
     },
-    containCompose = containCompose
+    containCompose = containCompose,
 ) {
-
     /**
      * store previous point for later usage, reset after finger down
      * */
@@ -54,6 +54,7 @@ class FloatingBubble(
     }
 
     private var springAnim: SpringAnimation? = null
+
     fun animateIconToEdge() {
         springAnim?.cancel()
         springAnim = null
@@ -73,24 +74,26 @@ class FloatingBubble(
             endX = sez.safeWidth - bubbleWidth
         }
 
-        springAnim = AnimHelper.startSpringX(
-            startValue = startX.toFloat(),
-            finalPosition = endX.toFloat(),
-            event = object : AnimHelper.Event {
-                override fun onUpdate(float: Float) {
-                    try {
-                        layoutParams.x = float.toInt()
-                        update()
-                    } catch (e: Exception) {
+        springAnim =
+            AnimHelper.startSpringX(
+                startValue = startX.toFloat(),
+                finalPosition = endX.toFloat(),
+                event =
+                object : AnimHelper.Event {
+                    override fun onUpdate(float: Float) {
+                        try {
+                            layoutParams.x = float.toInt()
+                            update()
+                        } catch (e: Exception) {
 //                        Log.e("<>", "onUpdate: ${e.printStackTrace()}")
+                        }
                     }
-                }
 
-                override fun onEnd() {
-                    springAnim = null
-                }
-            }
-        )
+                    override fun onEnd() {
+                        springAnim = null
+                    }
+                },
+            )
     }
 
     fun safeCancelAnimation() {
@@ -99,7 +102,10 @@ class FloatingBubble(
 
     // private func --------------------------------------------------------------------------------
 
-    fun updateLocationUI(x: Float, y: Float) {
+    fun updateLocationUI(
+        x: Float,
+        y: Float,
+    ) {
         val mIconDeltaX = x - rawPointOnDown.x
         val mIconDeltaY = y - rawPointOnDown.y
 
@@ -128,7 +134,10 @@ class FloatingBubble(
     /**
      * set location without updating UI
      * */
-    fun setLocation(x: Float, y: Float) {
+    fun setLocation(
+        x: Float,
+        y: Float,
+    ) {
         newPoint.x = x.toInt()
         newPoint.y = y.toInt()
     }
@@ -143,14 +152,22 @@ class FloatingBubble(
     /**
      * pass close bubble point
      * */
-    fun animateTo(x: Float, y: Float, stiffness: Float = SpringForce.STIFFNESS_MEDIUM) {
+    fun animateTo(
+        x: Float,
+        y: Float,
+        stiffness: Float = SpringForce.STIFFNESS_MEDIUM,
+    ) {
         AnimHelper.animateSpringPath(
             startX = newPoint.x.toFloat(),
             startY = newPoint.y.toFloat(),
             endX = x,
             endY = y,
-            event = object : AnimHelper.Event {
-                override fun onUpdatePoint(x: Float, y: Float) {
+            event =
+            object : AnimHelper.Event {
+                override fun onUpdatePoint(
+                    x: Float,
+                    y: Float,
+                ) {
                     layoutParams.x = x.toInt()
                     layoutParams.y = y.toInt()
 
@@ -166,7 +183,7 @@ class FloatingBubble(
 
     @SuppressLint("ClickableViewAccessibility")
     private fun customTouch() {
-        val MAX_XY_MOVE = triggerClickableAreaPx
+        val maxXYMove = triggerClickableAreaPx
 
 //        val smallestWidth = context.resources.configuration.smallestScreenWidthDp
 //        Log.d("<> smallest width", smallestWidth.toString())
@@ -200,7 +217,6 @@ class FloatingBubble(
             }
         }
 
-
         fun ignoreChildClickEvent(event: MotionEvent): Boolean {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -212,7 +228,7 @@ class FloatingBubble(
                 }
 
                 MotionEvent.ACTION_MOVE -> {
-                    if (abs(event.rawX - rawPointOnDown.x) > MAX_XY_MOVE || abs(event.rawY - rawPointOnDown.y) > MAX_XY_MOVE) {
+                    if (abs(event.rawX - rawPointOnDown.x) > maxXYMove || abs(event.rawY - rawPointOnDown.y) > maxXYMove) {
                         ignoreClick = true
                     }
                 }
@@ -224,7 +240,6 @@ class FloatingBubble(
         // listen actions --------------------------------------------------------------------------
 
         (root as MyBubbleLayout).apply {
-
             afterMeasured { updateGestureExclusion() }
 
             if (forceDragging) {

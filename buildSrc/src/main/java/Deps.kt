@@ -61,4 +61,7 @@ object Deps {
     const val screen_easy =  "io.github.torrydo:screen-easy:${Versions.screen_easy}"
 
     const val dynamic_animation =  "androidx.dynamicanimation:dynamicanimation:${Versions.dynamic_animation}"
+
+    const val glide_compose = "com.github.bumptech.glide:compose:${Versions.glide_compose}"
+
 }

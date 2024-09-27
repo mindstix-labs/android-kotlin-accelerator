@@ -9,19 +9,25 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.mindstix.floatingview.toPx
 
-
 object ViewHelper {
-
     //region load bubble
     @JvmStatic
-    fun fromBitmap(context: Context, bm: Bitmap): View {
+    fun fromBitmap(
+        context: Context,
+        bm: Bitmap,
+    ): View {
         return ImageView(context).apply {
             setImageBitmap(bm)
         }
     }
 
     @JvmStatic
-    fun fromBitmap(context: Context, bm: Bitmap, widthDp: Int, heightDp: Int): View {
+    fun fromBitmap(
+        context: Context,
+        bm: Bitmap,
+        widthDp: Int,
+        heightDp: Int,
+    ): View {
         val view = fromBitmap(context, bm)
         return view.apply {
             layoutParams = ViewGroup.LayoutParams(widthDp.toPx(), heightDp.toPx())
@@ -29,7 +35,10 @@ object ViewHelper {
     }
 
     @JvmStatic
-    fun fromDrawable(context: Context, @DrawableRes drawable: Int): View {
+    fun fromDrawable(
+        context: Context,
+        @DrawableRes drawable: Int,
+    ): View {
         return ImageView(context).apply {
             setImageDrawable(ContextCompat.getDrawable(context, drawable))
         }
@@ -46,8 +55,5 @@ object ViewHelper {
         return view.apply {
             layoutParams = ViewGroup.LayoutParams(widthDp.toPx(), heightDp.toPx())
         }
-
     }
-    //endregion
-
 }

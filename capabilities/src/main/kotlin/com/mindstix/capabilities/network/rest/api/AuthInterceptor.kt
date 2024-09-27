@@ -25,49 +25,49 @@ import javax.inject.Singleton
  */
 @Singleton
 class AuthInterceptor
-    @Inject
-    constructor() : Interceptor {
-        // Volatile variables for thread safety
-        @Volatile
-        var authorizationHeaderValue: String? = null
+@Inject
+constructor() : Interceptor {
+    // Volatile variables for thread safety
+    @Volatile
+    var authorizationHeaderValue: String? = null
 
-        @Volatile
-        var anonymousHeaderValue = ""
+    @Volatile
+    var anonymousHeaderValue = ""
 
-        // Initialize with a default anonymous token value
-        init {
-            setAuthHeaderValue("YOUR_TOKEN_HERE")
-        }
+    // Initialize with a default anonymous token value
+    init {
+        setAuthHeaderValue("YOUR_TOKEN_HERE")
+    }
 
-        /**
-         * Function to set the Authorization Header value dynamically.
-         *
-         * @param authToken The new Authorization token to be set.
-         */
-        fun setAuthHeaderValue(authToken: String?) {
-            if (authToken != null) {
-                this.anonymousHeaderValue = authToken
-            }
-        }
-
-        /**
-         * Intercepts the request and adds the Authorization Header if available.
-         *
-         * @param chain The interceptor chain.
-         * @return The modified response after adding the Authorization Header.
-         * @throws IOException If an I/O error occurs during the request.
-         */
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain): Response {
-            val request = chain.request().newBuilder()
-            authorizationHeaderValue?.let {
-                // Add the Authorization Header to the request
-                request.addHeader(
-                    HTTP_HEADER_REQUEST_AUTHORIZATION_KEY,
-                    it,
-                )
-            }
-            // Proceed with the modified request
-            return chain.proceed(request.build())
+    /**
+     * Function to set the Authorization Header value dynamically.
+     *
+     * @param authToken The new Authorization token to be set.
+     */
+    fun setAuthHeaderValue(authToken: String?) {
+        if (authToken != null) {
+            this.anonymousHeaderValue = authToken
         }
     }
+
+    /**
+     * Intercepts the request and adds the Authorization Header if available.
+     *
+     * @param chain The interceptor chain.
+     * @return The modified response after adding the Authorization Header.
+     * @throws IOException If an I/O error occurs during the request.
+     */
+    @Throws(IOException::class)
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request().newBuilder()
+        authorizationHeaderValue?.let {
+            // Add the Authorization Header to the request
+            request.addHeader(
+                HTTP_HEADER_REQUEST_AUTHORIZATION_KEY,
+                it,
+            )
+        }
+        // Proceed with the modified request
+        return chain.proceed(request.build())
+    }
+}

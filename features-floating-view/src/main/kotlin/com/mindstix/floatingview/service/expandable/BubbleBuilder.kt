@@ -16,9 +16,8 @@ import com.mindstix.floatingview.FloatingBubbleListener
 import com.mindstix.floatingview.toPx
 
 class BubbleBuilder(
-    private val context: Context
+    private val context: Context,
 ) {
-
     // bubble
     internal var bubbleView: View? = null
     internal var bubbleCompose: ComposeView? = null
@@ -59,13 +58,12 @@ class BubbleBuilder(
                 windowAnimations = it
             }
 
-            gravity = Gravity.TOP or Gravity.LEFT
+            gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
             format = PixelFormat.TRANSLUCENT
 
             type =
                 WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
         }
-
     }
 
     /**
@@ -127,11 +125,14 @@ class BubbleBuilder(
         return this
     }
 
-    @Discouraged("when using bubbleCompose, you should set `forceDragging` to false. otherwise the bubbleCompose may not works correctly in some cases")
+    @Discouraged(
+        "when using bubbleCompose, you should set `forceDragging` to false. otherwise the bubbleCompose may not works correctly in some cases",
+    )
     fun bubbleCompose(content: @Composable () -> Unit): BubbleBuilder {
-        this.bubbleCompose = ComposeView(context).apply {
-            setContent(content)
-        }
+        this.bubbleCompose =
+            ComposeView(context).apply {
+                setContent(content)
+            }
         return this
     }
 
@@ -143,11 +144,12 @@ class BubbleBuilder(
         return this
     }
 
-
     /**
      * set open and exit animation to bubble
      * */
-    fun bubbleStyle(@StyleRes style: Int?): BubbleBuilder {
+    fun bubbleStyle(
+        @StyleRes style: Int?,
+    ): BubbleBuilder {
         this.bubbleStyle = style
         return this
     }
@@ -160,7 +162,9 @@ class BubbleBuilder(
     /**
      * set open and exit style to close-bubble
      * */
-    fun closeBubbleStyle(@StyleRes style: Int?): BubbleBuilder {
+    fun closeBubbleStyle(
+        @StyleRes style: Int?,
+    ): BubbleBuilder {
         this.closeBubbleStyle = style
         return this
     }
@@ -170,26 +174,33 @@ class BubbleBuilder(
      * @param FloatingBubble.Listener
      * */
     fun addFloatingBubbleListener(listener: FloatingBubbleListener): BubbleBuilder {
-
         val tempListener = this.listener
-        this.listener = object : FloatingBubbleListener {
+        this.listener =
+            object : FloatingBubbleListener {
+                override fun onFingerDown(
+                    x: Float,
+                    y: Float,
+                ) {
+                    tempListener?.onFingerDown(x, y)
+                    listener.onFingerDown(x, y)
+                }
 
-            override fun onFingerDown(x: Float, y: Float) {
-                tempListener?.onFingerDown(x, y)
-                listener.onFingerDown(x, y)
+                override fun onFingerMove(
+                    x: Float,
+                    y: Float,
+                ) {
+                    tempListener?.onFingerMove(x, y)
+                    listener.onFingerMove(x, y)
+                }
+
+                override fun onFingerUp(
+                    x: Float,
+                    y: Float,
+                ) {
+                    tempListener?.onFingerUp(x, y)
+                    listener.onFingerUp(x, y)
+                }
             }
-
-            override fun onFingerMove(x: Float, y: Float) {
-                tempListener?.onFingerMove(x, y)
-                listener.onFingerMove(x, y)
-            }
-
-            override fun onFingerUp(x: Float, y: Float) {
-                tempListener?.onFingerUp(x, y)
-                listener.onFingerUp(x, y)
-            }
-
-        }
         return this
     }
 
@@ -201,7 +212,10 @@ class BubbleBuilder(
      * @param x 0 ... screenWidth (dp).
      * @param y 0 ... screenHeight (dp).
      * */
-    fun startLocation(x: Int, y: Int): BubbleBuilder {
+    fun startLocation(
+        x: Int,
+        y: Int,
+    ): BubbleBuilder {
         startPoint.x = x.toPx()
         startPoint.y = y.toPx()
         return this
@@ -215,10 +229,12 @@ class BubbleBuilder(
      * @param x 0 ... screenWidth (px).
      * @param y 0 ... screenHeight (px).
      * */
-    fun startLocationPx(x: Int, y: Int): BubbleBuilder {
+    fun startLocationPx(
+        x: Int,
+        y: Int,
+    ): BubbleBuilder {
         startPoint.x = x
         startPoint.y = y
         return this
     }
-
 }

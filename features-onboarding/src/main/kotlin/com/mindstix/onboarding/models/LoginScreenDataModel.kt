@@ -35,12 +35,3 @@ data class LoginScreenDataModel(
         val defaultValue = LoginScreenDataModel()
     }
 }
-
-
-data class Answers(
-    val answers: Map<String,Any> = emptyMap()
-){
-    companion object{
-        val answers= Answers()
-    }
-}

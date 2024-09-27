@@ -24,9 +24,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun ExpandedComposeView(
     popBack: () -> Unit = {},
-    expand: () -> Unit = {}
+    expand: () -> Unit = {},
 ) {
-
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
@@ -49,13 +48,12 @@ fun ExpandedComposeView(
                             flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         }
                         context.startActivity(intent)
-
                         popBack.invoke()
                         coroutineScope.launch {
                             delay(750)
                             expand.invoke()
                         }
-                    }
+                    },
                 ) {
                     Text("Start Screen Capture")
                 }

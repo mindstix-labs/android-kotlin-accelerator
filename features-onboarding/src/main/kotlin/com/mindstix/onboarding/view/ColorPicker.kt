@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -20,18 +19,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun RainbowColorSlider(
-    onColorSelected: (String) -> Unit
-) {
+fun RainbowColorSlider(onColorSelected: (String) -> Unit) {
     var hue by remember { mutableFloatStateOf(0f) }
 
     val color = getColorForHue(hue)
     val colorName = getColorNameForHue(hue)
 
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Slider(
             value = hue,
@@ -40,27 +38,30 @@ fun RainbowColorSlider(
                 onColorSelected(getColorNameForHue(hue))
             },
             valueRange = 0f..360f,
-            colors = SliderDefaults.colors(
+            colors =
+            SliderDefaults.colors(
                 thumbColor = Color.White,
-                activeTrackColor = color.copy(alpha = 0.5f)
-            )
+                activeTrackColor = color.copy(alpha = 0.5f),
+            ),
         )
 
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .size(60.dp)
                 .background(color, shape = CircleShape)
                 .border(
                     5.dp,
                     Color.White,
-                    shape = CircleShape
-                )
+                    shape = CircleShape,
+                ),
         )
 
         // Display the color name
         Text(text = colorName, color = Color.White, modifier = Modifier.padding(top = 8.dp))
     }
 }
+
 fun getColorNameForHue(hue: Float): String {
     return when (hue) {
         0f -> "Black"
@@ -91,7 +92,6 @@ fun getColorNameForHue(hue: Float): String {
         else -> "Unknown Color"
     }
 }
-
 
 fun getColorForHue(hue: Float): Color {
     return when (hue) {

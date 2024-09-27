@@ -27,6 +27,9 @@ val md_theme_dark_background = Color.Black
 val md_theme_dark_error = Color(0xFFFFB4AB)
 val md_theme_dark_errorContainer = Color(0xFF93000A)
 
+val green = Color(0xFF0D6B10)
+val card_background = Color(0xFFE0D1FF)
+
 // Light color scheme
 val LightColors =
     lightColorScheme(

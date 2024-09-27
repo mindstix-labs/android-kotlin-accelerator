@@ -13,7 +13,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.DisplayMetrics
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -35,26 +34,40 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
 import com.mindstix.core.logger.Logger
+import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 import com.mindstix.floatingview.service.ScreenCaptureService
+import com.mindstix.floatingview.service.isGoodChoice
+import com.mindstix.floatingview.service.response
+import com.mindstix.floatingview.service.step
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import javax.inject.Inject
 
 /**
  * @author Apoorv Gupta
  */
 
+val bitmapState = mutableStateOf<Bitmap?>(null)
+val isDone = mutableStateOf(true)
 
+@AndroidEntryPoint
 class ScreenshotActivity : ComponentActivity() {
 
     private lateinit var mediaProjectionManager: MediaProjectionManager
     private var mediaProjection: MediaProjection? = null
     private var virtualDisplay: VirtualDisplay? = null
     private lateinit var imageReader: ImageReader
-    private val SCREEN_CAPTURE_REQUEST_CODE = 1001
+    private val screenCaptureCode = 1001
+
+    @Inject
+    lateinit var floatingBubbleServiceImpl: FloatingBubbleServiceImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mediaProjectionManager = getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
-        startScreenCaptureService(SCREEN_CAPTURE_REQUEST_CODE, Intent())
+        mediaProjectionManager =
+            getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
+        startScreenCaptureService(screenCaptureCode, Intent())
         startScreenCapture()
     }
 
@@ -71,31 +84,44 @@ class ScreenshotActivity : ComponentActivity() {
         startForegroundService(serviceIntent)
     }
 
-    private var screenCaptureLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK && result.data != null) {
-            startMediaProjection(result.resultCode, result.data!!)
-        } else {
-            Toast.makeText(this, "Screen capture permission denied. Activity", Toast.LENGTH_SHORT).show()
+    private var screenCaptureLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK && result.data != null) {
+                startMediaProjection(result.resultCode, result.data!!)
+            } else {
+//                Toast.makeText(
+//                    this,
+//                    "Screen capture permission denied. Activity",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+            }
         }
-    }
 
     private fun startMediaProjection(resultCode: Int, data: Intent) {
         mediaProjection = mediaProjectionManager.getMediaProjection(resultCode, data)
 
         // Register a callback to handle MediaProjection lifecycle
-        mediaProjection?.registerCallback(object : MediaProjection.Callback() {
-            override fun onStop() {
-                super.onStop()
-                Logger.d { "ScreenCapture MediaProjection stopped" }
-                virtualDisplay?.release()
-                mediaProjection = null
-            }
-        }, null)  // Null handler means callback will run on the main thread
+        mediaProjection?.registerCallback(
+            object : MediaProjection.Callback() {
+                override fun onStop() {
+                    super.onStop()
+                    Logger.d { "ScreenCapture MediaProjection stopped" }
+                    virtualDisplay?.release()
+                    mediaProjection = null
+                }
+            },
+            null,
+        ) // Null handler means callback will run on the main thread
 
         val metrics = DisplayMetrics()
         windowManager.defaultDisplay.getMetrics(metrics)
 
-        imageReader = ImageReader.newInstance(metrics.widthPixels, metrics.heightPixels, PixelFormat.RGBA_8888, 2)
+        imageReader = ImageReader.newInstance(
+            metrics.widthPixels,
+            metrics.heightPixels,
+            PixelFormat.RGBA_8888,
+            2,
+        )
 
         virtualDisplay = mediaProjection?.createVirtualDisplay(
             "ScreenCapture",
@@ -111,6 +137,7 @@ class ScreenshotActivity : ComponentActivity() {
         captureImage()
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun captureImage() {
         val handlerThread = HandlerThread("ImageCaptureThread")
         handlerThread.start()
@@ -128,7 +155,9 @@ class ScreenshotActivity : ComponentActivity() {
                 val rowPadding = rowStride - pixelStride * width
 
                 val bitmap = Bitmap.createBitmap(
-                    width + rowPadding / pixelStride, height, Bitmap.Config.ARGB_8888
+                    width + rowPadding / pixelStride,
+                    height,
+                    Bitmap.Config.ARGB_8888,
                 )
                 bitmap.copyPixelsFromBuffer(buffer)
 
@@ -137,18 +166,29 @@ class ScreenshotActivity : ComponentActivity() {
 
                 // Save the bitmap to a file (optional)
                 saveBitmapToFile(bitmap)
+                if (!isDone.value) {
+                    isDone.value = true
+                    floatingBubbleServiceImpl.test(
+                        bitmap,
+                        applicationContext,
+                    ) { isGood, responseData ->
+                        Logger.d { "at 8 result ${step.intValue}" }
+                        isGoodChoice.value = isGood
+                        response.value = responseData
+                        step.intValue = 2
+                    }
+                }
 
                 Logger.d { "ScreenshotActivity Screenshot captured!" }
 
-                image.close()  // Don't forget to close the image!
+                image.close() // Don't forget to close the image!
 
                 // close activity after taking screenshot
                 finish()
-
             } else {
                 Logger.d { "ScreenshotActivity No image available" }
             }
-        }, handler)  // Make sure to run this on a handler if needed
+        }, handler) // Make sure to run this on a handler if needed
     }
 
     private fun saveBitmapToFile(bitmap: Bitmap) {
@@ -156,7 +196,7 @@ class ScreenshotActivity : ComponentActivity() {
             val fileOutputStream = openFileOutput("screenshot.png", Context.MODE_PRIVATE)
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
             fileOutputStream.close()
-            Toast.makeText(this, "Screenshot saved successfully", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Screenshot saved successfully", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -169,20 +209,20 @@ class ScreenshotActivity : ComponentActivity() {
     }
 
     companion object {
-        val bitmapState = mutableStateOf<Bitmap?>(null)
+        val bitmapState1 = mutableStateOf<Bitmap?>(null)
     }
 }
 
 @Composable
 fun ScreenCaptureApp(onCaptureClick: () -> Unit) {
-    val bitmap by remember { ScreenshotActivity.bitmapState }
+    val bitmap by remember { ScreenshotActivity.bitmapState1 }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(onClick = { onCaptureClick() }) {
             Text("Capture Screenshot")
@@ -196,7 +236,7 @@ fun ScreenCaptureApp(onCaptureClick: () -> Unit) {
                 contentDescription = "Captured Screenshot",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(400.dp)
+                    .height(400.dp),
             )
         }
     }

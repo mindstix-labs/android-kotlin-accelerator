@@ -4,9 +4,7 @@ import androidx.dynamicanimation.animation.FloatValueHolder
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 
-
 internal object AnimHelper {
-
     /**
      * default minimum value of the property to be animated
      * */
@@ -17,10 +15,17 @@ internal object AnimHelper {
 
     interface Event {
         fun onStart() {}
+
         fun onEnd() {}
+
         fun onCancel() {}
+
         fun onUpdate(float: Float) {}
-        fun onUpdatePoint(x: Float, y: Float) {}
+
+        fun onUpdatePoint(
+            x: Float,
+            y: Float,
+        ) {}
     }
 
     // func ----------------------------------------------------------------------------------------
@@ -34,14 +39,13 @@ internal object AnimHelper {
     ): SpringAnimation {
         val springAnim = SpringAnimation(FloatValueHolder())
 
-        springAnim.spring = SpringForce().apply {
-
-            springAnim.setStartValue(startValue)
-            setFinalPosition(finalPosition)
-            this.stiffness = stiffness
-            this.dampingRatio = dampingRatio
-
-        }
+        springAnim.spring =
+            SpringForce().apply {
+                springAnim.setStartValue(startValue)
+                setFinalPosition(finalPosition)
+                this.stiffness = stiffness
+                this.dampingRatio = dampingRatio
+            }
         springAnim.addUpdateListener { animation, value, velocity ->
             event.onUpdate(value)
         }
@@ -55,7 +59,6 @@ internal object AnimHelper {
         return springAnim
     }
 
-
     fun animateSpringPath(
         startX: Float,
         startY: Float,
@@ -63,17 +66,18 @@ internal object AnimHelper {
         endY: Float,
         event: Event,
         stiffness: Float = SpringForce.STIFFNESS_MEDIUM,
-        dampingRatio: Float = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY
+        dampingRatio: Float = SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY,
     ): SpringAnimation {
         val xDistance = endX - startX
         val yDistance = endY - startY
 
         val springAnim = SpringAnimation(FloatValueHolder())
 
-        val springForce = SpringForce().apply {
-            this.stiffness = stiffness
-            this.dampingRatio = dampingRatio
-        }
+        val springForce =
+            SpringForce().apply {
+                this.stiffness = stiffness
+                this.dampingRatio = dampingRatio
+            }
 
         if (yDistance > xDistance) {
             springAnim.setStartValue(startY)
@@ -83,7 +87,7 @@ internal object AnimHelper {
                 val ratio = 1 - (endY - value) / yDistance
                 event.onUpdatePoint(
                     x = startX + xDistance * ratio,
-                    y = value
+                    y = value,
                 )
             }
         } else {
@@ -94,7 +98,7 @@ internal object AnimHelper {
                 val ratio = (value - startX) / xDistance
                 event.onUpdatePoint(
                     x = value,
-                    y = startY + yDistance * ratio
+                    y = startY + yDistance * ratio,
                 )
             }
         }
@@ -109,5 +113,4 @@ internal object AnimHelper {
 
         return springAnim
     }
-
 }

@@ -9,22 +9,24 @@ import android.content.Intent
  */
 
 class FloatingBubbleReceiver : BroadcastReceiver() {
-
     companion object {
-        var hide_bubble_function: (() -> Unit)? = null
-        var stop_bubble_function: (() -> Unit)? = null
+        var hideBubbleFunction: (() -> Unit)? = null
+        var stopBubbleFunction: (() -> Unit)? = null
 
         var isEnabled = true
     }
 
-    override fun onReceive(context: Context, intent: Intent) {
+    override fun onReceive(
+        context: Context,
+        intent: Intent,
+    ) {
         when (intent.action) {
             "ACTION_HIDE" -> {
                 isEnabled = !isEnabled
-                hide_bubble_function?.invoke()
+                hideBubbleFunction?.invoke()
             }
             "ACTION_STOP" -> {
-                stop_bubble_function?.invoke()
+                stopBubbleFunction?.invoke()
             }
         }
     }

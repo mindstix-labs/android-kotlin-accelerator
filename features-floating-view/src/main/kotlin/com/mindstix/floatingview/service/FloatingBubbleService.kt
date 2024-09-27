@@ -7,9 +7,7 @@ import com.mindstix.floatingview.canDrawOverlays
 import com.mindstix.floatingview.helper.NotificationHelper
 import com.mindstix.floatingview.sez
 
-
 abstract class FloatingBubbleService : Service() {
-
     open fun startNotificationForeground() {
         val noti = NotificationHelper(this)
         noti.createNotificationChannel()

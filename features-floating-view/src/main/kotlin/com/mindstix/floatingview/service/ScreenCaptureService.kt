@@ -69,7 +69,7 @@ class ScreenCaptureService : Service() {
         virtualDisplay = mediaProjection?.createVirtualDisplay(
             "ScreenCapture", metrics.widthPixels, metrics.heightPixels, metrics.densityDpi,
             DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-            imageReader.surface, null, null
+            imageReader.surface, null, null,
         )
 
         // Capture image from ImageReader
@@ -92,7 +92,6 @@ class ScreenCaptureService : Service() {
 
             // Here you can save or display the bitmap
             Log.d("ScreenCaptureService", "Screenshot captured!")
-
         }
     }
 
@@ -109,7 +108,7 @@ class ScreenCaptureService : Service() {
         val serviceChannel = NotificationChannel(
             CHANNEL_ID,
             "Screen Capture Service Channel",
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_DEFAULT,
         )
         val manager = getSystemService(NotificationManager::class.java)
         manager.createNotificationChannel(serviceChannel)

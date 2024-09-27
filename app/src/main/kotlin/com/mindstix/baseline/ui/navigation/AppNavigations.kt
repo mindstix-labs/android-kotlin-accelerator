@@ -2,7 +2,6 @@
 package com.mindstix.baseline.ui.navigation
 
 import WelcomeScreen
-import android.net.Uri
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
@@ -20,6 +19,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mindstix.capabilities.presentation.navigation.BaseComponentState
 import com.mindstix.capabilities.presentation.navigation.Destinations
+import com.mindstix.core.sharedpref.accessToken.UserDataStorageContract
 import com.mindstix.home.view.ProfileScreen
 import com.mindstix.home.view.SettingsScreen
 import com.mindstix.onboarding.navigation.LoginScreenDestination
@@ -102,23 +102,20 @@ fun NavGraphBuilder.loginNavigationGraph(
 fun NavGraphBuilder.homeNavigationGraph(
     navController: NavHostController,
     baseComponentState: BaseComponentState,
+    userDataStorageContract: UserDataStorageContract,
 ) {
-    composable(
-        route = Destinations.HomeDestination.route + "/{answersJson}",
-        arguments = listOf(navArgument("answersJson") { type = NavType.StringType })
-    ) { backStackEntry ->
+    composable(Destinations.HomeDestination.route) { backStackEntry ->
 
-        val answersJson = Uri.decode(backStackEntry.arguments?.getString("answersJson"))
+//        val answersJson = Uri.decode(backStackEntry.arguments?.getString("answersJson"))
         val gson = Gson()
         val mapType = object : TypeToken<Map<String, Any>>() {}.type
-        val answers: Map<String, Any> = gson.fromJson(answersJson, mapType)
-
+        val userDataContract = userDataStorageContract.getUserData()
+        val answers: Map<String, Any> = gson.fromJson(userDataContract, mapType)
         hideBottomBar(baseComponentState)
         hideFloatingActionButton(baseComponentState)
 
         WelcomeScreen(userAnswers = answers, {})
     }
-
 }
 
 /** Defines the navigation graph for the Profile screen. */

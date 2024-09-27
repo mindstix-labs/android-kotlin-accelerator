@@ -58,6 +58,7 @@ dependencies {
     // Core, Capabilities Integration in Feature Modules
     implementation project(':core')
     implementation project(':capabilities')
+    implementation project(':features-floating-view')
 
     // Third-party dependencies
     implementation Deps.kore_ktx

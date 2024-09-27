@@ -27,11 +27,11 @@ import com.mindstix.core.models.SharedPrefType
  * @author Nirav Patel
  */
 class SharedPref(context: Context, type: SharedPrefType, private val fileName: String) {
-    private val TAG = SharedPref::class.java.simpleName
+    private val tag = SharedPref::class.java.simpleName
 
     companion object {
-        private const val FileNameEncrypted = "BaseLineEncrypted"
-        private const val FileNameNormal = "BaseLineNormal"
+        private const val FILE_NAME_ENCRYPTED = "BaseLineEncrypted"
+        private const val FILE_NAME_NORMAL = "BaseLineNormal"
         private var instance: SharedPref? = null
         private val STRING_DEFAULT_VALUE = null
         private const val INT_DEFAULT_VALUE = -999
@@ -48,9 +48,9 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
             val preferFileName =
                 if (fileName.isNullOrEmpty()) {
                     if (type == SharedPrefType.NormalSharedPref) {
-                        FileNameNormal
+                        FILE_NAME_NORMAL
                     } else {
-                        FileNameEncrypted
+                        FILE_NAME_ENCRYPTED
                     }
                 } else {
                     fileName
@@ -87,18 +87,18 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
         keyName: String,
         value: String,
     ) {
-        Log.v(TAG, "saveStringInPrefs() Inside saveStringInPrefs")
+        Log.v(tag, "saveStringInPrefs() Inside saveStringInPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "saveStringInPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "saveStringInPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences key or value is not provided, return
         if (keyName.isEmpty() || value.isEmpty()) {
             Log.d(
-                TAG,
+                tag,
                 "saveStringInPrefs() Key or value to be stored in shared preferences is empty",
             )
             return
@@ -106,7 +106,7 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "saveStringInPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "saveStringInPrefs() Shared preferences file not found - $fileName")
             return
         }
 
@@ -128,23 +128,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
         keyName: String,
         value: Int,
     ) {
-        Log.v(TAG, "saveIntInPrefs() Inside saveIntInPrefs")
+        Log.v(tag, "saveIntInPrefs() Inside saveIntInPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "saveIntInPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "saveIntInPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "saveIntInPrefs() Key to be stored in shared preferences is empty")
+            Log.d(tag, "saveIntInPrefs() Key to be stored in shared preferences is empty")
             return
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "saveIntInPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "saveIntInPrefs() Shared preferences file not found - $fileName")
             return
         }
 
@@ -166,23 +166,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
         keyName: String,
         value: Boolean,
     ) {
-        Log.v(TAG, "saveBooleanInPrefs() Inside saveBooleanInPrefs")
+        Log.v(tag, "saveBooleanInPrefs() Inside saveBooleanInPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "saveBooleanInPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "saveBooleanInPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "saveBooleanInPrefs() Key to be stored in shared preferences is empty")
+            Log.d(tag, "saveBooleanInPrefs() Key to be stored in shared preferences is empty")
             return
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "saveBooleanInPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "saveBooleanInPrefs() Shared preferences file not found - $fileName")
             return
         }
 
@@ -204,23 +204,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
         keyName: String,
         value: Float,
     ) {
-        Log.v(TAG, "saveFloatInPrefs() Inside saveFloatInPrefs")
+        Log.v(tag, "saveFloatInPrefs() Inside saveFloatInPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "saveFloatInPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "saveFloatInPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "saveFloatInPrefs() Key to be stored in shared preferences is empty")
+            Log.d(tag, "saveFloatInPrefs() Key to be stored in shared preferences is empty")
             return
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "saveFloatInPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "saveFloatInPrefs() Shared preferences file not found - $fileName")
             return
         }
 
@@ -242,23 +242,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
         keyName: String,
         value: Long,
     ) {
-        Log.v(TAG, "saveLongInPrefs() Inside saveLongInPrefs")
+        Log.v(tag, "saveLongInPrefs() Inside saveLongInPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "saveLongInPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "saveLongInPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "saveLongInPrefs() Key to be stored in shared preferences is empty")
+            Log.d(tag, "saveLongInPrefs() Key to be stored in shared preferences is empty")
             return
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "saveLongInPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "saveLongInPrefs() Shared preferences file not found - $fileName")
             return
         }
 
@@ -277,23 +277,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @return value - String value to be returned for the keyName
      */
     fun readStringFromPrefs(keyName: String): String? {
-        Log.v(TAG, "readStringFromPrefs() Inside readStringFromPrefs")
+        Log.v(tag, "readStringFromPrefs() Inside readStringFromPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "readStringFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "readStringFromPrefs() SharedPreferences file name is not provided")
             return null
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "readStringFromPrefs() Key to be retrieved from shared preferences is empty")
+            Log.d(tag, "readStringFromPrefs() Key to be retrieved from shared preferences is empty")
             return null
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "readStringFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "readStringFromPrefs() Shared preferences file not found - $fileName")
             return null
         }
 
@@ -309,23 +309,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @return value - Int value to be returned for the keyName
      */
     fun readIntFromPrefs(keyName: String): Int {
-        Log.v(TAG, "readIntFromPrefs() Inside readIntFromPrefs")
+        Log.v(tag, "readIntFromPrefs() Inside readIntFromPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "readIntFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "readIntFromPrefs() SharedPreferences file name is not provided")
             return INT_DEFAULT_VALUE
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "readIntFromPrefs() Key to be retrieved from shared preferences is empty")
+            Log.d(tag, "readIntFromPrefs() Key to be retrieved from shared preferences is empty")
             return INT_DEFAULT_VALUE
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "readIntFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "readIntFromPrefs() Shared preferences file not found - $fileName")
             return INT_DEFAULT_VALUE
         }
 
@@ -344,17 +344,17 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
         keyName: String,
         defaultValue: Boolean = BOOLEAN_DEFAULT_VALUE,
     ): Boolean {
-        Log.v(TAG, "readBooleanFromPrefs() Inside readBooleanFromPrefs")
+        Log.v(tag, "readBooleanFromPrefs() Inside readBooleanFromPrefs")
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "readBooleanFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "readBooleanFromPrefs() SharedPreferences file name is not provided")
             return defaultValue
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
             Log.d(
-                TAG,
+                tag,
                 "readBooleanFromPrefs() Key to be retrieved from shared preferences is empty",
             )
             return defaultValue
@@ -362,7 +362,7 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "readBooleanFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "readBooleanFromPrefs() Shared preferences file not found - $fileName")
             return defaultValue
         }
 
@@ -378,23 +378,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @return value - Float value to be returned for the keyName
      */
     fun readFloatFromPrefs(keyName: String): Float {
-        Log.v(TAG, "readFloatFromPrefs() Inside readFloatFromPrefs")
+        Log.v(tag, "readFloatFromPrefs() Inside readFloatFromPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "readFloatFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "readFloatFromPrefs() SharedPreferences file name is not provided")
             return FLOAT_DEFAULT_VALUE
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "readFloatFromPrefs() Key to be retrieved from shared preferences is empty")
+            Log.d(tag, "readFloatFromPrefs() Key to be retrieved from shared preferences is empty")
             return FLOAT_DEFAULT_VALUE
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "readFloatFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "readFloatFromPrefs() Shared preferences file not found - $fileName")
             return FLOAT_DEFAULT_VALUE
         }
 
@@ -410,23 +410,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @return value - Long value to be returned for the keyName
      */
     fun readLongFromPrefs(keyName: String): Long {
-        Log.v(TAG, "readLongFromPrefs() Inside readLongFromPrefs")
+        Log.v(tag, "readLongFromPrefs() Inside readLongFromPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "readLongFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "readLongFromPrefs() SharedPreferences file name is not provided")
             return LONG_DEFAULT_VALUE
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "readLongFromPrefs() Key to be retrieved from shared preferences is empty")
+            Log.d(tag, "readLongFromPrefs() Key to be retrieved from shared preferences is empty")
             return LONG_DEFAULT_VALUE
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "readLongFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "readLongFromPrefs() Shared preferences file not found - $fileName")
             return LONG_DEFAULT_VALUE
         }
 
@@ -441,23 +441,23 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param keyName - Name of the key to be retrieved from the shared preferences file
      */
     fun removeFromPrefs(keyName: String) {
-        Log.v(TAG, "removeFromPrefs() Inside removeFromPrefs")
+        Log.v(tag, "removeFromPrefs() Inside removeFromPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "removeFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "removeFromPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences key is not provided, return
         if (keyName.isEmpty()) {
-            Log.d(TAG, "removeFromPrefs() Key to be removed from shared preferences is empty")
+            Log.d(tag, "removeFromPrefs() Key to be removed from shared preferences is empty")
             return
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "removeFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "removeFromPrefs() Shared preferences file not found - $fileName")
             return
         }
 
@@ -474,17 +474,17 @@ class SharedPref(context: Context, type: SharedPrefType, private val fileName: S
      * @param fileName - Name of the shared preferences file
      */
     fun removeFromPrefs() {
-        Log.v(TAG, "removeFromPrefs() Inside removeFromPrefs")
+        Log.v(tag, "removeFromPrefs() Inside removeFromPrefs")
 
         // If shared preferences file name is not provided, return
         if (fileName.isEmpty()) {
-            Log.d(TAG, "removeFromPrefs() SharedPreferences file name is not provided")
+            Log.d(tag, "removeFromPrefs() SharedPreferences file name is not provided")
             return
         }
 
         // If shared preferences file reference is not found, return
         if (sharedPreferencesObject == null) {
-            Log.d(TAG, "removeFromPrefs() Shared preferences file not found - $fileName")
+            Log.d(tag, "removeFromPrefs() Shared preferences file not found - $fileName")
             return
         }
 

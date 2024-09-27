@@ -13,13 +13,12 @@ internal open class MyBubbleLayout(
     context,
     attrs,
 ) {
-
     internal var ignoreChildEvent: (MotionEvent) -> Boolean = { false }
     internal var doOnTouchEvent: (MotionEvent) -> Unit = {}
 
     private var onDispatchKeyEvent: ((KeyEvent) -> Boolean?)? = null
 
-    fun setOnDispatchKeyEvent(callback: ((KeyEvent) -> Boolean?)){
+    fun setOnDispatchKeyEvent(callback: ((KeyEvent) -> Boolean?)) {
         onDispatchKeyEvent = callback
     }
 
@@ -31,10 +30,11 @@ internal open class MyBubbleLayout(
     }
 
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        val b = ev?.let{
-            doOnTouchEvent(it)
-            ignoreChildEvent(it)
-        }
+        val b =
+            ev?.let {
+                doOnTouchEvent(it)
+                ignoreChildEvent(it)
+            }
         return b ?: onInterceptTouchEvent(ev)
     }
 
@@ -42,5 +42,4 @@ internal open class MyBubbleLayout(
         event?.let(doOnTouchEvent)
         return super.onTouchEvent(event)
     }
-
 }

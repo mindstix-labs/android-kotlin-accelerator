@@ -4,27 +4,21 @@
 
 package com.mindstix.onboarding.view
 
-import android.app.ActivityManager
-import android.app.Service
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
+import RainbowColorSlider
+import SkinToneSlider
 import android.provider.Settings
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import RainbowColorSlider
-import SkinToneSlider
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
@@ -55,14 +49,19 @@ import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginViewStates
 
 data class Question(
+    val order: Int,
     val questionText: String,
     val questionType: QuestionType,
     val options: List<String> = emptyList(),
-    val isMultiSelect: Boolean = false
+    val isMultiSelect: Boolean = false,
 )
 
 enum class QuestionType {
-    TEXT, RADIO, CHECKBOX, COLOR_PICKER, SKIN_TONE_PICKER
+    TEXT,
+    RADIO,
+    CHECKBOX,
+    COLOR_PICKER,
+    SKIN_TONE_PICKER,
 }
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -94,34 +93,37 @@ fun LoginScreenApp(
     val answers = remember { mutableStateMapOf<String, Any>() }
 
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
             .background(
-                color = Color.Black // Light gray background color
-            )
+                color = Color.Black, // Light gray background color
+            ),
     ) {
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(16.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
         ) {
             Text(
                 "Welcome to the future of shopping!",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .padding(bottom = 24.dp)
+                modifier =
+                Modifier
+                    .padding(bottom = 24.dp),
             )
 
-            questions.forEach { question ->
+            questions.sortedBy { it.order }.forEach { question ->
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
                     question.questionText,
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 8.dp)
+                    modifier = Modifier.padding(bottom = 8.dp),
                 )
 
                 when (question.questionType) {
@@ -134,7 +136,7 @@ fun LoginScreenApp(
                                 answers[question.questionText] = it
                             },
                             label = { Text("Enter your answer") },
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
                         )
                     }
 
@@ -144,25 +146,26 @@ fun LoginScreenApp(
                             question.options.forEach { option ->
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
+                                    modifier =
+                                    Modifier
                                         .fillMaxWidth()
                                         .clickable {
                                             selectedOption = option
                                             answers[question.questionText] = option
                                         }
-                                        .padding(vertical = 8.dp)
+                                        .padding(vertical = 8.dp),
                                 ) {
                                     RadioButton(
                                         selected = selectedOption == option,
                                         onClick = {
                                             selectedOption = option
                                             answers[question.questionText] = option
-                                        }
+                                        },
                                     )
                                     Text(
                                         text = option,
                                         style = MaterialTheme.typography.headlineSmall,
-                                        modifier = Modifier.padding(start = 16.dp)
+                                        modifier = Modifier.padding(start = 16.dp),
                                     )
                                 }
                             }
@@ -175,7 +178,8 @@ fun LoginScreenApp(
                             question.options.forEach { option ->
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier
+                                    modifier =
+                                    Modifier
                                         .fillMaxWidth()
                                         .clickable {
                                             val isChecked = !selectedOptions.contains(option)
@@ -187,7 +191,7 @@ fun LoginScreenApp(
                                             answers[question.questionText] =
                                                 selectedOptions.toList()
                                         }
-                                        .padding(vertical = 8.dp)
+                                        .padding(vertical = 8.dp),
                                 ) {
                                     Checkbox(
                                         checked = selectedOptions.contains(option),
@@ -200,12 +204,12 @@ fun LoginScreenApp(
                                             }
                                             answers[question.questionText] =
                                                 selectedOptions.toList()
-                                        }
+                                        },
                                     )
                                     Text(
                                         text = option,
                                         style = MaterialTheme.typography.headlineSmall,
-                                        modifier = Modifier.padding(start = 16.dp)
+                                        modifier = Modifier.padding(start = 16.dp),
                                     )
                                 }
                             }
@@ -213,15 +217,13 @@ fun LoginScreenApp(
                     }
 
                     QuestionType.COLOR_PICKER -> {
-                        RainbowColorSlider(
-                        ) { selectedColorName ->
+                        RainbowColorSlider { selectedColorName ->
                             answers[question.questionText] = selectedColorName
                         }
                     }
 
                     QuestionType.SKIN_TONE_PICKER -> {
-                        SkinToneSlider(
-                        ) { selectedColorName ->
+                        SkinToneSlider { selectedColorName ->
                             answers[question.questionText] = selectedColorName
                         }
                     }
@@ -234,9 +236,10 @@ fun LoginScreenApp(
                 onClick = {
                     userIntent.invoke(LoginIntent.NavigateToHomeScreen(answers))
                 },
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth()
-                    .align(Alignment.CenterHorizontally)
+                    .align(Alignment.CenterHorizontally),
             ) {
                 Text("Submit")
             }

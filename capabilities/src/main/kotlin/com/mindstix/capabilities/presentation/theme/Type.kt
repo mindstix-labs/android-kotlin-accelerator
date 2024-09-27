@@ -20,14 +20,14 @@ import androidx.compose.ui.unit.sp
 val Typography =
     Typography(
         displayLarge =
-            TextStyle(
-                // Default font family
-                fontFamily = FontFamily.Default,
-                // Normal font weight
-                fontWeight = FontWeight.Normal,
-                // Font size of 16sp
-                fontSize = 16.sp,
-            ),
+        TextStyle(
+            // Default font family
+            fontFamily = FontFamily.Default,
+            // Normal font weight
+            fontWeight = FontWeight.Normal,
+            // Font size of 16sp
+            fontSize = 16.sp,
+        ),
     )
 
 val textFieldLabel =

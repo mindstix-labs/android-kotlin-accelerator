@@ -7,17 +7,15 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import com.mindstix.floatingview.ComposeLifecycleOwner
 
-
 open class Bubble(
     context: Context,
     root: View?,
-    private val containCompose: Boolean = false
+    private val containCompose: Boolean = false,
 ) {
+    private var windowManagerInternal: WindowManager? = null
+    private var rootParamsInternal: WindowManager.LayoutParams? = null
 
-    private var _windowManager: WindowManager? = null
-    private var _rootParams: WindowManager.LayoutParams? = null
-
-    val windowManager get() = _windowManager!!
+    val windowManager get() = windowManagerInternal!!
 
     private var composeOwner: ComposeLifecycleOwner? = null
     private var isComposeOwnerInitialized: Boolean = false
@@ -30,16 +28,16 @@ open class Bubble(
         }
 
     var layoutParams
-        get() = _rootParams!!
+        get() = rootParamsInternal!!
         set(value) {
-            _rootParams = value
+            rootParamsInternal = value
         }
 
     val rootGroup get() = root as ViewGroup
 
     init {
-        _windowManager = context.getSystemService(Service.WINDOW_SERVICE) as WindowManager
-        _rootParams = WindowManager.LayoutParams()
+        windowManagerInternal = context.getSystemService(Service.WINDOW_SERVICE) as WindowManager
+        rootParamsInternal = WindowManager.LayoutParams()
         _root = root
 
         if (containCompose) {
@@ -56,13 +54,12 @@ open class Bubble(
                 if (isComposeOwnerInitialized.not()) {
                     composeOwner!!.onCreate() // only call this once
                     isComposeOwnerInitialized = true
-
                 }
                 composeOwner!!.onStart()
                 composeOwner!!.onResume()
             }
 
-            windowManager.addView(root, _rootParams)
+            windowManager.addView(root, rootParamsInternal)
         } catch (e: Exception) {
 //            e.printStackTrace() // xxx has already added to WindowManager
         }
@@ -83,14 +80,15 @@ open class Bubble(
                 composeOwner!!.onStop()
                 composeOwner!!.onDestroy()
             }
-        }catch (_: Exception){}
+        } catch (_: Exception) {
+        }
     }
 
     fun update() {
 //        if (root.windowToken == null) return
         try {
-            windowManager.updateViewLayout(root, _rootParams)
-        }catch (e: Exception){}
+            windowManager.updateViewLayout(root, rootParamsInternal)
+        } catch (_: Exception) {
+        }
     }
-
 }

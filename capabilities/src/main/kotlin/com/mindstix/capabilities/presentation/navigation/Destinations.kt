@@ -12,8 +12,12 @@ package com.mindstix.capabilities.presentation.navigation
  */
 sealed class Destinations(val route: String) {
     data object SplashDestination : Destinations("splash")
+
     data object LoginDestination : Destinations("login")
+
     data object HomeDestination : Destinations("home")
+
     data object ProfileDestination : Destinations("profile")
+
     data object SettingsDestination : Destinations("settings")
 }

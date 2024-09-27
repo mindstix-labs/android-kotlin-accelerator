@@ -20,21 +20,17 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-
 internal class ComposeLifecycleOwner : SavedStateRegistryOwner, ViewModelStoreOwner {
-
-    private var _view: View? = null
+    private var view: View? = null
     private var recomposer: Recomposer? = null
     private var runRecomposeScope: CoroutineScope? = null
     private var coroutineContext: CoroutineContext? = null
 
     init {
         coroutineContext = AndroidUiDispatcher.CurrentThread
-
     }
 
     fun onCreate() {
-
         savedStateRegistryController.performRestore(null)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
 
@@ -42,13 +38,11 @@ internal class ComposeLifecycleOwner : SavedStateRegistryOwner, ViewModelStoreOw
 
         runRecomposeScope = CoroutineScope(coroutineContext!!)
         recomposer = Recomposer(coroutineContext!!)
-        _view?.compositionContext = recomposer
+        view?.compositionContext = recomposer
 
         runRecomposeScope!!.launch {
             recomposer!!.runRecomposeAndApplyChanges()
         }
-
-
     }
 
     fun onStart() {
@@ -75,7 +69,6 @@ internal class ComposeLifecycleOwner : SavedStateRegistryOwner, ViewModelStoreOw
 
     fun onStop() {
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
-
     }
 
     fun onDestroy() {
@@ -92,13 +85,12 @@ internal class ComposeLifecycleOwner : SavedStateRegistryOwner, ViewModelStoreOw
     fun attachToDecorView(view: View?) {
         if (view == null) return
 
-        _view = view
+        this.view = view
 
 //        ViewTreeLifecycleOwner.set(view, this)
         view.setViewTreeLifecycleOwner(this)
         view.setViewTreeViewModelStoreOwner(this)
         view.setViewTreeSavedStateRegistryOwner(this)
-
     }
 
     private val lifecycleRegistry: LifecycleRegistry = LifecycleRegistry(this)
@@ -107,7 +99,6 @@ internal class ComposeLifecycleOwner : SavedStateRegistryOwner, ViewModelStoreOw
 
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
     override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
-
 
     private val store = ViewModelStore()
     override val viewModelStore: ViewModelStore get() = store
