@@ -106,7 +106,6 @@ fun LoginScreenDestination(
                 Question("Season", QuestionType.CHECKBOX, listOf("Rainy","Winter","Summer")),
                 Question("Fit Preference", QuestionType.RADIO, listOf("Loose", "Regular", "Fitted")),
                 Question("Typical Occasions", QuestionType.CHECKBOX, listOf("Work", "Casual Outings", "Parties", "Special Events")),
-                Question("Budget(Rs)", QuestionType.TEXT),
                 Question("Favorite Brands", QuestionType.TEXT)
             )
             // Display the Login Screen with loaded data.

@@ -3,10 +3,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
@@ -37,37 +41,48 @@ fun SkinToneSlider(
 
     val selectedSkinTone = interpolateSkinTone(skinTones, sliderPosition)
 
-    Column(
+    Box(
         modifier = Modifier
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(
+                color = Color.LightGray, // You can change this to any background color
+                shape = RoundedCornerShape(16.dp) // Adjust the corner radius here
+            )
+            .padding(16.dp) // Inner padding for the content inside the box
     ) {
-        Text(
-            text = selectedSkinTone.name,
-            color = Color.White,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-        Row {
-            Slider(
-                modifier = Modifier.weight(1f),
-                value = sliderPosition,
-                onValueChange = {
-                    sliderPosition = it
-                    onColorSelected(selectedSkinTone.name)
-                },
-                valueRange = 0f..1f,
-                colors = SliderDefaults.colors(
-                    thumbColor = selectedSkinTone.color,
-                    activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = selectedSkinTone.name,
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier.padding(top = 8.dp)
+            )
+            Row {
+                Slider(
+                    modifier = Modifier.weight(1f),
+                    value = sliderPosition,
+                    onValueChange = {
+                        sliderPosition = it
+                        onColorSelected(selectedSkinTone.name)
+                    },
+                    valueRange = 0f..1f,
+                    colors = SliderDefaults.colors(
+                        thumbColor = Color.White,
+                        activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f)
+                    )
                 )
-            )
-            Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .background(selectedSkinTone.color, shape = CircleShape)
-            )
+                Spacer(modifier = Modifier.width(10.dp))
+                Box(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .background(selectedSkinTone.color, shape = CircleShape)
+                )
+            }
         }
     }
+
 }
 
 data class SkinTone(val color: Color, val name: String)
