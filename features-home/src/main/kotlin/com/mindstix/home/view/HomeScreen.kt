@@ -54,43 +54,53 @@ fun WelcomeScreen(
     onDeleteClick: () -> Unit,
 ) {
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .padding(16.dp), contentAlignment = Alignment.BottomEnd
     ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+//                .padding(16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
 
 
-        val name =
-            if (userAnswers["What do people call you?"] != null) userAnswers["What do people call you?"] else ""
+            val name =
+                if (userAnswers["What do people call you?"] != null) userAnswers["What do people call you?"] else ""
 
-        FormElements(
-            text = "Welcome! $name",
-            fontSize = 36.sp,
-            fontWeight = FontWeight.ExtraBold,
-        )
-
-        if (userAnswers.isNotEmpty()) {
             FormElements(
-                text = "Here’s a summary of your input:",
-                fontSize = 20.sp,
-                modifier = Modifier.padding(top = 24.dp, bottom = 16.dp),
+                text = "Welcome! $name",
+                fontSize = 36.sp,
+                fontWeight = FontWeight.ExtraBold,
             )
-        }
 
-        userAnswers.forEach { (question, answer) ->
-            if (question != "What do people call you?") {
-                AnswerRow(question, answer.toString())
-                Spacer(modifier = Modifier.height(20.dp))
+            if (userAnswers.isNotEmpty()) {
+                FormElements(
+                    text = "Here’s a summary of your input:",
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(top = 24.dp, bottom = 16.dp),
+                )
             }
+
+            userAnswers.forEach { (question, answer) ->
+                if (question != "What do people call you?") {
+                    AnswerRow(question, answer.toString())
+                    Spacer(modifier = Modifier.height(20.dp))
+                }
+            }
+
+            Spacer(modifier = Modifier.height(30.dp))
         }
 
-        Spacer(modifier = Modifier.weight(1f))
+//        Spacer(modifier = Modifier.weight(1f))
+
         Row(
-            modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
         ) {
             Button(colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error),
                 onClick = {
