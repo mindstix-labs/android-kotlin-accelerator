@@ -61,4 +61,8 @@ dependencies {
     testImplementation Deps.mockk
     // Timber
     implementation(Deps.timber)
+
+    // Dagger Hilt for dependency injection
+    implementation Deps.hilt_android
+    kapt Deps.hilt_compiler
 }

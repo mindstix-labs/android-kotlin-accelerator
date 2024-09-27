@@ -111,7 +111,6 @@ fun getColorNameForHue(hue: Float): String {
     }
 }
 
-
 fun getColorForHue(hue: Float): Color {
     return when (hue) {
         0f -> Color.Black

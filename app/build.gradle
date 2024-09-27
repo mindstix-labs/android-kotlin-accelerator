@@ -118,6 +118,7 @@ dependencies {
     implementation project(':capabilities')
     implementation project(':features-onboarding')
     implementation project(':features-home')
+    implementation project(':features-floating-view')
 
     // Core dependencies
     implementation Deps.kore_ktx

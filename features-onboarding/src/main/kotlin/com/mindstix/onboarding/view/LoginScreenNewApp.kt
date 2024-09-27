@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import ColorSlider
@@ -48,14 +49,19 @@ import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginViewStates
 
 data class Question(
+    val order: Int,
     val questionText: String,
     val questionType: QuestionType,
     val options: List<String> = emptyList(),
-    val isMultiSelect: Boolean = false
+    val isMultiSelect: Boolean = false,
 )
 
 enum class QuestionType {
-    TEXT, RADIO, CHECKBOX, COLOR_PICKER, SKIN_TONE_PICKER
+    TEXT,
+    RADIO,
+    CHECKBOX,
+    COLOR_PICKER,
+    SKIN_TONE_PICKER,
 }
 
 @OptIn(ExperimentalComposeUiApi::class)

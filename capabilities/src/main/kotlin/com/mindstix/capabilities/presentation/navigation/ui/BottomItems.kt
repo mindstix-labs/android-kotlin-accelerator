@@ -10,21 +10,22 @@ import com.mindstix.capabilities.presentation.navigation.Destinations
 object BottomItems {
     // List of Bottom Navigation items, each representing a screen in the app.
     val items: List<BottomNavItem>
-        get() = listOf(
-            BottomNavItem(
-                name = "Home",
-                route = Destinations.HomeDestination.route,
-                icon = Icons.Default.Home,
-            ),
-            BottomNavItem(
-                name = "Profile",
-                route = Destinations.ProfileDestination.route,
-                icon = Icons.Default.Person,
-            ),
-            BottomNavItem(
-                name = "Settings",
-                route = Destinations.SettingsDestination.route,
-                icon = Icons.Default.Settings,
-            ),
-        )
+        get() =
+            listOf(
+                BottomNavItem(
+                    name = "Home",
+                    route = Destinations.HomeDestination.route,
+                    icon = Icons.Default.Home,
+                ),
+                BottomNavItem(
+                    name = "Profile",
+                    route = Destinations.ProfileDestination.route,
+                    icon = Icons.Default.Person,
+                ),
+                BottomNavItem(
+                    name = "Settings",
+                    route = Destinations.SettingsDestination.route,
+                    icon = Icons.Default.Settings,
+                ),
+            )
 }

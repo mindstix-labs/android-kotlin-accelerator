@@ -21,7 +21,7 @@ object BuildConfig {
     const val kotlinCompilerExtensionVersion = "1.5.6"
 
     const val applicationId = "com.mindstix.baseline"
-    const val appName = "BaseLine"
+    const val appName = "ShopMate"
 }
 
 // Object representing configurations specific to the India flavor

@@ -4,7 +4,11 @@
  */
 package com.mindstix.onboarding.viewModels
 
+import android.net.Uri
+import com.google.gson.Gson
 import com.mindstix.core.base.BaseViewModel
+import com.mindstix.core.logger.Logger
+import com.mindstix.core.sharedpref.accessToken.UserDataStorageContract
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewState
@@ -22,10 +26,10 @@ import javax.inject.Inject
  * @author Abhijeet Kokane
  */
 @HiltViewModel
-class LoginViewModel
-@Inject
-constructor(
+class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
+//    private val sharedPref: SharedPref,
+    private val userDataStorageContract: UserDataStorageContract,
 ) : BaseViewModel<LoginIntent, LoginViewState, LoginNavEffect>() {
     /**
      * Initial state of the Login Screen.
@@ -52,8 +56,13 @@ constructor(
             is LoginIntent.NavigateToHomeScreen -> {
                 // Trigger navigation to the Home Screen
                 val regularMap = intent.answers.toMap()
+                Logger.d { "##### regularMap $regularMap" }
+                val data = Gson().toJson(regularMap)
+                userDataStorageContract.saveUserData(data)
+//                sharedPref.saveStringInPrefs("UserData", data)
+                val answersJson: String = Uri.encode(data)
                 sendNavEffect {
-                    LoginNavEffect.OpenHomeScreen(regularMap)
+                    LoginNavEffect.OpenHomeScreen(answersJson)
                 }
             }
         }

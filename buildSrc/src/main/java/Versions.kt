@@ -55,4 +55,9 @@ object Versions {
 
     // Splash Screen
     const val splash_screen = "1.0.0"
+    const val screen_easy = "0.1.0"
+    const val dynamic_animation = "1.0.0"
+
+    const val glide_compose = "1.0.0-beta01"
+
 }

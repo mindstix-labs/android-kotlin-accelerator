@@ -10,7 +10,10 @@ import androidx.activity.compose.setContent
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.mindstix.baseline.ui.navigation.MainDestination
 import com.mindstix.capabilities.presentation.theme.AppTheme
+import com.mindstix.core.logger.Logger
+import com.mindstix.core.sharedpref.accessToken.UserDataStorageContract
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * MainActivity serves as the main entry point for the Mindstix Android application UI.
@@ -31,6 +34,9 @@ class MainActivity : ComponentActivity() {
      * consistent theme.
      *
      */
+    @Inject
+    lateinit var userDataStorageContract: UserDataStorageContract
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
@@ -38,7 +44,13 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                 // MainDestination is a composable that represents the main content
                 // of the app. It is included within the Row composable.
-                MainDestination()
+//               val userData =  sharedPref.removeFromPrefs("UserData").toString()
+//                val gson = Gson()
+//                val mapType = object : TypeToken<Map<String, Any>>() {}.type
+//                val answers: Map<String, Any> = gson.fromJson(userData, mapType)
+                val data = userDataStorageContract.getUserData()
+                Logger.d { "##### userDataStorageContract MainActivity $data and  ${data.isNullOrBlank()}" }
+                MainDestination(userDataStorageContract = userDataStorageContract, data.isNullOrBlank())
             }
         }
     }

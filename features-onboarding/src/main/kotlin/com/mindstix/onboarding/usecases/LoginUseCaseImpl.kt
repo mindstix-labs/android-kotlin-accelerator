@@ -15,9 +15,7 @@ import javax.inject.Inject
  */
 class LoginUseCaseImpl
 @Inject
-constructor(
-    // private val downloadRequestDao: DownloadRequestDao,
-) : LoginUseCase {
+constructor() : LoginUseCase {
     /**
      * Retrieves the content for the Login Screen.
      *

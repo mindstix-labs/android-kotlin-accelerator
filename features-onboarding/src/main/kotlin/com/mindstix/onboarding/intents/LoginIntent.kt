@@ -16,8 +16,9 @@ import com.mindstix.onboarding.models.OfflineScreenDataModel
  */
 sealed class LoginIntent : UserIntent {
     data object FetchLoginData : LoginIntent()
+
     data class NavigateToHomeScreen(
-        val answers: SnapshotStateMap<String, Any>
+        val answers: SnapshotStateMap<String, Any>,
     ) : LoginIntent()
 }
 
@@ -28,9 +29,9 @@ sealed class LoginIntent : UserIntent {
  */
 sealed class LoginNavEffect : NavEffect {
     data object CloseLoginScreen : LoginNavEffect()
-    data class OpenHomeScreen(
-        val answers: Map<String, Any>
-    ) : LoginNavEffect()
+
+    data class OpenHomeScreen(val answers: String) : LoginNavEffect()
+
     data object OpenExternalLink : LoginNavEffect()
 }
 

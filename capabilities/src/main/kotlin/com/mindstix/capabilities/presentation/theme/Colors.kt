@@ -28,6 +28,9 @@ val md_theme_dark_background = Color(0xFF2A1A29)    // Very dark desaturated pur
 val md_theme_dark_error = Color(0xFFE57373)         // Soft red for error messages
 val md_theme_dark_errorContainer = Color(0xFF8D021F) // Dark red for error containers
 
+val green = Color(0xFF0D6B10)
+val card_background = Color(0xFFE0D1FF)
+
 // Light color scheme
 val LightColors =
     lightColorScheme(

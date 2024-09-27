@@ -59,6 +59,7 @@ dependencies {
     // Core, Capabilities Integration in Feature Modules
     implementation project(':core')
     implementation project(':capabilities')
+    implementation project(':features-floating-view')
 
     // Third-party dependencies
     implementation Deps.kore_ktx
@@ -70,6 +71,7 @@ dependencies {
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
     implementation Deps.navigation_runtime_ktx
+    implementation 'com.google.ai.client.generativeai:generativeai:0.9.0'
 
     // Testing dependencies
     testImplementation Deps.junit

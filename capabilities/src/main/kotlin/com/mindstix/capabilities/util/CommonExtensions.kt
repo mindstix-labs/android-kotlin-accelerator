@@ -4,9 +4,7 @@
  */
 package com.mindstix.capabilities.util
 
-import android.util.Log
 import android.util.Patterns
-import androidx.navigation.NavArgument
 import com.mindstix.capabilities.util.Constants.DEFAULT_EMPTY_STRING
 import java.time.ZoneId
 import java.time.ZonedDateTime
