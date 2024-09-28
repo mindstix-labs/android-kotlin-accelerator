@@ -217,7 +217,7 @@ fun LoginScreenApp(
 //                        .clip(RoundedCornerShape(50.dp))
 //                )
                 Text(
-                    "Let Elvin know more about yourself !",
+                    "Let Alvin know more about yourself !",
                     style = MaterialTheme.typography.headlineMedium.copy(fontSize = 16.sp),
                     lineHeight = 22.sp,
                     fontWeight = FontWeight.Thin,
