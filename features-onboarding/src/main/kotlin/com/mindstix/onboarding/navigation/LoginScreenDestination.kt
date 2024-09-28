@@ -5,10 +5,13 @@
 
 package com.mindstix.onboarding.navigation
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import com.mindstix.capabilities.presentation.navigation.Destinations
@@ -128,5 +131,10 @@ fun LoginScreenDestination(
             // Display content for the uninitialized state.
             Text("UnInitialized")
         }
+    }
+
+    val context = LocalContext.current
+    BackHandler {
+        (context as? Activity)?.finish()
     }
 }

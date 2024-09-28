@@ -1,9 +1,11 @@
+import android.app.Activity
 import android.app.ActivityManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -60,6 +62,10 @@ fun WelcomeScreen(
     onDeleteClick: () -> Unit,
 ) {
 //
+    val context = LocalContext.current
+    BackHandler {
+        (context as? Activity)?.finish()
+    }
 
     Column(
         modifier = Modifier

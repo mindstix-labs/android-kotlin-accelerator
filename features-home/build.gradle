@@ -69,6 +69,7 @@ dependencies {
     implementation Deps.compose_ui_graphics
     implementation Deps.ui_tooling_preview
     implementation Deps.material3
+    implementation Deps.activity_compose
     implementation Deps.navigation_runtime_ktx
 
     // Mocking library for testing
