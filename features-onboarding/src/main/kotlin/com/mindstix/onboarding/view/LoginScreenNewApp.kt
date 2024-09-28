@@ -143,19 +143,19 @@ fun LoginScreenApp(
             Spacer(Modifier.height(18.dp))
             Text(
                 "Meet ALVIN !",
-                style = MaterialTheme.typography.headlineLarge.copy(fontSize = 32.sp),
+                style = MaterialTheme.typography.headlineLarge.copy(fontSize = 36.sp),
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onPrimary,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(
-                "The future of shopping, your personalized assistant..",
+                "The future of shopping,\nyour personalized assistant",
                 style = MaterialTheme.typography.headlineMedium.copy(fontSize = 16.sp),
                 fontWeight = FontWeight.Thin,
-                color = MaterialTheme.colorScheme.onSecondary,
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp),
                 lineHeight = 20.sp
             )
             Spacer(Modifier.height(42.dp))
@@ -216,6 +216,8 @@ fun LoginScreenApp(
 //                        .size(60.dp)
 //                        .clip(RoundedCornerShape(50.dp))
 //                )
+                Spacer(modifier = Modifier.width(8.dp))
+
                 Text(
                     "Let Alvin know more about yourself !",
                     style = MaterialTheme.typography.headlineMedium.copy(fontSize = 16.sp),
