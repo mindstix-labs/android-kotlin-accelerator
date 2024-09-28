@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -20,10 +21,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.mindstix.capabilities.presentation.theme.card_background
+import com.mindstix.capabilities.presentation.theme.textStyle1
 import com.mindstix.core.logger.Logger
 import com.mindstix.features.floatingview.R
 import com.mindstix.floatingview.service.isGoodChoice
@@ -238,6 +242,7 @@ fun Card(text: MutableState<String>) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
                 text = text.value,
+                color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
                 modifier = Modifier.padding(8.dp),
             )
         }
