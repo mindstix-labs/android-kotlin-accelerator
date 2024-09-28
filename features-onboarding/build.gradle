@@ -93,4 +93,6 @@ dependencies {
     implementation Deps.retrofit_gson
     implementation Deps.okhttp
     implementation Deps.okhttpLogging
+
+    implementation Deps.glide_compose
 }

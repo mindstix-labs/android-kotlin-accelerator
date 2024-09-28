@@ -22,7 +22,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun RainbowColorSlider(onColorSelected: (String) -> Unit) {
@@ -32,23 +34,18 @@ fun RainbowColorSlider(onColorSelected: (String) -> Unit) {
     val colorName = getColorNameForHue(hue)
     Box(
         modifier = Modifier
+            .fillMaxWidth()
             .background(
-                color = MaterialTheme.colorScheme.secondary, // You can change this to any background color
+                color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.4f), // You can change this to any background color
                 shape = RoundedCornerShape(16.dp) // Adjust the corner radius here
             )
-            .padding(16.dp) // Inner padding for the content inside the box
+            .padding(10.dp) // Inner padding for the content inside the box
     ) {
+
         Column(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = colorName,
-                modifier = Modifier.padding(top = 8.dp),
-                color = MaterialTheme.colorScheme.onSecondary,
-                style = MaterialTheme.typography.bodyLarge,
-            )
             Row {
                 Slider(
                     modifier = Modifier.weight(1f),
@@ -60,22 +57,30 @@ fun RainbowColorSlider(onColorSelected: (String) -> Unit) {
                     valueRange = 0f..360f,
                     colors = SliderDefaults.colors(
                         thumbColor = Color.White,
+                        inactiveTrackColor = Color.Gray,
                         activeTrackColor = color.copy(alpha = 0.5f)
                     )
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Box(
                     modifier = Modifier
-                        .size(60.dp)
+                        .size(40.dp)
                         .background(color, shape = CircleShape)
                         .border(
-                            5.dp,
+                            1.dp,
                             Color.White,
                             shape = CircleShape
                         )
                 )
             }
         }
+        Text(
+            text = colorName,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onPrimary,
+            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp),
+        )
     }
 }
 

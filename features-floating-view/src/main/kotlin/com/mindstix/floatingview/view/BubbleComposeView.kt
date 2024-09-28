@@ -16,6 +16,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -44,7 +45,7 @@ fun BubbleComposeView(
             model = when (step.value) {
                 0 -> {
                     isDone.value = false
-                    R.drawable.blue_boy
+                    R.drawable.alvin_ai_1
                 }
 
                 1 -> {
@@ -60,7 +61,7 @@ fun BubbleComposeView(
                 }
 
                 else -> {
-                    R.drawable.boy_think
+                    R.drawable.alvin_ai_1
                 }
             },
             contentDescription = "",
@@ -77,11 +78,14 @@ fun BubbleComposeView(
                             it.padding(start = 20.dp)
                                 .size(60.dp)
                         }
-                    } else {
+                    }
+                    else if (step.value == 0) {
+                        it.padding(20.dp).size(50.dp).clip(RoundedCornerShape(50.dp))
+                    }
+                    else {
                         it.size(100.dp)
                     }
                 }
-
                 .clickable {
                     when (step.value) {
                         0 -> {

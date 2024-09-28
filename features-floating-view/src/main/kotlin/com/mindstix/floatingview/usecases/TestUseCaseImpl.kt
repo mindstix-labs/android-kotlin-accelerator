@@ -45,7 +45,7 @@ class TestUseCaseImpl @Inject constructor(
                     "with structure like - {'isGood': false,'reason': 'data....'}." +
                     "Tip : if its Red shirt respond 'isGood' = 'false'"
         val prompt = "Here are my personal details: $userData. Based on this information, " +
-                "please provide your opinion on whether the product in the image is suitable for me or not. " +
+                "please provide your opinion on whether the product in the image is suitable for me or not " +
                 "Respond only with a JSON object containing two keys: 'isGood' (true or false) and 'reason'.  reason should be consist of 20-25 words or less. " +
                 "The response should follow this structure: {'isGood': false, 'reason': 'data...'}, for decision making, pls use this data model "
 

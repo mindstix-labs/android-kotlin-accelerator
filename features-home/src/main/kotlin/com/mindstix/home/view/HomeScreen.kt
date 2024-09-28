@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,16 +16,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -34,10 +38,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
@@ -46,6 +51,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.mindstix.features.login.R
 import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 
 @Composable
@@ -53,41 +59,68 @@ fun WelcomeScreen(
     userAnswers: Map<String, Any>,
     onDeleteClick: () -> Unit,
 ) {
+//
 
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp), contentAlignment = Alignment.BottomEnd
+
     ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(
+                    brush = Brush.linearGradient(
+                        colors = listOf(
+                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.error,
+                        )
+                    )
+                )
+                .padding(bottom = 16.dp, top = 16.dp, start = 16.dp, end = 16.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Image(
+                modifier = Modifier
+                    .size(68.dp)
+                    .padding(horizontal = 4.dp),
+                painter = painterResource(id = com.mindstix.capabilities.R.drawable.a_logo),
+                contentDescription = "Google Login",
+            )
+            Spacer(Modifier.width(12.dp))
+            Column {
+                val name =
+                    if (userAnswers["What do people call you?"] != null) userAnswers["What do people call you?"] else ""
+                FormElements(
+                    text = "Welcome $name !",
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                )
+                if (userAnswers.isNotEmpty()) {
+                    FormElements(
+                        text = "Here’s your profile summary",
+                        fontSize = 14.sp,
+                        modifier = Modifier.padding(bottom = 4.dp),
+                    )
+                }
+            }
+        }
         Column(
             modifier = Modifier
-                .fillMaxSize()
-//                .padding(16.dp)
+                .fillMaxWidth()
+                .weight(1f)
+                .padding(16.dp)
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
 
-            val name =
-                if (userAnswers["What do people call you?"] != null) userAnswers["What do people call you?"] else ""
-
-            FormElements(
-                text = "Welcome! $name",
-                fontSize = 36.sp,
-                fontWeight = FontWeight.ExtraBold,
-            )
-
-            if (userAnswers.isNotEmpty()) {
-                FormElements(
-                    text = "Here’s a summary of your input:",
-                    fontSize = 20.sp,
-                    modifier = Modifier.padding(top = 24.dp, bottom = 16.dp),
-                )
-            }
-
             userAnswers.forEach { (question, answer) ->
-                if (question != "What do people call you?") {
+                if (question != "What do people call you?" && question != "What's your Gender?") {
                     AnswerRow(question, answer.toString())
                     Spacer(modifier = Modifier.height(20.dp))
                 }
@@ -96,26 +129,16 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(30.dp))
         }
 
-//        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Button(colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error),
-                onClick = {
-                    onDeleteClick.invoke()
-                }) {
-                Text(
-                    text = "Delete", style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 20.sp,
-                    ), color = MaterialTheme.colorScheme.onSecondary
-                )
-            }
+        Divider(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(0.5.dp),
+            color = MaterialTheme.colorScheme.primary,
+        )
+        StartService(onDeleteClick)
 
-            Spacer(modifier = Modifier.weight(1f))
-            StartService()
-        }
 
     }
 }
@@ -128,32 +151,32 @@ fun AnswerRow(
     Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 4.dp),
+            modifier = Modifier.padding(vertical = 2.dp),
         ) {
             Icon(
-                imageVector = Icons.Filled.Search, // Placeholder icon, replace with actual icon id
+                imageVector = Icons.Filled.CheckCircle,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
             )
             Spacer(modifier = Modifier.width(8.dp))
             FormElements(
-                text = question, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold
+                text = question, fontSize = 14.sp, fontWeight = FontWeight.ExtraBold
             )
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(vertical = 4.dp),
+            modifier = Modifier.padding(vertical = 2.dp),
         ) {
             Icon(
-                imageVector = Icons.Filled.ArrowForward, // Placeholder icon, replace with actual icon id
+                imageVector = Icons.Filled.ArrowForward,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
+                tint = Color.Transparent,
                 modifier = Modifier.align(Alignment.Top)
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(4.dp))
             FormElements(
-                text = answer,
-                fontSize = 18.sp,
+                text = "  $answer",
+                fontSize = 16.sp,
             )
         }
     }
@@ -183,42 +206,65 @@ fun FormElements(
 }
 
 @Composable
-fun StartService() {
-    Column(
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally,
+fun StartService(
+    onDeleteClick: () -> Unit,
+) {
+    val context = LocalContext.current
+    val isServiceRunning = remember {
+        mutableStateOf(
+            isServiceRunning(
+                context,
+                FloatingBubbleServiceImpl::class.java,
+            ),
+        )
+    }
+    val hasOverlayPermission = remember { mutableStateOf(Settings.canDrawOverlays(context)) }
+
+    // Get the current lifecycle owner
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    // Update permission state when the lifecycle state changes
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                // Check permission when the app resumes
+                hasOverlayPermission.value = Settings.canDrawOverlays(context)
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+
+        // Clean up the observer when this Composable leaves the composition
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.End
     ) {
-        val context = LocalContext.current
-        val isServiceRunning = remember {
-            mutableStateOf(
-                isServiceRunning(
-                    context,
-                    FloatingBubbleServiceImpl::class.java,
-                ),
+        Button(modifier = Modifier
+            .wrapContentHeight(),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+            onClick = {
+                onDeleteClick.invoke()
+            }) {
+            Icon(
+                imageVector = Icons.Filled.Delete,
+                contentDescription = null,
+                tint = Color.LightGray.copy(alpha = 0.7f),
+                modifier = Modifier.align(Alignment.Top)
             )
         }
-        val hasOverlayPermission = remember { mutableStateOf(Settings.canDrawOverlays(context)) }
-
-        // Get the current lifecycle owner
-        val lifecycleOwner = LocalLifecycleOwner.current
-
-        // Update permission state when the lifecycle state changes
-        DisposableEffect(lifecycleOwner) {
-            val observer = LifecycleEventObserver { _, event ->
-                if (event == Lifecycle.Event.ON_RESUME) {
-                    // Check permission when the app resumes
-                    hasOverlayPermission.value = Settings.canDrawOverlays(context)
-                }
-            }
-            lifecycleOwner.lifecycle.addObserver(observer)
-
-            // Clean up the observer when this Composable leaves the composition
-            onDispose {
-                lifecycleOwner.lifecycle.removeObserver(observer)
-            }
-        }
-
+        Spacer(modifier = Modifier.width(10.dp))
         Button(
+            modifier = Modifier
+                .wrapContentHeight()
+                .weight(1f)
+                .align(Alignment.CenterVertically),
             colors = if (isServiceRunning.value) {
                 ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error)
             } else {
@@ -248,18 +294,18 @@ fun StartService() {
             if (isServiceRunning.value) {
                 Text(
                     "Stop", style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 20.sp,
-                    ), color = MaterialTheme.colorScheme.onSecondary
+                        fontSize = 14.sp, fontWeight = FontWeight.ExtraBold,
+                    ), color = MaterialTheme.colorScheme.onPrimary
                 )
             } else {
                 Text(
-                    "Let's Go", style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 20.sp,
-                    ), color = MaterialTheme.colorScheme.onSecondary
+                    "Hey Alvin..", style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = 14.sp, fontWeight = FontWeight.ExtraBold,
+                    ), color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
-//        Spacer(modifier = Modifier.height(100.dp))
+
     }
 }
 

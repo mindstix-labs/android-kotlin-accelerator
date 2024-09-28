@@ -22,7 +22,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun SkinToneSlider(onColorSelected: (String) -> Unit) {
@@ -43,22 +45,17 @@ fun SkinToneSlider(onColorSelected: (String) -> Unit) {
     Box(
         modifier = Modifier
             .background(
-                color = MaterialTheme.colorScheme.secondary, // You can change this to any background color
+                color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.4f), // You can change this to any background color
                 shape = RoundedCornerShape(16.dp) // Adjust the corner radius here
             )
-            .padding(16.dp) // Inner padding for the content inside the box
+            .padding(10.dp) // Inner padding for the content inside the box
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = selectedSkinTone.name,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSecondary,
-                modifier = Modifier.padding(top = 8.dp)
-            )
+
             Row {
                 Slider(
                     modifier = Modifier.weight(1f),
@@ -70,17 +67,26 @@ fun SkinToneSlider(onColorSelected: (String) -> Unit) {
                     valueRange = 0f..1f,
                     colors = SliderDefaults.colors(
                         thumbColor = Color.White,
+                        inactiveTrackColor = Color.Gray,
                         activeTrackColor = selectedSkinTone.color.copy(alpha = 0.5f)
                     )
                 )
                 Spacer(modifier = Modifier.width(10.dp))
                 Box(
                     modifier = Modifier
-                        .size(60.dp)
+                        .size(40.dp)
                         .background(selectedSkinTone.color, shape = CircleShape)
                 )
             }
         }
+        Text(
+            text = selectedSkinTone.name,
+            style = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp),
+            color = MaterialTheme.colorScheme.onPrimary,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
+        )
+
     }
 }
 

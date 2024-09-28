@@ -94,18 +94,17 @@ fun LoginScreenDestination(
                 listOf(
                     Question(1, "What do people call you?", QuestionType.TEXT),
                     Question(2, "How many trips around the sun have you made?", QuestionType.TEXT),
-                    Question(3, "What's your vibe?", QuestionType.RADIO, listOf("Male", "Female")),
+                    Question(3, "What's your Gender?", QuestionType.RADIO, listOf("Male", "Female")),
                     Question(4, "How tall are you in centimeters?", QuestionType.TEXT),
                     Question(5, "What’s your weight in kilograms?", QuestionType.TEXT),
-                    Question(6, "What shade are you rocking?", QuestionType.SKIN_TONE_PICKER),
-                    Question(7, "What’s your color crush?", QuestionType.COLOR_PICKER),
-                    Question(8, "Which color is a no-go for you?", QuestionType.COLOR_PICKER),
-                    Question(9, "Which fashion vibes do you dig?", QuestionType.CHECKBOX, listOf("Casual", "Formal", "Sporty", "Streetwear", "Bohemian")),
-                    Question(10, "Which seasons get you excited?", QuestionType.CHECKBOX, listOf("Rainy", "Winter", "Summer")),
-                    Question(11, "How do you like your clothes to fit?", QuestionType.RADIO, listOf("Loose", "Regular", "Fitted")),
-                    Question(12, "What occasions do you love to dress up for?", QuestionType.CHECKBOX, listOf("Work", "Casual Outings", "Parties", "Special Events")),
-                    Question(13, "What are your brand obsessions?", QuestionType.TEXT),
-                )
+                    Question(6, "What's your skin tone?", QuestionType.SKIN_TONE_PICKER),
+                    Question(7, "What’s your favourite color?", QuestionType.COLOR_PICKER),
+                    Question(8, "Which color you don't like?", QuestionType.COLOR_PICKER),
+                    Question(9, "Which fashion style do you want to try?", QuestionType.CHECKBOX, listOf("Casual", "Formal", "Sporty", "Street-wear","Traditional")),
+                    Question(10, "Which seasonal wear are you looking for?", QuestionType.CHECKBOX, listOf("Rainy", "Winter", "Summer")),
+                    Question(11, "What occasions do you love to dress up for?", QuestionType.CHECKBOX, listOf("Work", "Casual Outings", "Parties", "Weddings")),
+                    Question(12, "How do you like your dressing style?", QuestionType.RADIO, listOf("Loose", "Regular", "Slim Fit")),
+                    )
             // Display the Login Screen with loaded data.
             LoginScreenApp(
                 state = loginViewState,

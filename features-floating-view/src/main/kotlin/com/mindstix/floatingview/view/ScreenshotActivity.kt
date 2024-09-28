@@ -13,6 +13,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.DisplayMetrics
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -64,7 +65,7 @@ class ScreenshotActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        step.intValue = 0
         mediaProjectionManager =
             getSystemService(Context.MEDIA_PROJECTION_SERVICE) as MediaProjectionManager
         startScreenCaptureService(screenCaptureCode, Intent())
@@ -88,12 +89,9 @@ class ScreenshotActivity : ComponentActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK && result.data != null) {
                 startMediaProjection(result.resultCode, result.data!!)
+                step.intValue = 1
             } else {
-//                Toast.makeText(
-//                    this,
-//                    "Screen capture permission denied. Activity",
-//                    Toast.LENGTH_SHORT
-//                ).show()
+                Toast.makeText(this, "Screen capture permission denied. Pls enable permission", Toast.LENGTH_SHORT).show()
             }
         }
 
