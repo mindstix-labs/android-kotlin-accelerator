@@ -200,22 +200,22 @@ fun LoginScreenApp(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-//                Image(
-//                    modifier = Modifier
-//                        .size(68.dp)
-//                        .padding(horizontal = 4.dp),
-//                    painter = painterResource(id = com.mindstix.capabilities.R.drawable.a_logo),
-//                    contentDescription = "Google Login",
-//                )
-
-                GlideImage(
-                    model = R.drawable.alvin_ai_1,
-                    contentDescription = "",
-                    modifier =
-                    Modifier
-                        .size(60.dp)
-                        .clip(RoundedCornerShape(50.dp))
+                Image(
+                    modifier = Modifier
+                        .size(68.dp)
+                        .padding(horizontal = 4.dp),
+                    painter = painterResource(id = com.mindstix.capabilities.R.drawable.a_logo),
+                    contentDescription = "Google Login",
                 )
+
+//                GlideImage(
+//                    model = R.drawable.alvin_ai_1,
+//                    contentDescription = "",
+//                    modifier =
+//                    Modifier
+//                        .size(60.dp)
+//                        .clip(RoundedCornerShape(50.dp))
+//                )
                 Text(
                     "Let Elvin know more about yourself !",
                     style = MaterialTheme.typography.headlineMedium.copy(fontSize = 16.sp),

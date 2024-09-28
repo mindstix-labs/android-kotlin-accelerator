@@ -45,7 +45,7 @@ fun BubbleComposeView(
             model = when (step.value) {
                 0 -> {
                     isDone.value = false
-                    R.drawable.alvin_ai_1
+                    R.drawable.boy_think
                 }
 
                 1 -> {
@@ -61,7 +61,7 @@ fun BubbleComposeView(
                 }
 
                 else -> {
-                    R.drawable.alvin_ai_1
+                    R.drawable.boy_think
                 }
             },
             contentDescription = "",
@@ -79,9 +79,9 @@ fun BubbleComposeView(
                                 .size(60.dp)
                         }
                     }
-                    else if (step.value == 0) {
-                        it.padding(20.dp).size(50.dp).clip(RoundedCornerShape(50.dp))
-                    }
+//                    else if (step.value == 0) {
+//                        it.padding(20.dp).size(50.dp).clip(RoundedCornerShape(50.dp))
+//                    }
                     else {
                         it.size(100.dp)
                     }
