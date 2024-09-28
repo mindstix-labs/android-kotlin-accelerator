@@ -250,6 +250,7 @@ fun LoginScreenApp(
                             var textAnswer by remember { mutableStateOf("") }
                             OutlinedTextField(
                                 value = textAnswer,
+                                maxLines = 1,
                                 textStyle = MaterialTheme.typography.headlineSmall.copy(fontSize = 14.sp),
                                 onValueChange = {
                                     textAnswer = it
