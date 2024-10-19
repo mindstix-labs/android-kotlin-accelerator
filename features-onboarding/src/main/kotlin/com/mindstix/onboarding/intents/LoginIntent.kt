@@ -16,7 +16,6 @@ import com.mindstix.onboarding.models.OfflineScreenDataModel
  */
 sealed class LoginIntent : UserIntent {
     data object FetchLoginData : LoginIntent()
-
     data class NavigateToHomeScreen(
         val answers: SnapshotStateMap<String, Any>,
     ) : LoginIntent()

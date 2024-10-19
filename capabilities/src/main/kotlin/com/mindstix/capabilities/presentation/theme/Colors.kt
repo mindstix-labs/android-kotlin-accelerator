@@ -10,11 +10,11 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 // Color constants for light theme
-val md_theme_light_primary = Color(0xFF6C79F0)  // Muted purple
+val md_theme_light_primary = Color(0xFF493266)  // Muted purple
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)  // Vibrant pink
 val md_theme_light_secondary = Color(0xFFBC85A3)  // Soft lavender
 val md_theme_light_onSecondary = Color(0xFFF9E1E0)  // Soft peach
-val md_theme_light_background = Color(0xFFE7ECF0)  // Soft light grayish color
+val md_theme_light_background = Color(0xFFDED8EB)  // Soft light grayish color
 val md_theme_light_error = Color(0xFFFFB4AB)  // Light red for error states
 val md_theme_light_errorContainer = Color(0xFF93000A) // Darker red for error container
 

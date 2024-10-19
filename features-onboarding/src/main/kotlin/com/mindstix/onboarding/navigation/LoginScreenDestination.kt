@@ -18,9 +18,9 @@ import com.mindstix.capabilities.presentation.navigation.Destinations
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewStates
-import com.mindstix.onboarding.view.LoginScreenApp
-import com.mindstix.onboarding.view.Question
-import com.mindstix.onboarding.view.QuestionType
+import com.mindstix.onboarding.view.screens.LoginScreenApp
+import com.mindstix.onboarding.view.screens.Question
+import com.mindstix.onboarding.view.screens.QuestionType
 import com.mindstix.onboarding.viewModels.LoginViewModel
 import kotlinx.coroutines.flow.Flow
 
@@ -93,21 +93,17 @@ fun LoginScreenDestination(
     // Choose the appropriate content based on the current state of the Login Screen.
     when (loginViewState) {
         is LoginViewStates.LoadedData -> {
-            val questions =
-                listOf(
-                    Question(1, "What do people call you?", QuestionType.TEXT),
-                    Question(2, "How many trips around the sun have you made?", QuestionType.TEXT),
-                    Question(3, "What's your Gender?", QuestionType.RADIO, listOf("Male", "Female")),
-                    Question(4, "How tall are you in centimeters?", QuestionType.TEXT),
-                    Question(5, "What’s your weight in kilograms?", QuestionType.TEXT),
-                    Question(6, "What's your skin tone?", QuestionType.SKIN_TONE_PICKER),
-                    Question(7, "What’s your favourite color?", QuestionType.COLOR_PICKER),
-                    Question(8, "Which color you don't like?", QuestionType.COLOR_PICKER),
-                    Question(9, "Which fashion style do you want to try?", QuestionType.CHECKBOX, listOf("Casual", "Formal", "Sporty", "Street-wear","Traditional")),
-                    Question(10, "Which seasonal wear are you looking for?", QuestionType.CHECKBOX, listOf("Rainy", "Winter", "Summer")),
-                    Question(11, "What occasions do you love to dress up for?", QuestionType.CHECKBOX, listOf("Work", "Casual Outings", "Parties", "Weddings")),
-                    Question(12, "How do you like your dressing style?", QuestionType.RADIO, listOf("Loose", "Regular", "Slim Fit")),
-                    )
+            val questions = listOf(
+                Question(1, "What is your name?", QuestionType.TEXT),
+                Question(3, "How old are you?", QuestionType.TEXT),  // Can be improved with age picker (if available)
+                Question(2, "What is your gender?", QuestionType.RADIO, listOf("Male", "Female", "Non-binary", "Prefer not to say")),
+                Question(4, "What is your skin tone?", QuestionType.RADIO, listOf("Fair", "Medium", "Olive", "Dark")),
+                Question(5, "What is your skin type?", QuestionType.RADIO, listOf("Oily", "Dry", "Combination", "Sensitive", "Normal")),
+                Question(6, "What are your main skin concerns?", QuestionType.CHECKBOX, listOf("Acne", "Wrinkles", "Dark Spots", "Dryness", "Redness", "Pigmentation", "Enlarged Pores")),
+                Question(7, "Do you have any allergies or sensitivities?", QuestionType.CHECKBOX, listOf("Fragrance", "Alcohol", "Parabens", "Sulfates", "None")),
+                Question(8, "Is it important for you to use eco-friendly products?", QuestionType.RADIO, listOf("Yes", "No"))
+            )
+
             // Display the Login Screen with loaded data.
             LoginScreenApp(
                 state = loginViewState,

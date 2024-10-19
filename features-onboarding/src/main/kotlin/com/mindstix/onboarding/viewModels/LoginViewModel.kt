@@ -55,6 +55,7 @@ class LoginViewModel @Inject constructor(
 
             is LoginIntent.NavigateToHomeScreen -> {
                 // Trigger navigation to the Home Screen
+                //TODO
                 val regularMap = intent.answers.toMap()
                 Logger.d { "##### regularMap $regularMap" }
                 val data = Gson().toJson(regularMap)

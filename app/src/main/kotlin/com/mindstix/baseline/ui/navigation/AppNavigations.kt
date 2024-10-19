@@ -23,7 +23,7 @@ import com.mindstix.core.sharedpref.accessToken.UserDataStorageContract
 import com.mindstix.home.view.ProfileScreen
 import com.mindstix.home.view.SettingsScreen
 import com.mindstix.onboarding.navigation.LoginScreenDestination
-import com.mindstix.onboarding.view.SplashScreen
+import com.mindstix.onboarding.view.screens.SplashScreen
 import com.mindstix.onboarding.viewModels.LoginViewModel
 import org.json.JSONObject
 
