@@ -40,6 +40,7 @@ import com.mindstix.floatingview.service.ScreenCaptureService
 import com.mindstix.floatingview.service.isGoodChoice
 import com.mindstix.floatingview.service.response
 import com.mindstix.floatingview.service.step
+import com.mindstix.floatingview.service.suggestedUrl
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Inject
@@ -161,7 +162,6 @@ class ScreenshotActivity : ComponentActivity() {
 
                 // Update UI in Jetpack Compose
                 bitmapState.value = bitmap
-
                 // Save the bitmap to a file (optional)
                 saveBitmapToFile(bitmap)
                 if (!isDone.value) {
@@ -169,10 +169,11 @@ class ScreenshotActivity : ComponentActivity() {
                     floatingBubbleServiceImpl.test(
                         bitmap,
                         applicationContext,
-                    ) { isGood, responseData ->
+                    ) { isGood, responseData, suggestedProductLink ->
                         Logger.d { "at 8 result ${step.intValue}" }
                         isGoodChoice.value = isGood
                         response.value = responseData
+                        suggestedUrl.value = searchProduct(suggestedProductLink)
                         step.intValue = 2
                     }
                 }

@@ -46,8 +46,10 @@ class TestUseCaseImpl @Inject constructor(
                     "Tip : if its Red shirt respond 'isGood' = 'false'"
         val prompt = "Here are my personal details: $userData. Based on this information, " +
                 "please provide your opinion on whether the product in the image is suitable for me or not " +
-                "Respond only with a JSON object containing two keys: 'isGood' (true or false) and 'reason'.  reason should be consist of 20-25 words or less. " +
-                "The response should follow this structure: {'isGood': false, 'reason': 'data...'}, for decision making, pls use this data model "
+                "Respond only with a JSON object containing three keys: 'isGood' (true or false), 'reason' and 'property' " +
+                "reason should consist of 20-25 words or less. " +
+                "And property should consist of the color, type and category of the product" +
+                  "The response should follow this structure: {'isGood': false, 'reason': 'data...', 'property': 'data'.}, for decision making, pls use this data model "
 
         CoroutineScope(Dispatchers.IO).launch {
             val response =

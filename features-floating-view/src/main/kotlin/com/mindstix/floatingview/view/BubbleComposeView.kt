@@ -1,10 +1,13 @@
 package com.mindstix.floatingview.view
 
+import android.content.Context
 import android.content.Intent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
@@ -17,17 +20,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.mindstix.capabilities.presentation.theme.card_background
-import com.mindstix.capabilities.presentation.theme.textStyle1
 import com.mindstix.core.logger.Logger
 import com.mindstix.features.floatingview.R
 import com.mindstix.floatingview.service.isGoodChoice
@@ -41,6 +40,7 @@ fun BubbleComposeView(
     expand: () -> Unit = {},
     text: MutableState<String>,
     popBack: () -> Unit = {},
+    onClick: (context: Context) -> Unit = {},
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -73,13 +73,16 @@ fun BubbleComposeView(
             Modifier
                 .let {
                     if (step.value == 2) {
-                        it .padding(start = 20.dp)
-                        .size(60.dp)
+                        it
+                            .padding(start = 20.dp)
+                            .size(60.dp)
                         if (isGoodChoice.value) {
-                            it .padding(start = 16.dp)
+                            it
+                                .padding(start = 16.dp)
                                 .size(70.dp)
                         } else {
-                            it.padding(start = 20.dp)
+                            it
+                                .padding(start = 20.dp)
                                 .size(60.dp)
                         }
                     }
@@ -126,7 +129,11 @@ fun BubbleComposeView(
                 },
         )
         if (step.value == 2) {
-            Card(text)
+            val context = LocalContext.current
+            Card(text){
+                popBack()
+                onClick(context)
+            }
         }
     }
 
@@ -224,7 +231,7 @@ fun BubbleComposeView(
 }
 
 @Composable
-fun Card(text: MutableState<String>) {
+fun Card(text: MutableState<String>,onClick: () -> Unit,) {
     Icon(
         modifier = Modifier
             .wrapContentSize()
@@ -245,6 +252,18 @@ fun Card(text: MutableState<String>) {
                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
                 modifier = Modifier.padding(8.dp),
             )
+            Row {
+                Text(
+                    text = "click here",
+                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
+                    modifier = Modifier.padding(8.dp).weight(1f).clickable { onClick.invoke() },
+                )
+                Image(
+                    modifier = Modifier.size(40.dp).clickable { onClick.invoke() },
+                    painter = painterResource(id = com.mindstix.capabilities.R.drawable.a_logo),
+                    contentDescription = "",
+                )
+            }
         }
     }
 }
