@@ -393,13 +393,12 @@ fun LoginScreenApp(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.CenterHorizontally),
-                    colors = ButtonDefaults.buttonColors(secondary_main)
                 ) {
                     Text(
                         "Submit",
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.ExtraBold,
+                            fontWeight = FontWeight.Thin,
                             letterSpacing = 1.sp
                         ),
                         color = MaterialTheme.colorScheme.onPrimary
