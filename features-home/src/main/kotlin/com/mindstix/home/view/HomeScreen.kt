@@ -1,6 +1,7 @@
 import android.app.Activity
 import android.app.ActivityManager
 import android.app.Service
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -68,6 +69,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.mindstix.capabilities.presentation.theme.complementary
 import com.mindstix.capabilities.presentation.theme.secondary_main
 import com.mindstix.capabilities.presentation.theme.tertiary_2
+import com.mindstix.core.logger.Logger
 import com.mindstix.features.login.R
 import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 import com.mindstix.floatingview.view.Product
@@ -159,7 +161,24 @@ fun WelcomeScreen(
                             modifier = Modifier
                                 .fillMaxSize()
                                 .clip(RoundedCornerShape(8.dp))
-                                .background(Color.LightGray),
+                                .background(Color.LightGray)
+                                .clickable {
+                                    try {
+                                        val intent = Intent(
+                                            Intent.ACTION_VIEW,
+                                            Uri.parse(productItem.detailUrl)
+                                        ).apply {
+                                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        }
+                                        context.startActivity(intent)
+
+                                    } catch (e: ActivityNotFoundException) {
+                                        Logger.e(
+                                            "ActivityNotFoundException",
+                                            "Activity not found to handle the URL intent from Profile section"
+                                        )
+                                    }
+                                },
                             contentScale = ContentScale.Crop
                         )
                         Spacer(modifier = Modifier.height(5.dp))
