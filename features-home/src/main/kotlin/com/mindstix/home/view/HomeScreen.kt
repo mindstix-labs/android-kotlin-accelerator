@@ -10,6 +10,8 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -77,6 +79,7 @@ fun WelcomeScreen(
 
     Column(
         modifier = Modifier
+            .background(tertiary_2)
             .fillMaxSize()
     ) {
         Row(
@@ -154,7 +157,10 @@ fun WelcomeScreen(
                     .background(
                         color = Color.LightGray,
                         shape = RoundedCornerShape(10.dp)
-                    ),
+                    )
+                    .clickable {
+                        // Handle click
+                    },
                 verticalArrangement = Arrangement.Center
                 ) {
                 Button(
@@ -305,19 +311,19 @@ fun StartService(
             .padding(8.dp),
         horizontalArrangement = Arrangement.End
     ) {
-        /*Button(modifier = Modifier
+        Button(modifier = Modifier
             .wrapContentHeight(),
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+            colors = ButtonDefaults.buttonColors(secondary_main.copy(alpha = 0.3f)),
             onClick = {
                 onDeleteClick.invoke()
             }) {
             Icon(
                 imageVector = Icons.Filled.Delete,
                 contentDescription = null,
-                tint = Color.LightGray.copy(alpha = 0.7f),
+                tint = Color.LightGray,
                 modifier = Modifier.align(Alignment.Top)
             )
-        }*/
+        }
         Spacer(modifier = Modifier.width(10.dp))
         Button(
             modifier = Modifier
@@ -354,7 +360,7 @@ fun StartService(
                 Text(
                     "Stop", style = MaterialTheme.typography.titleMedium.copy(
                         fontSize = 14.sp, fontWeight = FontWeight.ExtraBold,
-                    ), color = MaterialTheme.colorScheme.onPrimary
+                    ), color = Color.Black
                 )
             } else {
                 Text(
