@@ -124,7 +124,7 @@ abstract class ExpandableBubbleService : FloatingBubbleService() {
     fun test(
         image: Bitmap,
         context: Context,
-        callback: (Boolean, String) -> Unit,
+        callback: (Boolean, String, String) -> Unit,
     ) {
         state = 2
         Logger.d { "at 3 image $image" }
@@ -133,10 +133,10 @@ abstract class ExpandableBubbleService : FloatingBubbleService() {
                 val data = Gson().fromJson(it1, ClothingAdvice::class.java)
                 Logger.d { "##### response is $data" }
                 state = 3
-                callback(data.isGood, data.reason.getValueOrEmpty())
+                callback(data.isGood, data.reason.getValueOrEmpty(), data.property.getValueOrEmpty())
             } catch (e: Exception) {
                 state = 3
-                callback(false, "Pls Try Again")
+                callback(false, "Pls Try Again", "")
             }
         }
     }
@@ -144,6 +144,7 @@ abstract class ExpandableBubbleService : FloatingBubbleService() {
     data class ClothingAdvice(
         val isGood: Boolean,
         val reason: String,
+        val property: String
     )
 
     fun minimize() {
