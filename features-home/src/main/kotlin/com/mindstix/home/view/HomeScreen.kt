@@ -51,6 +51,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
@@ -62,12 +63,17 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.mindstix.capabilities.presentation.theme.complementary
 import com.mindstix.capabilities.presentation.theme.secondary_main
 import com.mindstix.capabilities.presentation.theme.tertiary_2
 import com.mindstix.features.login.R
 import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
+import com.mindstix.floatingview.view.Product
+import com.mindstix.floatingview.view.getProductsList
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun WelcomeScreen(
     userAnswers: Map<String, Any>,
@@ -139,16 +145,30 @@ fun WelcomeScreen(
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState()) // Enable horizontal scrolling
             ) {
-                // Example items in the horizontal scroll view
-                repeat(10) { index ->
-                    Box(
+                val product: List<Product> = getProductsList()
+                product.forEach { productItem ->
+                    Column(
                         modifier = Modifier
                             .size(150.dp)
                             .padding(8.dp)
                             .background(Color.LightGray),
-                        contentAlignment = Alignment.Center
                     ) {
-                        Text(text = "Item $index", color = Color.White)
+                        GlideImage(
+                            model = productItem.productImageUrl,
+                            contentDescription = productItem.name,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color.LightGray),
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(modifier = Modifier.height(5.dp))
+                        Text(
+                            text = productItem.name,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.padding(16.dp),
+                            color = Color.Black
+                        )
                     }
                 }
             }

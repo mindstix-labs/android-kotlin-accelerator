@@ -71,6 +71,7 @@ dependencies {
     implementation Deps.material3
     implementation Deps.activity_compose
     implementation Deps.navigation_runtime_ktx
+    implementation Deps.glide_compose
 
     // Mocking library for testing
     testImplementation Deps.mockk

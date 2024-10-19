@@ -175,7 +175,7 @@ const val productData = """
 "name": "Esika Duo Tattoo Intense Lipstick 12 Hrs. Duration",
 "description": "Esika SKU: 19130",
 "price": "${'$'}9",
-"productImageUrl": "",
+"productImageUrl": "https://lbelmy.store/cdn/shop/files/Esika-Colorfix-Duo-Tattoo-PIMIENTA-CALIENTE-ESIKA-4607117_1800x1800.jpg?v=1704509761",
 "detailUrl": "https://lbelmy.store/en/products/esika-colorfix-duo-tattoo-pimienta-caliente?_pos=1&_sid=f38a8c0be&_ss=r"
 },
 {
