@@ -14,7 +14,8 @@ val md_theme_light_primary = Color(0xFF6C79F0)  // Muted purple
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)  // Vibrant pink
 val md_theme_light_secondary = Color(0xFFBC85A3)  // Soft lavender
 val md_theme_light_onSecondary = Color(0xFFF9E1E0)  // Soft peach
-val md_theme_light_background = Color(0xFFE7ECF0)  // Soft light grayish color
+//val md_theme_light_background = Color(0xFFE7ECF0)  // Soft light grayish color
+val md_theme_light_background = Color(0xFFDED8EB)  // Soft light grayish color
 val md_theme_light_error = Color(0xFFFFB4AB)  // Light red for error states
 val md_theme_light_errorContainer = Color(0xFF93000A) // Darker red for error container
 
@@ -27,6 +28,13 @@ val md_theme_dark_onSecondary = Color(0xFF000000)   // Dark purple for text on s
 val md_theme_dark_background = Color(0xFF000000)    // Very dark desaturated purple, almost black, for background
 val md_theme_dark_error = Color(0xFFFF647C)         // Soft red for error messages
 val md_theme_dark_errorContainer = Color(0xFF8D021F) // Dark red for error containers
+
+
+val primary = Color(0xFF2E1A47)
+val secondary_main = Color(0xFF493266)
+val tertiary_1 = Color(0xFF332347)
+val tertiary_2 = Color(0xFFDED8EB)
+val complementary = Color(0xFFB9975B)
 
 val green = Color(0xFF0D6B10)
 val card_background = Color(0xFF6C79F0)
