@@ -96,7 +96,7 @@ fun LoginScreenDestination(
             val questions = listOf(
                 Question(1, "What is your name?", QuestionType.TEXT),
                 Question(3, "How old are you?", QuestionType.TEXT),  // Can be improved with age picker (if available)
-                Question(2, "What is your gender?", QuestionType.RADIO, listOf("Male", "Female", "Non-binary", "Prefer not to say")),
+                Question(2, "What is your gender?", QuestionType.RADIO, listOf("Male", "Female", "Non-binary")),
                 Question(4, "What is your skin tone?", QuestionType.SKIN_TONE_PICKER),
                 Question(5, "What is your skin type?", QuestionType.RADIO, listOf("Oily", "Dry", "Combination", "Sensitive", "Normal")),
                 Question(6, "What are your main skin concerns?", QuestionType.CHECKBOX, listOf("Acne", "Wrinkles", "Dark Spots", "Dryness", "Redness", "Pigmentation", "Enlarged Pores")),
