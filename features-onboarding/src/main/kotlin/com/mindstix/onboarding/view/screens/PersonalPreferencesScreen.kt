@@ -76,7 +76,10 @@ fun PersonalPreferencesScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(10.dp))
-        Divider(modifier = Modifier.align(Alignment.CenterHorizontally).width(300.dp).height(2.dp))
+        Divider(modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+            .width(300.dp)
+            .height(2.dp))
         Image(
             modifier = Modifier
                 .size(400.dp)
@@ -149,8 +152,8 @@ fun PersonalPreferencesScreen(
                                         Text(
                                             text = option,
                                             style = MaterialTheme.typography.headlineSmall.copy(
-                                                fontSize = 14.sp
-                                            ),
+                                                fontSize = 20.sp
+                                            )
                                         )
                                     }
                                 }
@@ -205,8 +208,8 @@ fun PersonalPreferencesScreen(
                                         Text(
                                             text = option,
                                             style = MaterialTheme.typography.headlineSmall.copy(
-                                                fontSize = 14.sp
-                                            ),
+                                                fontSize = 20.sp
+                                            )
                                         )
                                     }
                                 }

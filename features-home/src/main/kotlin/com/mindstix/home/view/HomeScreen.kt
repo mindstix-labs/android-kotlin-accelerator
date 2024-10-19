@@ -11,6 +11,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -61,6 +62,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.mindstix.capabilities.presentation.theme.complementary
 import com.mindstix.capabilities.presentation.theme.secondary_main
 import com.mindstix.capabilities.presentation.theme.tertiary_2
 import com.mindstix.features.login.R
@@ -71,7 +73,6 @@ fun WelcomeScreen(
     userAnswers: Map<String, Any>,
     onDeleteClick: () -> Unit,
 ) {
-//
     val context = LocalContext.current
     BackHandler {
         (context as? Activity)?.finish()
@@ -85,15 +86,6 @@ fun WelcomeScreen(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-//                .background(
-//                    brush = Brush.linearGradient(
-//                        colors = listOf(
-//                            MaterialTheme.colorScheme.primary,
-//                            MaterialTheme.colorScheme.primary,
-//                            MaterialTheme.colorScheme.error,
-//                        )
-//                    )
-//                )
                 .padding(bottom = 16.dp, top = 16.dp, start = 16.dp, end = 16.dp)
                 .verticalScroll(rememberScrollState()),
             verticalAlignment = Alignment.CenterVertically,
@@ -109,7 +101,7 @@ fun WelcomeScreen(
             Spacer(Modifier.width(12.dp))
             Column {
                 val name =
-                    if (userAnswers["What do people call you?"] != null) userAnswers["What do people call you?"] else ""
+                    if (userAnswers["What is your name?"] != null) userAnswers["What is your name?"] else ""
                 FormElements(
                     text = "Welcome $name !",
                     fontSize = 24.sp,
@@ -141,7 +133,26 @@ fun WelcomeScreen(
                 contentDescription = null,
                 modifier = Modifier.size(300.dp),
             )
-
+            Spacer(Modifier.height(12.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState()) // Enable horizontal scrolling
+            ) {
+                // Example items in the horizontal scroll view
+                repeat(10) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(150.dp)
+                            .padding(8.dp)
+                            .background(Color.LightGray),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(text = "Item $index", color = Color.White)
+                    }
+                }
+            }
+            Spacer(Modifier.height(12.dp))
             FormElements(
                 text = "Add Profile",
                 fontSize = 20.sp,
@@ -162,10 +173,12 @@ fun WelcomeScreen(
                         // Handle click
                     },
                 verticalArrangement = Arrangement.Center
-                ) {
+            ) {
                 Button(
                     contentPadding = PaddingValues(0.dp),
-                    modifier = Modifier.size(50.dp).align(Alignment.CenterHorizontally),
+                    modifier = Modifier
+                        .size(50.dp)
+                        .align(Alignment.CenterHorizontally),
                     shape = CircleShape,
                     colors = ButtonDefaults.buttonColors(
                         containerColor = Color.DarkGray.copy(0.3F)
@@ -313,7 +326,7 @@ fun StartService(
     ) {
         Button(modifier = Modifier
             .wrapContentHeight(),
-            colors = ButtonDefaults.buttonColors(secondary_main.copy(alpha = 0.3f)),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
             onClick = {
                 onDeleteClick.invoke()
             }) {
@@ -331,7 +344,7 @@ fun StartService(
                 .weight(1f)
                 .align(Alignment.CenterVertically),
             colors = if (isServiceRunning.value) {
-                ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error)
+                ButtonDefaults.buttonColors(Color.LightGray)
             } else {
                 ButtonDefaults.buttonColors(secondary_main)
             },
@@ -360,7 +373,7 @@ fun StartService(
                 Text(
                     "Stop", style = MaterialTheme.typography.titleMedium.copy(
                         fontSize = 14.sp, fontWeight = FontWeight.ExtraBold,
-                    ), color = Color.Black
+                    ), color = MaterialTheme.colorScheme.primary
                 )
             } else {
                 Text(

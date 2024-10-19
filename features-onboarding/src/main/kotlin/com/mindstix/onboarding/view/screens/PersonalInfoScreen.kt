@@ -62,7 +62,7 @@ fun PersonalInfoScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(40.dp)
+            .padding(30.dp)
             .verticalScroll(rememberScrollState())
     ) {
         Text(
@@ -73,9 +73,14 @@ fun PersonalInfoScreen(
             color = Color.Black,
             textAlign = TextAlign.Start,
             modifier = Modifier.fillMaxWidth(),
-            )
+        )
         Spacer(modifier = Modifier.height(10.dp))
-        Divider(modifier = Modifier.align(Alignment.CenterHorizontally).width(300.dp).height(2.dp))
+        Divider(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .width(300.dp)
+                .height(2.dp)
+        )
         Image(
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
@@ -91,7 +96,9 @@ fun PersonalInfoScreen(
                 Spacer(modifier = Modifier.height(24.dp))
             Text(
                 question.questionText,
-                style = MaterialTheme.typography.headlineSmall.copy(fontSize = 14.sp),
+                style = MaterialTheme.typography.headlineSmall.copy(
+                    fontSize = 20.sp
+                ),
                 fontWeight = FontWeight.Thin,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
@@ -102,7 +109,7 @@ fun PersonalInfoScreen(
                     OutlinedTextField(
                         value = textAnswer,
                         maxLines = 1,
-                        textStyle = MaterialTheme.typography.headlineSmall.copy(fontSize = 14.sp),
+                        textStyle = MaterialTheme.typography.headlineSmall.copy(fontSize = 20.sp),
                         onValueChange = {
                             textAnswer = it
                             answers[question.questionText] = it
@@ -110,7 +117,7 @@ fun PersonalInfoScreen(
                         label = {
                             Text(
                                 "Enter your answer",
-                                style = MaterialTheme.typography.headlineSmall.copy(fontSize = 12.sp),
+                                style = MaterialTheme.typography.headlineSmall.copy(fontSize = 20.sp),
                             )
                         },
                         modifier = Modifier.fillMaxWidth(),
@@ -124,7 +131,7 @@ fun PersonalInfoScreen(
                             state = rememberLazyGridState(),
                             columns = GridCells.Adaptive(180.dp),
                             modifier = Modifier.height(
-                                height = (((question.options.size + 1) / 2) * 53).dp
+                                height = (((question.options.size + 1) / 2) * 60).dp
                             )
                         ) {
                             question.options.forEach { option ->
@@ -149,8 +156,8 @@ fun PersonalInfoScreen(
                                         Text(
                                             text = option,
                                             style = MaterialTheme.typography.headlineSmall.copy(
-                                                fontSize = 14.sp
-                                            ),
+                                                fontSize = 20.sp
+                                            )
                                         )
                                     }
                                 }
@@ -205,7 +212,7 @@ fun PersonalInfoScreen(
                                         Text(
                                             text = option,
                                             style = MaterialTheme.typography.headlineSmall.copy(
-                                                fontSize = 14.sp
+                                                fontSize = 20.sp
                                             ),
                                         )
                                     }
