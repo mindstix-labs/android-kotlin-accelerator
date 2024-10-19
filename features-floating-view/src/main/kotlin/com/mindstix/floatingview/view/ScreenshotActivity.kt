@@ -40,7 +40,7 @@ import com.mindstix.floatingview.service.ScreenCaptureService
 import com.mindstix.floatingview.service.isGoodChoice
 import com.mindstix.floatingview.service.response
 import com.mindstix.floatingview.service.step
-import com.mindstix.floatingview.service.suggestedUrl
+import com.mindstix.floatingview.service.suggestedProduct
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Inject
@@ -173,7 +173,7 @@ class ScreenshotActivity : ComponentActivity() {
                         Logger.d { "at 8 result ${step.intValue}" }
                         isGoodChoice.value = isGood
                         response.value = responseData
-                        suggestedUrl.value = searchProduct(suggestedProductLink)
+                        suggestedProduct.value = searchProduct(suggestedProductLink)
                         step.intValue = 2
                     }
                 }
