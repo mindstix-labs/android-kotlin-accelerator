@@ -65,6 +65,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
+import com.mindstix.capabilities.presentation.theme.secondary_main
+import com.mindstix.capabilities.presentation.theme.tertiary_2
 import com.mindstix.features.floatingview.R
 import com.mindstix.floatingview.view.isDone
 import com.mindstix.onboarding.intents.LoginIntent
@@ -390,7 +392,7 @@ fun LoginScreenApp(
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .align(Alignment.CenterHorizontally)
+                        .align(Alignment.CenterHorizontally),
                 ) {
                     Text(
                         "Submit",

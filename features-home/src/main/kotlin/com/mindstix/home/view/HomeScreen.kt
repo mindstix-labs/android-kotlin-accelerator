@@ -6,12 +6,16 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,17 +26,21 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -40,7 +48,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
@@ -53,6 +61,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.mindstix.capabilities.presentation.theme.secondary_main
+import com.mindstix.capabilities.presentation.theme.tertiary_2
 import com.mindstix.features.login.R
 import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
 
@@ -69,21 +79,21 @@ fun WelcomeScreen(
 
     Column(
         modifier = Modifier
+            .background(tertiary_2)
             .fillMaxSize()
-
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(
-                            MaterialTheme.colorScheme.primary,
-                            MaterialTheme.colorScheme.primary,
-                            MaterialTheme.colorScheme.error,
-                        )
-                    )
-                )
+//                .background(
+//                    brush = Brush.linearGradient(
+//                        colors = listOf(
+//                            MaterialTheme.colorScheme.primary,
+//                            MaterialTheme.colorScheme.primary,
+//                            MaterialTheme.colorScheme.error,
+//                        )
+//                    )
+//                )
                 .padding(bottom = 16.dp, top = 16.dp, start = 16.dp, end = 16.dp)
                 .verticalScroll(rememberScrollState()),
             verticalAlignment = Alignment.CenterVertically,
@@ -103,12 +113,14 @@ fun WelcomeScreen(
                 FormElements(
                     text = "Welcome $name !",
                     fontSize = 24.sp,
+                    color = Color.Black,
                     fontWeight = FontWeight.ExtraBold,
                 )
                 if (userAnswers.isNotEmpty()) {
                     FormElements(
                         text = "Here’s your profile summary",
                         fontSize = 14.sp,
+                        color = Color.Black,
                         modifier = Modifier.padding(bottom = 4.dp),
                     )
                 }
@@ -124,15 +136,62 @@ fun WelcomeScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
+            Image(
+                painterResource(R.drawable.screen2),
+                contentDescription = null,
+                modifier = Modifier.size(300.dp),
+            )
 
-            userAnswers.forEach { (question, answer) ->
+            FormElements(
+                text = "Add Profile",
+                fontSize = 20.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.ExtraBold,
+                modifier = Modifier.padding(bottom = 4.dp),
+            )
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .height(150.dp)
+                    .background(
+                        color = Color.LightGray,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .clickable {
+                        // Handle click
+                    },
+                verticalArrangement = Arrangement.Center
+                ) {
+                Button(
+                    contentPadding = PaddingValues(0.dp),
+                    modifier = Modifier.size(50.dp).align(Alignment.CenterHorizontally),
+                    shape = CircleShape,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color.DarkGray.copy(0.3F)
+                    ),
+                    onClick = {
+                        // Handle click
+                    },
+                ) {
+                    Icon(
+                        Icons.Filled.Add,
+                        modifier = Modifier.size(40.dp),
+                        tint = Color.Black,
+                        contentDescription = null,
+                    )
+                }
+            }
+
+
+            /*userAnswers.forEach { (question, answer) ->
                 if (question != "What do people call you?" && question != "What's your Gender?") {
                     AnswerRow(question, answer.toString())
                     Spacer(modifier = Modifier.height(20.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(30.dp))*/
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -254,14 +313,14 @@ fun StartService(
     ) {
         Button(modifier = Modifier
             .wrapContentHeight(),
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+            colors = ButtonDefaults.buttonColors(secondary_main.copy(alpha = 0.3f)),
             onClick = {
                 onDeleteClick.invoke()
             }) {
             Icon(
                 imageVector = Icons.Filled.Delete,
                 contentDescription = null,
-                tint = Color.LightGray.copy(alpha = 0.7f),
+                tint = Color.LightGray,
                 modifier = Modifier.align(Alignment.Top)
             )
         }
@@ -274,7 +333,7 @@ fun StartService(
             colors = if (isServiceRunning.value) {
                 ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error)
             } else {
-                ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
+                ButtonDefaults.buttonColors(secondary_main)
             },
 
             onClick = {
@@ -301,7 +360,7 @@ fun StartService(
                 Text(
                     "Stop", style = MaterialTheme.typography.titleMedium.copy(
                         fontSize = 14.sp, fontWeight = FontWeight.ExtraBold,
-                    ), color = MaterialTheme.colorScheme.onPrimary
+                    ), color = Color.Black
                 )
             } else {
                 Text(

@@ -28,6 +28,13 @@ val md_theme_dark_background = Color(0xFF000000)    // Very dark desaturated pur
 val md_theme_dark_error = Color(0xFFFF647C)         // Soft red for error messages
 val md_theme_dark_errorContainer = Color(0xFF8D021F) // Dark red for error containers
 
+
+val primary = Color(0xFF2E1A47)
+val secondary_main = Color(0xFF493266)
+val tertiary_1 = Color(0xFF332347)
+val tertiary_2 = Color(0xFFDED8EB)
+val complementary = Color(0xFFB9975B)
+
 val green = Color(0xFF0D6B10)
 val card_background = Color(0xFF6C79F0)
 
