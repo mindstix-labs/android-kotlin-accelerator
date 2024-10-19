@@ -24,7 +24,7 @@ import javax.inject.Inject
  * @author Abhijeet Kokane
  */
 val response = mutableStateOf("")
-val suggestedUrl : MutableState<Product?> = mutableStateOf(Product())
+val suggestedProduct : MutableState<Product?> = mutableStateOf(Product())
 val step = mutableIntStateOf(0)
 val isGoodChoice = mutableStateOf(false)
 class FloatingBubbleServiceImpl@Inject constructor() : ExpandableBubbleService() {
@@ -72,7 +72,7 @@ class FloatingBubbleServiceImpl@Inject constructor() : ExpandableBubbleService()
                     },
                     onClick = {
                         try {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(suggestedUrl.value?.detailUrl)).apply {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(suggestedProduct.value?.detailUrl)).apply {
                                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             }
                             it.startActivity(intent)
@@ -80,7 +80,8 @@ class FloatingBubbleServiceImpl@Inject constructor() : ExpandableBubbleService()
                         } catch (e: ActivityNotFoundException) {
                             Logger.e("ActivityNotFoundException","Activity not found to handle the URL intent from Profile section")
                         }
-                    }
+                    },
+                    suggestedProduct = suggestedProduct
                 )
             }
             .forceDragging(true)

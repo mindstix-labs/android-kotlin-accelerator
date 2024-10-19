@@ -225,6 +225,8 @@ fun searchProduct(
                         product.description.contains(word, ignoreCase = true)
             }
         }
+        Logger.d {"##### suggest $response"}
+
         return response
 
     } catch (e: JsonSyntaxException) {

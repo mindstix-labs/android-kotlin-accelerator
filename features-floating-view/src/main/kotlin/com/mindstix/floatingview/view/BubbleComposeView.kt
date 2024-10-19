@@ -23,10 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.mindstix.capabilities.presentation.theme.card_background
+import com.mindstix.capabilities.util.CommonExtensions.getValueOrEmpty
 import com.mindstix.core.logger.Logger
 import com.mindstix.features.floatingview.R
 import com.mindstix.floatingview.service.isGoodChoice
@@ -41,6 +43,7 @@ fun BubbleComposeView(
     text: MutableState<String>,
     popBack: () -> Unit = {},
     onClick: (context: Context) -> Unit = {},
+    suggestedProduct: MutableState<Product?>,
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
@@ -130,7 +133,7 @@ fun BubbleComposeView(
         )
         if (step.value == 2) {
             val context = LocalContext.current
-            Card(text){
+            Card(text, suggestedProduct) {
                 popBack()
                 onClick(context)
             }
@@ -230,8 +233,13 @@ fun BubbleComposeView(
 //        }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun Card(text: MutableState<String>,onClick: () -> Unit,) {
+fun Card(
+    text: MutableState<String>,
+    suggestedProduct: MutableState<Product?>?,
+    onClick: () -> Unit,
+) {
     Icon(
         modifier = Modifier
             .wrapContentSize()
@@ -252,17 +260,27 @@ fun Card(text: MutableState<String>,onClick: () -> Unit,) {
                 color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
                 modifier = Modifier.padding(8.dp),
             )
-            Row {
-                Text(
-                    text = "click here",
-                    color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
-                    modifier = Modifier.padding(8.dp).weight(1f).clickable { onClick.invoke() },
-                )
-                Image(
-                    modifier = Modifier.size(40.dp).clickable { onClick.invoke() },
-                    painter = painterResource(id = com.mindstix.capabilities.R.drawable.a_logo),
-                    contentDescription = "",
-                )
+            if (suggestedProduct?.value?.name.getValueOrEmpty().isNotEmpty()) {
+                Row {
+                    Text(
+                        text = "Hey, checkout this product from Belcorp",
+                        color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.7f),
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .weight(1f)
+                            .clickable { onClick.invoke() },
+                    )
+                    GlideImage(
+                        model = suggestedProduct?.value?.productImageUrl.getValueOrEmpty(),
+                        contentDescription = "",
+                        modifier =
+                        Modifier
+                            .size(40.dp)
+                            .clickable {
+                                onClick.invoke()
+                            },
+                    )
+                }
             }
         }
     }
