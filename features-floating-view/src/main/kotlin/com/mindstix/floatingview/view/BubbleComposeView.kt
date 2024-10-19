@@ -52,7 +52,7 @@ fun BubbleComposeView(
             model = when (step.value) {
                 0 -> {
                     isDone.value = false
-                    R.drawable.boy_think
+                    com.mindstix.capabilities.R.drawable.ai_logo
                 }
 
                 1 -> {
@@ -68,7 +68,7 @@ fun BubbleComposeView(
                 }
 
                 else -> {
-                    R.drawable.boy_think
+                    com.mindstix.capabilities.R.drawable.ai_logo
                 }
             },
             contentDescription = "",
