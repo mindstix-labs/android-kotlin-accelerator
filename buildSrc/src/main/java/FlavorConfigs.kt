@@ -6,7 +6,7 @@
 /**
  * Object containing build time configurations.
  *
- * @author Nirav Patel
+ * @author Abhijeet Kokane
  */
 object BuildConfig {
     // Android build configuration
@@ -22,6 +22,7 @@ object BuildConfig {
 
     const val applicationId = "com.mindstix.baseline"
     const val appName = "Alvin"
+    const val apiKey = "AIzaSyD9tFr5FN6NwIMQ6afdvvfIJUiTkwVp_Ms"
 }
 
 // Object representing configurations specific to the India flavor

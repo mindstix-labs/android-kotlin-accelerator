@@ -14,7 +14,7 @@ import org.junit.Test
 /**
  * This unit test exercises the GenericErrorModel class.
  *
- * @author Abhishek Singh
+ * @author Abhijeet Kokane
  */
 class GenericErrorModelTest {
     /**

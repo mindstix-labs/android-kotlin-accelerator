@@ -26,7 +26,7 @@ import org.junit.Test
 /**
  * This unit test exercises the LoginViewModel class.
  *
- * @author Abhishek Singh
+ * @author Abhijeet Kokane
  */
 class LoginViewModelTest {
     private lateinit var loginViewModel: LoginViewModel

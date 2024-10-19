@@ -18,7 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 /**
- * @author Apoorv Gupta
+ * @author Abhijeet Kokane
  */
 
 @Composable

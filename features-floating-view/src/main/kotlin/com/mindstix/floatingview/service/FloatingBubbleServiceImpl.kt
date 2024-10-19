@@ -1,6 +1,10 @@
 package com.mindstix.floatingview.service
 
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import com.mindstix.core.logger.Logger
@@ -12,13 +16,15 @@ import com.mindstix.floatingview.helper.ViewHelper
 import com.mindstix.floatingview.service.expandable.BubbleBuilder
 import com.mindstix.floatingview.service.expandable.ExpandableBubbleService
 import com.mindstix.floatingview.view.BubbleComposeView
+import com.mindstix.floatingview.view.Product
 import com.mindstix.floatingview.view.bitmapState
 import javax.inject.Inject
 
 /**
- * @author Apoorv Gupta
+ * @author Abhijeet Kokane
  */
 val response = mutableStateOf("")
+val suggestedUrl : MutableState<Product?> = mutableStateOf(Product())
 val step = mutableIntStateOf(0)
 val isGoodChoice = mutableStateOf(false)
 class FloatingBubbleServiceImpl@Inject constructor() : ExpandableBubbleService() {
@@ -64,6 +70,17 @@ class FloatingBubbleServiceImpl@Inject constructor() : ExpandableBubbleService()
                         step.intValue = 0
                         minimize()
                     },
+                    onClick = {
+                        try {
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(suggestedUrl.value?.detailUrl)).apply {
+                                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            }
+                            it.startActivity(intent)
+
+                        } catch (e: ActivityNotFoundException) {
+                            Logger.e("ActivityNotFoundException","Activity not found to handle the URL intent from Profile section")
+                        }
+                    }
                 )
             }
             .forceDragging(true)

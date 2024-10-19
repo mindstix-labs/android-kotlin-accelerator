@@ -23,7 +23,7 @@ import org.junit.Test
 /**
  * This unit test exercises the AuthInterceptor class.
  *
- * @author Abhishek Singh
+ * @author Abhijeet Kokane
  */
 class AuthInterceptorTest {
     private lateinit var authInterceptor: AuthInterceptor

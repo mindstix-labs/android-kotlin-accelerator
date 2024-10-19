@@ -217,15 +217,14 @@ fun searchProduct(
         val searchWords = searchTerm.split(" ")
 
         // Find the first product that contains all the search terms in either name or description
-        Logger.d { "##### allProducts $allProducts" }
-
-        val response = allProducts.find { product ->
-            searchWords.all { word ->
-                product.name.contains(word, ignoreCase = true) ||
+        Logger.d {"##### searchWords $searchWords"}
+        Logger.d {"##### allProducts $allProducts"}
+        val response =  allProducts.find { product ->
+            searchWords.any { word ->
+                product.name.contains(word.replace(",", ""), ignoreCase = true) ||
                         product.description.contains(word, ignoreCase = true)
             }
         }
-        Logger.d { "##### suggested $response" }
         return response
 
     } catch (e: JsonSyntaxException) {

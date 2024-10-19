@@ -11,7 +11,7 @@ import android.graphics.Bitmap
 /**
  * @author Pranav Hadawale
  */
-interface TestUseCase {
+interface GeminiUseCase {
     /**
      * Retrieves the content for the Login Screen.
      *

@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mindstix.capabilities.util.CommonExtensions.getValueOrEmpty
 import com.mindstix.core.sharedpref.accessToken.UserDataStorageContract
+import com.mindstix.core.utils.API_KEY
 import com.mindstix.core.utils.EMPTY_STRING
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,13 +23,13 @@ import javax.inject.Inject
 /**
  * @author Pranav Hadawale
  */
-class TestUseCaseImpl @Inject constructor(
+class GeminiUseCaseImpl @Inject constructor(
     private val userDataStorageContract: UserDataStorageContract
-) : TestUseCase {
+) : GeminiUseCase {
     private val generativeModel =
         GenerativeModel(
             modelName = "models/gemini-1.5-flash-latest",
-            apiKey = "AIzaSyD9tFr5FN6NwIMQ6afdvvfIJUiTkwVp_Ms",
+            apiKey = API_KEY,
         )
 
     override fun addPrompt(
@@ -46,8 +47,10 @@ class TestUseCaseImpl @Inject constructor(
                     "Tip : if its Red shirt respond 'isGood' = 'false'"
         val prompt = "Here are my personal details: $userData. Based on this information, " +
                 "please provide your opinion on whether the product in the image is suitable for me or not " +
-                "Respond only with a JSON object containing two keys: 'isGood' (true or false) and 'reason'.  reason should be consist of 20-25 words or less. " +
-                "The response should follow this structure: {'isGood': false, 'reason': 'data...'}, for decision making, pls use this data model "
+                "Respond only with a JSON object containing three keys: 'isGood' (true or false), 'reason' and 'property' " +
+                "reason should consist of 20-25 words or less. " +
+                "And property should consist of the color, type and category of the product" +
+                  "The response should follow this structure: {'isGood': false, 'reason': 'data...', 'property': 'data'.}, for decision making, pls use this data model "
 
         CoroutineScope(Dispatchers.IO).launch {
             val response =
