@@ -15,7 +15,7 @@ import timber.log.Timber
  * @see Timber.DebugTree
  * @see Logger.getTagFromElement
  *
- * @author Nirav Patel
+ * @author Abhijeet Kokane
  */
 internal class DebugTree : Timber.DebugTree() {
     /**

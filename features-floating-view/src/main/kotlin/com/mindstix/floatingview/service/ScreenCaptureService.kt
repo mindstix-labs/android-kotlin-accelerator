@@ -22,7 +22,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 
 /**
- * @author Apoorv Gupta
+ * @author Abhijeet Kokane
  */
 class ScreenCaptureService : Service() {
 

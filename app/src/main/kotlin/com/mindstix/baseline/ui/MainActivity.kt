@@ -44,10 +44,6 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                 // MainDestination is a composable that represents the main content
                 // of the app. It is included within the Row composable.
-//               val userData =  sharedPref.removeFromPrefs("UserData").toString()
-//                val gson = Gson()
-//                val mapType = object : TypeToken<Map<String, Any>>() {}.type
-//                val answers: Map<String, Any> = gson.fromJson(userData, mapType)
                 val data = userDataStorageContract.getUserData()
                 Logger.d { "##### userDataStorageContract MainActivity $data and  ${data.isNullOrBlank()}" }
                 MainDestination(userDataStorageContract = userDataStorageContract, data.isNullOrBlank())

@@ -16,7 +16,7 @@ import com.mindstix.floatingview.view.bitmapState
 import javax.inject.Inject
 
 /**
- * @author Apoorv Gupta
+ * @author Abhijeet Kokane
  */
 val response = mutableStateOf("")
 val step = mutableIntStateOf(0)

@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 
 /**
- * @author Apoorv Gupta
+ * @author Abhijeet Kokane
  */
 
 class FloatingBubbleReceiver : BroadcastReceiver() {

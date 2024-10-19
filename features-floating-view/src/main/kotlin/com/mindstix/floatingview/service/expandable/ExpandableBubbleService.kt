@@ -17,7 +17,7 @@ import com.mindstix.floatingview.bubble.FloatingBubble
 import com.mindstix.floatingview.bubble.FloatingCloseBubble
 import com.mindstix.floatingview.service.FloatingBubbleService
 import com.mindstix.floatingview.sez
-import com.mindstix.floatingview.usecases.TestUseCase
+import com.mindstix.floatingview.usecases.GeminiUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.abs
@@ -25,7 +25,7 @@ import kotlin.math.abs
 @AndroidEntryPoint
 abstract class ExpandableBubbleService : FloatingBubbleService() {
     @Inject
-    lateinit var testUseCase: TestUseCase
+    lateinit var geminiUseCase: GeminiUseCase
 
     private var _context: Context? = null
     private val context get() = _context!!
@@ -128,7 +128,7 @@ abstract class ExpandableBubbleService : FloatingBubbleService() {
     ) {
         state = 2
         Logger.d { "at 3 image $image" }
-        testUseCase.addPrompt(image, context) { it1 ->
+        geminiUseCase.addPrompt(image, context) { it1 ->
             try {
                 val data = Gson().fromJson(it1, ClothingAdvice::class.java)
                 Logger.d { "##### response is $data" }

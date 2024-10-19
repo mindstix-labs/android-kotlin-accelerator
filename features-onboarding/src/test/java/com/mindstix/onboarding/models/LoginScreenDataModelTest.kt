@@ -12,7 +12,7 @@ import org.junit.Test
 /**
  * This unit test exercises the LoginScreenDataModel class.
  *
- * @author Abhishek Singh
+ * @author Abhijeet Kokane
  */
 class LoginScreenDataModelTest {
     /**

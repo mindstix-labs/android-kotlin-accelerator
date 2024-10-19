@@ -7,8 +7,8 @@ package com.mindstix.floatingview.di
 
 import com.mindstix.floatingview.service.FloatingBubbleService
 import com.mindstix.floatingview.service.FloatingBubbleServiceImpl
-import com.mindstix.floatingview.usecases.TestUseCase
-import com.mindstix.floatingview.usecases.TestUseCaseImpl
+import com.mindstix.floatingview.usecases.GeminiUseCase
+import com.mindstix.floatingview.usecases.GeminiUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,8 +23,8 @@ interface BubbleModule {
 
     @Binds
     abstract fun bindTestUseCase(
-        impl: TestUseCaseImpl
-    ): TestUseCase
+        impl: GeminiUseCaseImpl
+    ): GeminiUseCase
 //    @Provides
 //    @Singleton
 //    fun provideTestUseCase(userDataStorageContract: UserDataStorageContract): TestUseCase {

@@ -45,7 +45,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Inject
 
 /**
- * @author Apoorv Gupta
+ * @author Abhijeet Kokane
  */
 
 val bitmapState = mutableStateOf<Bitmap?>(null)

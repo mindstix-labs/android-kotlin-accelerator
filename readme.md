@@ -150,11 +150,9 @@ Reference Links:
 ----
 ### Contributors ###
 - Abhijeet Kokane
-- Asim Shah
-- Nirav Patel
-- Anmol Kashyap
 - Pranav Hadawale
-- Abhishek Singh
+- Tejas Kohade
+- Asim Shah
 
 ----
 ### Uses ###

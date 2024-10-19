@@ -13,7 +13,7 @@ import org.junit.Test
 /**
  * This unit test exercises the LoginUseCaseImpl class.
  *
- * @author Abhishek Singh
+ * @author Abhijeet Kokane
  */
 class LoginUseCaseImplTest {
     private lateinit var loginUseCaseImpl: LoginUseCaseImpl

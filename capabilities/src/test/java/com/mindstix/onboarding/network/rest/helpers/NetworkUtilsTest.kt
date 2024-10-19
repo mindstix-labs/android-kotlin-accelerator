@@ -20,7 +20,7 @@ import org.junit.Test
 /**
  * This unit test exercises the NetworkUtils class.
  *
- * @author Abhishek Singh
+ * @author Abhijeet Kokane
  */
 class NetworkUtilsTest {
     private lateinit var context: Context
