@@ -57,7 +57,7 @@ fun PersonalPreferencesScreen(
     setIsFirstScreen: (Int) -> Unit
 ) {
     BackHandler {
-        setIsFirstScreen(0)
+        setIsFirstScreen(1)
     }
 
     Column(
