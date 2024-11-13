@@ -136,7 +136,7 @@ Reference Links:
 ----
 ### Requirements ###
 - Android Studio Hedgehog | 2023.1.1
-- Target API: 35 (Android 15 Upside Down Cake)
+- Target API: 35 (Android 15 VanillaIceCream)
 - Gradle: 8.11
 - Android application plugin : 'com.android.application:8.4.0'
 - Android library plugin: 'com.android.library:8.4.0'
