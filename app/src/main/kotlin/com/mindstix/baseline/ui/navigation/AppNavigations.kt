@@ -40,13 +40,6 @@ fun NavGraphBuilder.splashNavigationGraph(
         route = Destinations.SplashDestination.route,
         // Enable Deeplink to this screen
         // deepLinks = listOf(navDeepLink { uriPattern = "example://splash" }),
-        // Arguments to be passed from the current screen to the next destination
-        arguments =
-        listOf(
-            navArgument("exampleArg") {
-                type = NavType.StringType
-            },
-        ),
         // Animation for this screen
         enterTransition = {
             slideIntoContainer(

@@ -10,15 +10,15 @@
  */
 object BuildConfig {
     // Android build configuration
-    const val compileSdk = 34
+    const val compileSdk = 35
     const val minSdk = 29
-    const val targetSdk = 34
+    const val targetSdk = 35
     const val versionCode = 1
     const val versionName = "1.0"
 
     // Kotlin and JVM configuration
     const val jvmTarget = "17"
-    const val kotlinCompilerExtensionVersion = "1.5.6"
+    const val kotlinCompilerExtensionVersion = "1.5.15"
 
     const val applicationId = "com.mindstix.baseline"
     const val appName = "BaseLine"
