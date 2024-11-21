@@ -4,14 +4,19 @@
  */
 package com.mindstix.onboarding.viewModels
 
+import androidx.lifecycle.viewModelScope
+import com.mindstix.capabilities.presentation.reusableComponents.commonscreens.OfflineScreenDataModel
 import com.mindstix.core.base.BaseViewModel
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewState
+import com.mindstix.onboarding.intents.LoginViewStates
 import com.mindstix.onboarding.intents.LoginViewStates.LoadedData
 import com.mindstix.onboarding.models.LoginScreenDataModel
 import com.mindstix.onboarding.usecases.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -43,7 +48,7 @@ constructor(
         when (intent) {
             is LoginIntent.FetchLoginData -> {
                 // Fetch login-related information and execute API calls
-                val loginDataModel = loginUseCase.getLoginScreenContent()
+                fetchLoginData()
 
                 // Update the UI with the fetched data
                 // renderLoginScreenDetails(loginDataModel)
@@ -57,6 +62,54 @@ constructor(
             }
         }
     }
+
+    private fun fetchLoginData() {
+        emitViewState {
+            copy(loginViewState = LoginViewStates.InitialLoading)
+        }
+
+        try {
+            val loginDataModel = loginUseCase.getLoginScreenContent()
+            // Update the UI with fetched data
+            renderLoginScreenDetails(loginDataModel)
+        } catch (e: Exception) {
+            // Handle offline or error state
+            emitViewState {
+                copy(
+                    loginViewState = LoginViewStates.Offline(
+                        offlineContentModel = OfflineScreenDataModel.emptyValue,
+                    )
+                )
+            }
+        }
+    }
+
+    fun retryFetchingData() {
+        val currentState = currentState.loginViewState
+        if (currentState is LoginViewStates.Offline) {
+            emitViewState {
+                copy(loginViewState = LoadedData(LoginScreenDataModel.defaultValue))
+            }
+        }
+
+        viewModelScope.launch {
+            delay(3000) // Simulate a retry delay
+
+            try {
+                val loginDataModel = loginUseCase.getLoginScreenContent()
+                renderLoginScreenDetails(loginDataModel)
+            } catch (e: Exception) {
+                emitViewState {
+                    copy(
+                        loginViewState = LoginViewStates.Offline(
+                            offlineContentModel = OfflineScreenDataModel.emptyValue
+                        )
+                    )
+                }
+            }
+        }
+    }
+
 
     /**
      * Update the ViewState with the fetched login screen details.

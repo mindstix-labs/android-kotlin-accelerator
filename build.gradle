@@ -6,13 +6,13 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     // Android application plugin
-    id 'com.android.application' version '8.2.0' apply false
+    id 'com.android.application' version '8.4.0' apply false
     // Android library plugin
-    id 'com.android.library' version '8.2.0' apply false
+    id 'com.android.library' version '8.4.0' apply false
     // Kotlin Android plugin
-    id 'org.jetbrains.kotlin.android' version '1.9.21' apply false
+    id 'org.jetbrains.kotlin.android' version '1.9.25' apply false
     // Dagger Hilt Android plugin
-    id 'com.google.dagger.hilt.android' version '2.49' apply false
+    id 'com.google.dagger.hilt.android' version '2.52' apply false
 }
 
 // Apply ktlint to the entire project.
