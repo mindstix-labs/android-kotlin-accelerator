@@ -53,7 +53,7 @@ sealed class LoginViewStates {
      * @param offlineContentModel The offline screen data model.
      */
     data class Offline(
-        var offlineContentModel: OfflineScreenDataModel,
+        var offlineContentModel: com.mindstix.capabilities.presentation.reusableComponents.commonscreens.OfflineScreenDataModel,
     ) : LoginViewStates()
 
     /**

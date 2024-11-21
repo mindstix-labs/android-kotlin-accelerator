@@ -13,6 +13,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.navigation.NavController
 import com.mindstix.capabilities.presentation.navigation.Destinations
+import com.mindstix.capabilities.presentation.reusableComponents.loader.OfflineScreen
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewStates
@@ -103,8 +104,11 @@ fun LoginScreenDestination(
         }
 
         is LoginViewStates.Offline -> {
-            // Display content for the offline state.
-            Text("Offline")
+            OfflineScreen(
+                offlineContentModel = loginViewState.offlineContentModel,
+                isRetryButtonVisible = true,
+                onRetry = { loginViewModel.retryFetchingData() }
+            )
         }
 
         is LoginViewStates.UnInitialized -> {
