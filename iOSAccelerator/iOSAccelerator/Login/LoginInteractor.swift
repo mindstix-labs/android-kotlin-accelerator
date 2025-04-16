@@ -10,8 +10,15 @@ import Foundation
 
 // Login/Interactor/LoginInteractor.swift
 class LoginInteractor {
-    func validatePhone(_ number: String) -> Bool {
-        let phoneRegex = "^[0-9]{10}$"
+    func validatePhone(_ number: String, selectedCountryCode: String) -> Bool {
+        var phoneRegex = ""
+        if selectedCountryCode == "+1" {
+            phoneRegex = "^[0-9]{8}$"
+        } else if selectedCountryCode == "+44" {
+            phoneRegex = "^[0-9]{12}$"
+        } else {
+            phoneRegex = "^[0-9]{10}$"
+        }
         return NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluate(with: number)
     }
 
