@@ -1,0 +1,13 @@
+//
+//  Production.xcconfig
+//  iOSAccelerator
+//
+//  Created by Mindstix on 12/01/24.
+//  Copyright © 2024 Mindstix Software Labs. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+APP_NAME = Accelerator Production
+APP_BUNDLE_ID = com.accelerator.prod
+BASE_URL = http:\/\/api.accelerator.com/

@@ -1,13 +1,13 @@
-<h1 align="center">Mindstix: Android Accelerator</h1>
+<h1 align="center">Mindstix: iOS Accelerator</h1>
 <p align="center">
 Reusable Architectures, Effortless Integration, and Time-Efficient Development.
 </p>
 <p align="center">
 <a href="#">
-<img alt="Android OS" src="https://img.shields.io/badge/OS-Android-3DDC84?style=flat-square&logo=android">
+<img alt="iPhone OS" src="https://img.shields.io/badge/OS-iOS-blue?style=flat-square&logo=apple">
 </a>
 <a href="#">
-<img alt="Android OS" src="https://flat.badgen.net/badge/Language/Kotlin?icon=https://raw.githubusercontent.com/binaryshrey/Awesome-Android-Open-Source-Projects/master/assets/Kotlin_Logo_icon_white.svg&color=f18e33">
+<img alt="iPhone OS" src="https://img.shields.io/badge/Language-Swift-orange?style=flat-square&logo=swift">
 </a>
 </p>
 <br>
@@ -27,29 +27,26 @@ Reusable Architectures, Effortless Integration, and Time-Efficient Development.
 
 ----
 ### Baseline ###
-The Android baseline, serving as the starting point for the application's development. It defines the foundational structure and architecture upon which features, capabilities, and the app are built. The baseline ensures consistency, maintainability, and scalability throughout the development process.
+The iOS baseline, acting as the foundation for application development, establishes the fundamental structure and architecture that underlies the app's features and capabilities. This baseline is crucial for maintaining consistency, ensuring maintainability, and facilitating scalability throughout the entire development process.
 
 ----
 ### Contents ###
-- Jetpack Compose
-- Product Flavors
-- MVI (Model-View-Intent) Clean Architecture
-- Hilt DI (Dependency Injection)
+- SwiftUI
+- MVVM (Model-View-ViewModel) Clean Architecture
+- Package dependency manager (Dependency Injection)
 - Reusable Modules
     - Network Module
-        - REST: Retrofit + OKHttp
-        - GraphQl: Apollographql
+        - REST: URLSession
+        - GraphQl
 - Data Storage Module
-    - SharedPreferences
-    - Database
-    - Datastore
+    - General Data: DataModel
+    - Preference: Core Data , Realm
+    - Secure Data: KeyChain, Userdefaults
 - Navigation Components
-    - Tabs
-    - Toolbar
-    - Drawer
+    - Tab bar menu
+    - Hamburger menu
 - Common Utilities
-- Logger
-- Unit Test Library - MockK, JUnit
+- App Logger
 - MBaaS Capabilities: Firebase
     - Remote Configuration
     - Crashlytics
@@ -68,103 +65,100 @@ The Android baseline, serving as the starting point for the application's develo
 
 #### Clean Architecture ####
 ##### Core #####
-The Core module is the foundational layer of your application. It consists of components and functionalities that are considered essential, universal, and stable. These components are less likely to undergo frequent changes, providing a stable and reliable base for the entire application. The purpose of the Core module is to establish a set of fundamental building blocks that can be leveraged across the application without significant modifications.
+The Core module serves as the bedrock of your application, comprising essential components and functionalities that are deemed universal and stable. These elements are designed to undergo minimal changes, offering a dependable and consistent foundation for the entire application. The primary objective of the Core module is to define a collection of fundamental building blocks that can be utilized throughout the application with minimal need for substantial modifications.
 
 ##### Capabilities #####
-The Capabilities module groups together shared capabilities that are crucial for building the application. These capabilities might include functionalities related to networking, presentation, and utilities that are needed across different features. The goal is to create a modular and reusable set of tools that can be easily integrated into various parts of the application.
+The Capabilities module serves as an amalgamation of essential shared functionalities vital for constructing the application. Within this module, one can find a spectrum of capabilities spanning areas such as networking, presentation, and utilities, all of which are indispensable across diverse features. The overarching aim is to forge a modular and reusable toolkit, fostering the seamless integration of these tools into various facets of the application. This approach not only enhances efficiency but also contributes to the creation of a more versatile and adaptable development framework.
 
 ##### Features #####
-Feature modules represent specific functionalities or components within the application. Each feature is designed to encapsulate a standalone piece of user-facing functionality. Features can be thought of as self-contained units, allowing for modularity, maintainability, and ease-of development.
+The Feature modules embody distinct functionalities or components within the application, with each feature meticulously crafted to encapsulate a self-contained and independent unit of user-facing functionality. These features are conceptualized as standalone entities, meticulously designed to enhance the application's modularity, facilitate ease-of-maintenance, and streamline the development process. By treating each feature as an isolated and cohesive unit, developers gain the flexibility to address specific user needs or business requirements with precision, fostering a modular architecture that not only enhances maintainability but also affords greater adaptability and scalability to the overall application structure.
 
 ##### App #####
-The App module acts as the orchestrator, bringing together all the different elements of the application. It serves as the integration point for Core components, shared Capabilities, and individual Features. The App module is responsible for combining these elements to construct the final application. This module is where you define the overall structure, dependencies, and interactions between different parts of the application. The App module ensures that the Core functionalities are available, shared Capabilities are accessible, and individual Features are integrated to create a cohesive and functional Android application.
+The App module functions as the master conductor, harmonizing various elements within the application. Serving as the central integration point, it unifies Core components, shared Capabilities, and individual Features. Tasked with assembling these elements, the App module plays a crucial role in defining the comprehensive structure, dependencies, and interactions across different facets of the application. It is in this module that the overall blueprint for the application is articulated, ensuring that Core functionalities are readily available, shared Capabilities are easily accessible, and individual Features seamlessly come together to forge a unified and functional Android application. Through this orchestration, the App module stands as the linchpin in guaranteeing a cohesive and robust user experience.
 
 #### Folder Structure ####
 
 ```
 app
-
+...... Modules
+ └── networking
+     └── rest
+     
 ... features
-└── onboarding
-└── home
+ └── Login
+ └── home
+ └── Tabbar
+ └── Hamburger
 
 ...... capabilities
-    └── network
-         └── graphql
-         └── rest
     └── presentation
-         └── navigation
          └── reusable-ui-components
          └── theme
     └── util
     
 ......... core
-        └── base
-        └── exception-handlers
-        └── gobal-constants
+     └── Managers
+        └── Secure Data
+        └── exception-handlers (API)
+        └── Peference
         └── logger
-        └── global-models
+        └── Analytics
+            └── Manager
+            └── Constant
         └── storage
 ...............
 ```
 
+----
 #### Application Architecture ####
-##### MVI #####
+##### MVVM  Architecture #####
 
 <p align="center">
-<img width="580px" src="https://blog.mindorks.com/images/mvi_cyclic-49d9f8c2d3fe26b7.png" alt="aaosp"></img></p>
+<img width="580px" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*_DMvajfGcKQoIOWpLysa1Q.png" alt="aaosp"></img></p>
 
-MVI (Model-View-Intent) architecture is a reactive architecture pattern.
+MVVM (Model-View-ViewModel) architecture is a software design pattern designed to segregate program logic from user interface controls.
 
 Key benefits:
-1. Unidirectional Data Flow
-2. Immutability
-3. Single Source of Truth
-4. Predictable State Changes
-5. Testability
-6. Separation of Concerns
-7. Scalability
+1. **Separation of Concerns**
+2. **Maintainability**
+3. **Reusability**
+4. **Flexibility**
+5. **Testability**
+6. **Enhanced Collaboration**
+7. **Scalability**
+8. **Data Binding**
 
 
 Reference Links:
-- [Reference 1](https://blog.mindorks.com/mvi-architecture-android-tutorial-for-beginners-step-by-step-guide/)
-- [Reference 2](https://tech.olx.com/mvi-architecture-in-android-a-simple-livedata-based-approach-b4b23896fd32)
-- [Reference 3](https://blog.mindorks.com/mvi-architecture-android-tutorial-for-beginners-step-by-step-guide/)
-- [Reference 4](https://blog.mindorks.com/mvi-architecture-android-tutorial-for-beginners-step-by-step-guide/)
-- [Reference 5](https://blog.mindorks.com/mvi-architecture-android-tutorial-for-beginners-step-by-step-guide/)
+- [Reference 1](https://medium.com/@abhilash.mathur1891/mvvm-in-ios-swift-aa1448a66fb4)
+- [Reference 2](https://letcreateanapp.com/2022/02/26/mvvm-in-swift/)
+- [Reference 3](https://www.youtube.com/watch?v=FwGMU_Grnf8&pp=ygUNbXZ2bSBpbiBzd2lmdA%3D%3D)
 
 ----
 ### Requirements ###
-- Android Studio Hedgehog | 2023.1.1
-- Target API: 34 (Android 14 Upside Down Cake)
-- Gradle: 8.2
-- Android application plugin : 'com.android.application:8.2.0'
-- Android library plugin: 'com.android.library:8.2.0'
-- Kotlin: 1.9.21
-- JVM Target Version: 17
+- Xcode 15
+- Minimum deployment Target: iOS 15 
+- Minimum swift version: Swift 4.2
 
 ----
 ### Guidelines ###
--  [Code Guidelines](https://github.com/AbhijeetKMindstix/AndroidCodeSamples/blob/main/README.md)
+-  [Code Guidelines](https://github.com/mindstix-labs/ios-swift-accelerator/blob/Feature/HomePage/CodingPractices/README.md)
 
 ----
 ### Contributors ###
-- Abhijeet Kokane
-- Asim Shah
-- Nirav Patel
-- Anmol Kashyap
-- Pranav Hadawale
-- Abhishek Singh
+- Srinivas Reddy
+- Anshul Rokde
+- Abdul Khan
 
 ----
 ### Uses ###
 
 <p align="center">
 <a href="#">
-<img alt="Ktlint" src="https://img.shields.io/badge/ktlint%20code--style-%E2%9D%A4-FF4081">
+<img alt="Ktlint" src="https://img.shields.io/badge/SwiftLint%20-%E2%9D%A4-FF4081">
 </a>
 <a href="#">
-<img alt="Retrofit" src="https://flat.badgen.net/badge/Networking/Retrofit">
+<img alt="Retrofit" src="https://flat.badgen.net/badge/Database/RealmDB">
 </a>
 <a href="#">
 <img alt="Firebase" src="https://img.shields.io/badge/Google-Firebase-yellow">
@@ -196,9 +190,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
 ----
 ### Get in touch ###
 
 
 [Mindstix](https://www.mindstix.com/)
+
