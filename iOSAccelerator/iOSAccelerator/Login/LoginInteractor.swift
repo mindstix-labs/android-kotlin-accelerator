@@ -9,20 +9,21 @@
 import Foundation
 
 // Login/Interactor/LoginInteractor.swift
-protocol LoginInteractorProtocol {
-    func login(with credentials: LoginCredentials)
-}
+class LoginInteractor {
+    func validatePhone(_ number: String) -> Bool {
+        let phoneRegex = "^[0-9]{10}$"
+        return NSPredicate(format: "SELF MATCHES %@", phoneRegex).evaluate(with: number)
+    }
 
-class LoginInteractor: LoginInteractorProtocol {
-    var presenter: LoginPresenterProtocol?
+    func validateEmail(_ email: String) -> Bool {
+        let emailRegex = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: email)
+    }
 
-    func login(with credentials: LoginCredentials) {
-        // Simulate login logic
-        if credentials.username == "admin" && credentials.password == "password" {
-            presenter?.loginSucceeded()
-        } else {
-            presenter?.loginFailed(error: "Invalid username or password.")
-        }
+    func sendOTP(to destination: String) {
+        print("Sending OTP to: \(destination)")
+        // Trigger backend API here
     }
 }
+
 

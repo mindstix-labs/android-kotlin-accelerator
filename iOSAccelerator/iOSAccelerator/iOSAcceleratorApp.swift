@@ -12,7 +12,10 @@ import SwiftUI
 struct iOSAcceleratorApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            let interactor = LoginInteractor()
+            let router = LoginRouter()
+            let presenter = LoginPresenter(interactor: interactor, router: router)
+            LoginView(presenter: presenter)
         }
     }
 }

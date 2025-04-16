@@ -8,25 +8,38 @@
 import Foundation
 
 // Login/Presenter/LoginPresenter.swift
-protocol LoginPresenterProtocol {
-    func loginSucceeded()
-    func loginFailed(error: String)
-}
+class LoginPresenter: ObservableObject {
+    private let interactor: LoginInteractor
+    private let router: LoginRouter
 
-class LoginPresenter: LoginPresenterProtocol {
-    var viewModel: LoginViewModel?
-    var router: LoginRouterProtocol?
+    @Published var input = LoginInput()
+    @Published var selectedCountryCode: String = "+91"
+    
+    let countryCodes = ["+91", "+1", "+44"] // Extend as needed
 
-    func loginSucceeded() {
-        DispatchQueue.main.async {
-            self.viewModel?.errorMessage = nil
-            self.router?.navigateToHome()
+    init(interactor: LoginInteractor, router: LoginRouter) {
+        self.interactor = interactor
+        self.router = router
+    }
+
+    var isFormValid: Bool {
+        input.isUsingPhone
+            ? interactor.validatePhone(input.phoneNumber)
+            : interactor.validateEmail(input.email)
+    }
+
+    func sendOTP() {
+        guard isFormValid else { return }
+
+        if input.isUsingPhone {
+            interactor.sendOTP(to: "\(selectedCountryCode)\(input.phoneNumber)")
+        } else {
+            interactor.sendOTP(to: input.email)
         }
     }
 
-    func loginFailed(error: String) {
-        DispatchQueue.main.async {
-            self.viewModel?.errorMessage = error
-        }
+    func goToSignUp() {
+        router.navigateToSignUp()
     }
 }
+

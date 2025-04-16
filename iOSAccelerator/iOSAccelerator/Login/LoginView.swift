@@ -9,42 +9,78 @@
 // Login/View/LoginView.swift
 import SwiftUI
 struct LoginView: View {
-    @StateObject private var viewModel = LoginViewModel()
+    @ObservedObject var presenter: LoginPresenter
 
     var body: some View {
-        NavigationStack(path: $viewModel.path) {
-            VStack(spacing: 20) {
-                Text("Login")
-                    .font(.largeTitle)
+        VStack {
+            Image("loginBackground") // replace with the 3D image asset
+                .resizable()
+                .scaledToFill()
+                .padding(.top, 100)
+                .padding(.bottom, 20)
+                .frame(width: UIScreen.main.bounds.width - 40, height: 200)
+                .clipped()
 
-                TextField("Username", text: $viewModel.username)
-                    .textFieldStyle(.roundedBorder)
-
-                SecureField("Password", text: $viewModel.password)
-                    .textFieldStyle(.roundedBorder)
-
-                if let errorMessage = viewModel.errorMessage {
-                    Text(errorMessage)
-                        .foregroundColor(.red)
-                }
-
-                Button("Login") {
-                    viewModel.login()
-                }
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
+            Text("Login to Your Account")
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundColor(.black)
+            
+            Picker(selection: $presenter.input.isUsingPhone, label: Text("")) {
+                Text("Email").tag(false)
+                Text("Phone Number").tag(true)
             }
+            .pickerStyle(SegmentedPickerStyle())
             .padding()
-            .navigationDestination(for: String.self) { route in
-                switch route {
-                case "home":
-                    HomeView()
-                default:
-                    Text("Unknown destination")
-                }
+            
+            if presenter.input.isUsingPhone {
+                HStack {
+                    Menu {
+                        ForEach(presenter.countryCodes, id: \.self) { code in
+                            Button(action: {
+                                presenter.selectedCountryCode = code
+                            }) {
+                                Text(code)
+                            }
+                        }
+                    } label: {
+                        Text(presenter.selectedCountryCode)
+                            .padding(.horizontal)
+                    }
+                    
+                    TextField("Phone Number", text: $presenter.input.phoneNumber)
+                        .keyboardType(.phonePad)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                }.padding(.horizontal)
+            } else {
+                TextField("Email", text: $presenter.input.email)
+                    .keyboardType(.emailAddress)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding(.horizontal)
             }
+            
+            Button("Send OTP") {
+                presenter.sendOTP()
+            }
+            .disabled(!presenter.isFormValid)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(presenter.isFormValid ? Color.orange : Color.gray)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+            .padding()
+            
+            HStack {
+                Text("Don’t have account?")
+                    .foregroundColor(.black)
+                Button("Create Account") {
+                    presenter.goToSignUp()
+                }
+                .foregroundColor(.orange)
+            }
+            
+            Spacer()
         }
     }
 }
+

@@ -6,7 +6,8 @@
 //  Copyright © 2025 Mindstix Software Labs. All rights reserved.
 //
 
-struct LoginCredentials {
-    let username: String
-    let password: String
+struct LoginInput {
+    var email: String = ""
+    var phoneNumber: String = ""
+    var isUsingPhone: Bool = true
 }
