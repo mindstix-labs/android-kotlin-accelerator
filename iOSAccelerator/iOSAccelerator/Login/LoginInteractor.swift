@@ -18,7 +18,7 @@ class LoginInteractor: LoginInteractorProtocol {
 
     func login(with credentials: LoginCredentials) {
         // Simulate login logic
-        if credentials.username == "admin" && credentials.password == "admin" {
+        if credentials.username == "admin" && credentials.password == "password" {
             presenter?.loginSucceeded()
         } else {
             presenter?.loginFailed(error: "Invalid username or password.")
