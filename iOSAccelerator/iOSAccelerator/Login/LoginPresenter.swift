@@ -24,8 +24,8 @@ class LoginPresenter: ObservableObject {
 
     var isFormValid: Bool {
         input.isUsingPhone
-            ? interactor.validatePhone(input.phoneNumber)
-            : interactor.validateEmail(input.email)
+        ? interactor.validatePhone(input.phoneNumber, selectedCountryCode: self.selectedCountryCode)
+        : interactor.validateEmail(input.email)
     }
 
     func sendOTP() {
