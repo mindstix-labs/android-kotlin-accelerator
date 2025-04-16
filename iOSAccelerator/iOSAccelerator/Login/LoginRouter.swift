@@ -7,20 +7,14 @@
 //
 import Foundation
 // Login/Router/LoginRouter.swift
-protocol LoginRouterProtocol {
-    func navigateToHome()
-}
-
-class LoginRouter: LoginRouterProtocol {
-    weak var viewModel: LoginViewModel?
-
-    init(viewModel: LoginViewModel) {
-        self.viewModel = viewModel
+class LoginRouter {
+    func navigateToSignUp() {
+        // Handle navigation to sign-up screen
+        print("Navigate to Create Account")
     }
 
-    func navigateToHome() {
-        DispatchQueue.main.async {
-            self.viewModel?.path.append("home")
-        }
+    func navigateToOTPVerification() {
+        // Navigate to OTP screen after successful request
     }
 }
+

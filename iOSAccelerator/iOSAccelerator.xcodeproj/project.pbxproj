@@ -20,7 +20,6 @@
 		96AA4BDF2DAFAD1C008DD735 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA4BDE2DAFAD1A008DD735 /* HomeViewModel.swift */; };
 		96AA4BE12DAFAD34008DD735 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA4BE02DAFAD2D008DD735 /* HomeView.swift */; };
 		96FA6FC82B4D2C9800CB91B7 /* iOSAcceleratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA6FC72B4D2C9800CB91B7 /* iOSAcceleratorApp.swift */; };
-		96FA6FCA2B4D2C9800CB91B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA6FC92B4D2C9800CB91B7 /* ContentView.swift */; };
 		96FA6FCC2B4D2C9A00CB91B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96FA6FCB2B4D2C9A00CB91B7 /* Assets.xcassets */; };
 		96FA6FCF2B4D2C9A00CB91B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96FA6FCE2B4D2C9A00CB91B7 /* Preview Assets.xcassets */; };
 		96FA6FD92B4D2C9B00CB91B7 /* iOSAcceleratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FA6FD82B4D2C9B00CB91B7 /* iOSAcceleratorTests.swift */; };
@@ -61,7 +60,6 @@
 		96AA4BE02DAFAD2D008DD735 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		96FA6FC42B4D2C9800CB91B7 /* iOSAccelerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSAccelerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96FA6FC72B4D2C9800CB91B7 /* iOSAcceleratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSAcceleratorApp.swift; sourceTree = "<group>"; };
-		96FA6FC92B4D2C9800CB91B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		96FA6FCB2B4D2C9A00CB91B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		96FA6FCE2B4D2C9A00CB91B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		96FA6FD42B4D2C9B00CB91B7 /* iOSAcceleratorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSAcceleratorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,7 +178,6 @@
 				96FA70252B510D9300CB91B7 /* Info.plist */,
 				96FA70132B5014BD00CB91B7 /* Environment.swift */,
 				96FA6FC72B4D2C9800CB91B7 /* iOSAcceleratorApp.swift */,
-				96FA6FC92B4D2C9800CB91B7 /* ContentView.swift */,
 				96FA6FCB2B4D2C9A00CB91B7 /* Assets.xcassets */,
 				96FA6FCD2B4D2C9A00CB91B7 /* Preview Content */,
 			);
@@ -349,7 +346,6 @@
 			files = (
 				96AA4BCE2DAFA0F4008DD735 /* LoginPresenter.swift in Sources */,
 				96AA4BD92DAFACC0008DD735 /* HomeInteractor.swift in Sources */,
-				96FA6FCA2B4D2C9800CB91B7 /* ContentView.swift in Sources */,
 				96AA4BE12DAFAD34008DD735 /* HomeView.swift in Sources */,
 				96AA4BDB2DAFACE8008DD735 /* HomePresenter.swift in Sources */,
 				96FA6FC82B4D2C9800CB91B7 /* iOSAcceleratorApp.swift in Sources */,
