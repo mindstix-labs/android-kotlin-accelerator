@@ -1,9 +1,9 @@
-package com.mindstix.onboarding.view
-
 /**
  * Copyright (c) 2023 Mindstix Software Labs
  * All rights reserved.
  */
+
+package com.mindstix.onboarding.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -49,7 +49,8 @@ fun LoginScreen(
     userIntent: (LoginIntent) -> Unit,
 ) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .fillMaxHeight()
             .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 90.dp),
