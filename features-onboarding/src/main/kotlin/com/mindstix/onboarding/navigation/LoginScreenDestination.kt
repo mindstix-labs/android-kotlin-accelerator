@@ -16,6 +16,7 @@ import com.mindstix.capabilities.presentation.navigation.Destinations
 import com.mindstix.onboarding.intents.LoginIntent
 import com.mindstix.onboarding.intents.LoginNavEffect
 import com.mindstix.onboarding.intents.LoginViewStates
+import com.mindstix.onboarding.view.LoginAccountScreen
 import com.mindstix.onboarding.view.LoginScreen
 import com.mindstix.onboarding.viewModels.LoginViewModel
 import kotlinx.coroutines.flow.Flow
@@ -90,7 +91,7 @@ fun LoginScreenDestination(
     when (loginViewState) {
         is LoginViewStates.LoadedData -> {
             // Display the Login Screen with loaded data.
-            LoginScreen(
+            LoginAccountScreen(
                 state = loginViewState,
                 keyboardController = keyboardController,
                 userIntent = onUserAction(),
